@@ -3,7 +3,7 @@ it: refactoring coding-standards security-analysis static-code-analysis tests ##
 
 .PHONY: backward-compatibility-analysis
 backward-compatibility-analysis: vendor ## Runs a backward-compatibility analysis with roave/backward-compatibility-check
-	vendor/bin/roave-backward-compatibility-check --from=6e3389d
+	vendor/bin/roave-backward-compatibility-check --from=421ce5b
 
 .PHONY: code-coverage
 code-coverage: vendor ## Collects coverage from running unit tests with phpunit/phpunit
