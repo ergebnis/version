@@ -11,21 +11,15 @@ declare(strict_types=1);
  * @see https://github.com/ergebnis/version
  */
 
-namespace Ergebnis\Version;
+namespace Ergebnis\Version\Exception;
 
-final class Example
+final class InvalidVersion extends \InvalidArgumentException
 {
-    private function __construct(private readonly string $value)
-    {
-    }
-
     public static function fromString(string $value): self
     {
-        return new self($value);
-    }
-
-    public function toString(): string
-    {
-        return $this->value;
+        return new self(\sprintf(
+            'Value "%s" does not appear to be valid.',
+            $value,
+        ));
     }
 }
