@@ -8,4 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`64ced12...main`][64ced12...main].
 
+### Added
+
+- Added `Version` as a value object ([#1]), by [@localheinz]
+
 [64ced12...main]: https://github.com/ergebnis/version/compare/64ced12...main
+
+[#1]: https://github.com/ergebnis/version/pull/1
+
+[@localheinz]: https://github.com/localheinz

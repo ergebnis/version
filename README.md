@@ -26,7 +26,34 @@ composer require ergebnis/version
 
 ## Usage
 
-💡 This is a great place for showing a few usage examples!
+### Create a `Version` from a `string`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Version;
+
+$version = Version\Version::fromString('1.2.3');
+```
+
+### Compare a `Version` to another `Version`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Version;
+
+$one = Version\Version::fromString('1.2.3');
+$two = Version\Version::fromString('1.2.3');
+$three = Version\Version::fromString('1.2.4');
+
+$one->equals($two); // true
+$one->equals($three); // false
+```
 
 ## Changelog
 
