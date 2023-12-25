@@ -170,7 +170,7 @@ declare(strict_types=1);
 
 use Ergebnis\Version;
 
-$one = Version\Major::::fromString('1');
+$one = Version\Major::fromString('1');
 
 $two = $one->bump();
 
@@ -186,7 +186,7 @@ declare(strict_types=1);
 
 use Ergebnis\Version;
 
-$one = Version\Major::::fromString('1');
+$one = Version\Major::fromString('1');
 $two = Version\Major::fromString('1');
 $three = Version\Major::fromString('2');
 
@@ -233,7 +233,7 @@ declare(strict_types=1);
 
 use Ergebnis\Version;
 
-$one = Version\Minor::::fromString('1');
+$one = Version\Minor::fromString('1');
 
 $two = $one->bump();
 
@@ -249,7 +249,7 @@ declare(strict_types=1);
 
 use Ergebnis\Version;
 
-$one = Version\Minor::::fromString('1');
+$one = Version\Minor::fromString('1');
 $two = Version\Minor::fromString('1');
 $three = Version\Minor::fromString('2');
 
@@ -296,7 +296,7 @@ declare(strict_types=1);
 
 use Ergebnis\Version;
 
-$one = Version\Patch::::fromString('1');
+$one = Version\Patch::fromString('1');
 
 $two = $one->bump();
 
@@ -312,7 +312,7 @@ declare(strict_types=1);
 
 use Ergebnis\Version;
 
-$one = Version\Patch::::fromString('1');
+$one = Version\Patch::fromString('1');
 $two = Version\Patch::fromString('1');
 $three = Version\Patch::fromString('2');
 
@@ -359,7 +359,7 @@ declare(strict_types=1);
 
 use Ergebnis\Version;
 
-$one = Version\PreRelease::::fromString('alpha');
+$one = Version\PreRelease::fromString('alpha');
 $two = Version\PreRelease::fromString('alpha');
 $three = Version\PreRelease::fromString('beta');
 
@@ -406,7 +406,7 @@ declare(strict_types=1);
 
 use Ergebnis\Version;
 
-$one = Version\BuildMetaData::::fromString('build.9001');
+$one = Version\BuildMetaData::fromString('build.9001');
 $two = Version\BuildMetaData::fromString('build.9001');
 $three = Version\BuildMetaData::fromString('build.9000');
 
