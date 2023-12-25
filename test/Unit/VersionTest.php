@@ -14,12 +14,14 @@ declare(strict_types=1);
 namespace Ergebnis\Version\Test\Unit;
 
 use Ergebnis\Version\Exception;
+use Ergebnis\Version\Major;
 use Ergebnis\Version\Test;
 use Ergebnis\Version\Version;
 use PHPUnit\Framework;
 
 #[Framework\Attributes\CoversClass(Version::class)]
 #[Framework\Attributes\UsesClass(Exception\InvalidVersion::class)]
+#[Framework\Attributes\UsesClass(Major::class)]
 final class VersionTest extends Framework\TestCase
 {
     use Test\Util\Helper;
@@ -90,58 +92,125 @@ final class VersionTest extends Framework\TestCase
     }
 
     #[Framework\Attributes\DataProvider('provideValidValue')]
-    public function testFromStringReturnsVersion(string $value): void
-    {
+    public function testFromStringReturnsVersion(
+        string $value,
+        Major $major,
+    ): void {
         $version = Version::fromString($value);
 
         self::assertSame($value, $version->toString());
+
+        self::assertEquals($major, $version->major());
     }
 
     /**
      * @see https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
      * @see https://regex101.com/r/Ly7O1x/3/
      *
-     * @return \Generator<string, array{0: string}>
+     * @return \Generator<string, array{0: string, 1: Major}>
      */
     public static function provideValidValue(): \Generator
     {
         $values = [
-            '0.0.4',
-            '1.2.3',
-            '10.20.30',
-            '1.1.2-prerelease+meta',
-            '1.1.2+meta',
-            '1.1.2+meta-valid',
-            '1.0.0-alpha',
-            '1.0.0-beta',
-            '1.0.0-alpha.beta',
-            '1.0.0-alpha.beta.1',
-            '1.0.0-alpha.1',
-            '1.0.0-alpha0.valid',
-            '1.0.0-alpha.0valid',
-            '1.0.0-alpha-a.b-c-somethinglong+build.1-aef.1-its-okay',
-            '1.0.0-rc.1+build.1',
-            '2.0.0-rc.1+build.123',
-            '1.2.3-beta',
-            '10.2.3-DEV-SNAPSHOT',
-            '1.2.3-SNAPSHOT-123',
-            '1.0.0',
-            '2.0.0',
-            '1.1.7',
-            '2.0.0+build.1848',
-            '2.0.1-alpha.1227',
-            '1.0.0-alpha+beta',
-            '1.2.3----RC-SNAPSHOT.12.9.1--.12+788',
-            '1.2.3----R-S.12.9.1--.12+meta',
-            '1.2.3----RC-SNAPSHOT.12.9.1--.12',
-            '1.0.0+0.build.1-rc.10000aaa-kk-0.1',
-            '99999999999999999999999.999999999999999999.99999999999999999',
-            '1.0.0-0A.is.legal',
+            '0.0.4' => [
+                Major::fromString('0'),
+            ],
+            '1.2.3' => [
+                Major::fromString('1'),
+            ],
+            '10.20.30' => [
+                Major::fromString('10'),
+            ],
+            '1.1.2-prerelease+meta' => [
+                Major::fromString('1'),
+            ],
+            '1.1.2+meta' => [
+                Major::fromString('1'),
+            ],
+            '1.1.2+meta-valid' => [
+                Major::fromString('1'),
+            ],
+            '1.0.0-alpha' => [
+                Major::fromString('1'),
+            ],
+            '1.0.0-beta' => [
+                Major::fromString('1'),
+            ],
+            '1.0.0-alpha.beta' => [
+                Major::fromString('1'),
+            ],
+            '1.0.0-alpha.beta.1' => [
+                Major::fromString('1'),
+            ],
+            '1.0.0-alpha.1' => [
+                Major::fromString('1'),
+            ],
+            '1.0.0-alpha0.valid' => [
+                Major::fromString('1'),
+            ],
+            '1.0.0-alpha.0valid' => [
+                Major::fromString('1'),
+            ],
+            '1.0.0-alpha-a.b-c-somethinglong+build.1-aef.1-its-okay' => [
+                Major::fromString('1'),
+            ],
+            '1.0.0-rc.1+build.1' => [
+                Major::fromString('1'),
+            ],
+            '2.0.0-rc.1+build.123' => [
+                Major::fromString('2'),
+            ],
+            '1.2.3-beta' => [
+                Major::fromString('1'),
+            ],
+            '10.2.3-DEV-SNAPSHOT' => [
+                Major::fromString('10'),
+            ],
+            '1.2.3-SNAPSHOT-123' => [
+                Major::fromString('1'),
+            ],
+            '1.0.0' => [
+                Major::fromString('1'),
+            ],
+            '2.0.0' => [
+                Major::fromString('2'),
+            ],
+            '1.1.7' => [
+                Major::fromString('1'),
+            ],
+            '2.0.0+build.1848' => [
+                Major::fromString('2'),
+            ],
+            '2.0.1-alpha.1227' => [
+                Major::fromString('2'),
+            ],
+            '1.0.0-alpha+beta' => [
+                Major::fromString('1'),
+            ],
+            '1.2.3----RC-SNAPSHOT.12.9.1--.12+788' => [
+                Major::fromString('1'),
+            ],
+            '1.2.3----R-S.12.9.1--.12+meta' => [
+                Major::fromString('1'),
+            ],
+            '1.2.3----RC-SNAPSHOT.12.9.1--.12' => [
+                Major::fromString('1'),
+            ],
+            '1.0.0+0.build.1-rc.10000aaa-kk-0.1' => [
+                Major::fromString('1'),
+            ],
+            '99999999999999999999999.999999999999999999.99999999999999999' => [
+                Major::fromString('99999999999999999999999'),
+            ],
+            '1.0.0-0A.is.legal' => [
+                Major::fromString('1'),
+            ],
         ];
 
-        foreach ($values as $value) {
+        foreach ($values as $value => [$major]) {
             yield $value => [
                 $value,
+                $major,
             ];
         }
     }
