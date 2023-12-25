@@ -94,6 +94,39 @@ final class Version
         return $value;
     }
 
+    public function bumpMajor(): self
+    {
+        return new self(
+            $this->major->bump(),
+            Minor::fromInt(0),
+            Patch::fromInt(0),
+            PreRelease::empty(),
+            BuildMetaData::empty(),
+        );
+    }
+
+    public function bumpMinor(): self
+    {
+        return new self(
+            $this->major,
+            $this->minor->bump(),
+            Patch::fromInt(0),
+            PreRelease::empty(),
+            BuildMetaData::empty(),
+        );
+    }
+
+    public function bumpPatch(): self
+    {
+        return new self(
+            $this->major,
+            $this->minor,
+            $this->patch->bump(),
+            PreRelease::empty(),
+            BuildMetaData::empty(),
+        );
+    }
+
     public function equals(self $other): bool
     {
         return $this->toString() === $other->toString();
