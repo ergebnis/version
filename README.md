@@ -72,7 +72,7 @@ use Ergebnis\Version;
 
 $major = Version\Major::fromInt(1);
 
-echo $major->toInt(); // 1
+echo $major->toString(); // 1
 ```
 
 ### Create a `Major` from a `string`
@@ -135,7 +135,7 @@ use Ergebnis\Version;
 
 $minor = Version\Minor::fromInt(1);
 
-echo $minor->toInt(); // 1
+echo $minor->toString(); // 1
 ```
 
 ### Create a `Minor` from a `string`
@@ -198,7 +198,7 @@ use Ergebnis\Version;
 
 $patch = Version\Patch::fromInt(1);
 
-echo $patch->toInt(); // 1
+echo $patch->toString(); // 1
 ```
 
 ### Create a `Patch` from a `string`
