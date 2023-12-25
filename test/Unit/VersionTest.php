@@ -97,7 +97,7 @@ final class VersionTest extends Framework\TestCase
         }
     }
 
-    #[Framework\Attributes\DataProvider('provideValidValue')]
+    #[Framework\Attributes\DataProvider('provideValidValueMajorMinorPatchAndPreRelease')]
     public function testFromStringReturnsVersion(
         string $value,
         Major $major,
@@ -121,7 +121,7 @@ final class VersionTest extends Framework\TestCase
      *
      * @return \Generator<string, array{0: string, 1: Major, 2: Minor, 3: Patch, 4: PreRelease}>
      */
-    public static function provideValidValue(): \Generator
+    public static function provideValidValueMajorMinorPatchAndPreRelease(): \Generator
     {
         $values = [
             '0.0.4' => [

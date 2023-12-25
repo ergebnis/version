@@ -27,7 +27,7 @@
   <file src="test/Unit/VersionTest.php">
     <PossiblyUnusedMethod>
       <code>provideInvalidValue</code>
-      <code>provideValidValue</code>
+      <code>provideValidValueMajorMinorPatchAndPreRelease</code>
     </PossiblyUnusedMethod>
   </file>
 </files>
