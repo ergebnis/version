@@ -38,7 +38,7 @@ use Ergebnis\Version;
 $version = Version\Version::fromString('1.2.3');
 ```
 
-### Compare a `Version` to another `Version`
+### Compare a `Version` with another `Version`
 
 ```php
 <?php
