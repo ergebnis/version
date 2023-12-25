@@ -89,6 +89,22 @@ $major = Version\Major::fromString('1');
 echo $major->toString(); // 1
 ```
 
+### Bump a `Major`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Version;
+
+$one = Version\Major::::fromString('1');
+
+$two = $one->bump();
+
+echo $two->toString(); // 2
+```
+
 ### Compare a `Major` with another `Major`
 
 ```php
@@ -136,6 +152,22 @@ $minor = Version\Minor::fromString('1');
 echo $minor->toString(); // 1
 ```
 
+### Bump a `Minor`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Version;
+
+$one = Version\Minor::::fromString('1');
+
+$two = $one->bump();
+
+echo $two->toString(); // 2
+```
+
 ### Compare a `Minor` with another `Minor`
 
 ```php
@@ -181,6 +213,22 @@ use Ergebnis\Version;
 $patch = Version\Patch::fromString('1');
 
 echo $patch->toString(); // 1
+```
+
+### Bump a `Patch`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Version;
+
+$one = Version\Patch::::fromString('1');
+
+$two = $one->bump();
+
+echo $two->toString(); // 2
 ```
 
 ### Compare a `Patch` with another `Patch`
