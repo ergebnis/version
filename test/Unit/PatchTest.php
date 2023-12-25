@@ -14,7 +14,6 @@ declare(strict_types=1);
 use Ergebnis\Version\Exception;
 use Ergebnis\Version\Patch;
 use Ergebnis\Version\Test;
-use Ergebnis\Version\Version;
 use PHPUnit\Framework;
 
 #[Framework\Attributes\CoversClass(Patch::class)]
