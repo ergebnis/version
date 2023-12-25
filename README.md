@@ -187,13 +187,11 @@ declare(strict_types=1);
 use Ergebnis\Version;
 
 $one = Version\Major::fromString('1');
-$two = Version\Major::fromString('1');
-$three = Version\Major::fromString('2');
+$two = Version\Major::fromString('2');
 
-$one->equals($two); // true
-$one->equals($three); // false
-
-$one->equals($two); // true
+$one->compare($two); // -1
+$one->compare($one); // 0
+$two->compare($one); // 1
 ```
 
 ### Create a `Minor` from an `int`
