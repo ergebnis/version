@@ -59,6 +59,11 @@ final class Patch
         return (string) $this->value;
     }
 
+    public function bump(): self
+    {
+        return new self($this->value + 1);
+    }
+
     public function equals(self $other): bool
     {
         return $this->value === $other->value;

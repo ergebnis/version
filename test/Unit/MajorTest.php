@@ -104,6 +104,16 @@ final class MajorTest extends Framework\TestCase
         }
     }
 
+    public function testBumpReturnsMajorWithIncrementedValue(): void
+    {
+        $one = Major::fromInt(self::faker()->numberBetween(0, \PHP_INT_MAX - 1));
+
+        $two = $one->bump();
+
+        self::assertNotSame($one, $two);
+        self::assertSame($one->toInt() + 1, $two->toInt());
+    }
+
     public function testEqualsReturnsFalseWhenValuesAreDifferent(): void
     {
         $faker = self::faker()->unique();
