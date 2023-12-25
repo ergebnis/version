@@ -61,6 +61,20 @@ $one->equals($two); // true
 $one->equals($three); // false
 ```
 
+### Create a `Major` from an `int`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Version;
+
+$major = Version\Major::fromInt(1);
+
+echo $major->toInt(); // 1
+```
+
 ### Create a `Major` from a `string`
 
 ```php
@@ -94,6 +108,20 @@ $one->equals($three); // false
 $one->equals($two); // true
 ```
 
+### Create a `Minor` from an `int`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Version;
+
+$minor = Version\Minor::fromInt(1);
+
+echo $minor->toInt(); // 1
+```
+
 ### Create a `Minor` from a `string`
 
 ```php
@@ -125,6 +153,20 @@ $one->equals($two); // true
 $one->equals($three); // false
 
 $one->equals($two); // true
+```
+
+### Create a `Patch` from an `int`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Version;
+
+$patch = Version\Patch::fromInt(1);
+
+echo $patch->toInt(); // 1
 ```
 
 ### Create a `Patch` from a `string`

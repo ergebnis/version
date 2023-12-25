@@ -21,8 +21,20 @@ final class Patch
      */
     private const REGEX = '/^(?P<patch>0|[1-9]\d*)$/';
 
-    private function __construct(private readonly string $value)
+    private function __construct(private readonly int $value)
     {
+    }
+
+    /**
+     * @throws Exception\InvalidPatch
+     */
+    public static function fromInt(int $value): self
+    {
+        if (0 > $value) {
+            throw Exception\InvalidPatch::fromInt($value);
+        }
+
+        return new self($value);
     }
 
     /**
@@ -34,12 +46,17 @@ final class Patch
             throw Exception\InvalidPatch::fromString($value);
         }
 
-        return new self($value);
+        return new self((int) $value);
+    }
+
+    public function toInt(): int
+    {
+        return $this->value;
     }
 
     public function toString(): string
     {
-        return $this->value;
+        return (string) $this->value;
     }
 
     public function equals(self $other): bool

@@ -8,20 +8,20 @@
   </file>
   <file src="test/Unit/MajorTest.php">
     <PossiblyUnusedMethod>
-      <code>provideInvalidValue</code>
-      <code>provideValidValue</code>
+      <code>provideInvalidStringValue</code>
+      <code>provideValidStringValue</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="test/Unit/MinorTest.php">
     <PossiblyUnusedMethod>
-      <code>provideInvalidValue</code>
-      <code>provideValidValue</code>
+      <code>provideInvalidStringValue</code>
+      <code>provideValidStringValue</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="test/Unit/PatchTest.php">
     <PossiblyUnusedMethod>
-      <code>provideInvalidValue</code>
-      <code>provideValidValue</code>
+      <code>provideInvalidStringValue</code>
+      <code>provideValidStringValue</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="test/Unit/PreReleaseTest.php">
