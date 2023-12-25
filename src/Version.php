@@ -25,6 +25,7 @@ final class Version
         private readonly string $value,
         private readonly Major $major,
         private readonly Minor $minor,
+        private readonly Patch $patch,
     ) {
     }
 
@@ -41,6 +42,7 @@ final class Version
             $value,
             Major::fromString($matches['major']),
             Minor::fromString($matches['minor']),
+            Patch::fromString($matches['patch']),
         );
     }
 
@@ -62,5 +64,10 @@ final class Version
     public function minor(): Minor
     {
         return $this->minor;
+    }
+
+    public function patch(): Patch
+    {
+        return $this->patch;
     }
 }

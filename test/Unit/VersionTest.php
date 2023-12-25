@@ -16,6 +16,7 @@ namespace Ergebnis\Version\Test\Unit;
 use Ergebnis\Version\Exception;
 use Ergebnis\Version\Major;
 use Ergebnis\Version\Minor;
+use Ergebnis\Version\Patch;
 use Ergebnis\Version\Test;
 use Ergebnis\Version\Version;
 use PHPUnit\Framework;
@@ -24,6 +25,7 @@ use PHPUnit\Framework;
 #[Framework\Attributes\UsesClass(Exception\InvalidVersion::class)]
 #[Framework\Attributes\UsesClass(Major::class)]
 #[Framework\Attributes\UsesClass(Minor::class)]
+#[Framework\Attributes\UsesClass(Patch::class)]
 final class VersionTest extends Framework\TestCase
 {
     use Test\Util\Helper;
@@ -98,6 +100,7 @@ final class VersionTest extends Framework\TestCase
         string $value,
         Major $major,
         Minor $minor,
+        Patch $patch,
     ): void {
         $version = Version::fromString($value);
 
@@ -105,13 +108,14 @@ final class VersionTest extends Framework\TestCase
 
         self::assertEquals($major, $version->major());
         self::assertEquals($minor, $version->minor());
+        self::assertEquals($patch, $version->patch());
     }
 
     /**
      * @see https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
      * @see https://regex101.com/r/Ly7O1x/3/
      *
-     * @return \Generator<string, array{0: string, 1: Major, 2: Minor}>
+     * @return \Generator<string, array{0: string, 1: Major, 2: Minor, 3: Patch}>
      */
     public static function provideValidValue(): \Generator
     {
@@ -119,134 +123,166 @@ final class VersionTest extends Framework\TestCase
             '0.0.4' => [
                 Major::fromString('0'),
                 Minor::fromString('0'),
+                Patch::fromString('4'),
             ],
             '1.2.3' => [
                 Major::fromString('1'),
                 Minor::fromString('2'),
+                Patch::fromString('3'),
             ],
             '10.20.30' => [
                 Major::fromString('10'),
                 Minor::fromString('20'),
+                Patch::fromString('30'),
             ],
             '1.1.2-prerelease+meta' => [
                 Major::fromString('1'),
                 Minor::fromString('1'),
+                Patch::fromString('2'),
             ],
             '1.1.2+meta' => [
                 Major::fromString('1'),
                 Minor::fromString('1'),
+                Patch::fromString('2'),
             ],
             '1.1.2+meta-valid' => [
                 Major::fromString('1'),
                 Minor::fromString('1'),
+                Patch::fromString('2'),
             ],
             '1.0.0-alpha' => [
                 Major::fromString('1'),
                 Minor::fromString('0'),
+                Patch::fromString('0'),
             ],
             '1.0.0-beta' => [
                 Major::fromString('1'),
                 Minor::fromString('0'),
+                Patch::fromString('0'),
             ],
             '1.0.0-alpha.beta' => [
                 Major::fromString('1'),
                 Minor::fromString('0'),
+                Patch::fromString('0'),
             ],
             '1.0.0-alpha.beta.1' => [
                 Major::fromString('1'),
                 Minor::fromString('0'),
+                Patch::fromString('0'),
             ],
             '1.0.0-alpha.1' => [
                 Major::fromString('1'),
                 Minor::fromString('0'),
+                Patch::fromString('0'),
             ],
             '1.0.0-alpha0.valid' => [
                 Major::fromString('1'),
                 Minor::fromString('0'),
+                Patch::fromString('0'),
             ],
             '1.0.0-alpha.0valid' => [
                 Major::fromString('1'),
                 Minor::fromString('0'),
+                Patch::fromString('0'),
             ],
             '1.0.0-alpha-a.b-c-somethinglong+build.1-aef.1-its-okay' => [
                 Major::fromString('1'),
                 Minor::fromString('0'),
+                Patch::fromString('0'),
             ],
             '1.0.0-rc.1+build.1' => [
                 Major::fromString('1'),
                 Minor::fromString('0'),
+                Patch::fromString('0'),
             ],
             '2.0.0-rc.1+build.123' => [
                 Major::fromString('2'),
                 Minor::fromString('0'),
+                Patch::fromString('0'),
             ],
             '1.2.3-beta' => [
                 Major::fromString('1'),
                 Minor::fromString('2'),
+                Patch::fromString('3'),
             ],
             '10.2.3-DEV-SNAPSHOT' => [
                 Major::fromString('10'),
                 Minor::fromString('2'),
+                Patch::fromString('3'),
             ],
             '1.2.3-SNAPSHOT-123' => [
                 Major::fromString('1'),
                 Minor::fromString('2'),
+                Patch::fromString('3'),
             ],
             '1.0.0' => [
                 Major::fromString('1'),
                 Minor::fromString('0'),
+                Patch::fromString('0'),
             ],
             '2.0.0' => [
                 Major::fromString('2'),
                 Minor::fromString('0'),
+                Patch::fromString('0'),
             ],
             '1.1.7' => [
                 Major::fromString('1'),
                 Minor::fromString('1'),
+                Patch::fromString('7'),
             ],
             '2.0.0+build.1848' => [
                 Major::fromString('2'),
                 Minor::fromString('0'),
+                Patch::fromString('0'),
             ],
             '2.0.1-alpha.1227' => [
                 Major::fromString('2'),
                 Minor::fromString('0'),
+                Patch::fromString('1'),
             ],
             '1.0.0-alpha+beta' => [
                 Major::fromString('1'),
                 Minor::fromString('0'),
+                Patch::fromString('0'),
             ],
             '1.2.3----RC-SNAPSHOT.12.9.1--.12+788' => [
                 Major::fromString('1'),
                 Minor::fromString('2'),
+                Patch::fromString('3'),
             ],
             '1.2.3----R-S.12.9.1--.12+meta' => [
                 Major::fromString('1'),
                 Minor::fromString('2'),
+                Patch::fromString('3'),
             ],
             '1.2.3----RC-SNAPSHOT.12.9.1--.12' => [
                 Major::fromString('1'),
                 Minor::fromString('2'),
+                Patch::fromString('3'),
             ],
             '1.0.0+0.build.1-rc.10000aaa-kk-0.1' => [
                 Major::fromString('1'),
                 Minor::fromString('0'),
+                Patch::fromString('0'),
             ],
             '99999999999999999999999.999999999999999999.99999999999999999' => [
                 Major::fromString('99999999999999999999999'),
                 Minor::fromString('999999999999999999'),
+                Patch::fromString('99999999999999999'),
             ],
             '1.0.0-0A.is.legal' => [
                 Major::fromString('1'),
                 Minor::fromString('0'),
+                Patch::fromString('0'),
             ],
         ];
 
-        foreach ($values as $value => [$major, $minor]) {
+        foreach ($values as $value => [$major, $minor, $patch]) {
             yield $value => [
                 $value,
                 $major,
                 $minor,
+                $patch,
             ];
         }
     }
