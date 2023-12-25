@@ -39,6 +39,7 @@ echo $version->toString(); // 1.2.3
 
 echo $version->major()->toString(); // 1
 echo $version->minor()->toString(); // 2
+echo $version->patch()->toString(); // 3
 ```
 
 ### Compare a `Version` with another `Version`
@@ -117,6 +118,39 @@ use Ergebnis\Version;
 $one = Version\Minor::::fromString('1');
 $two = Version\Minor::fromString('1');
 $three = Version\Minor::fromString('2');
+
+$one->equals($two); // true
+$one->equals($three); // false
+
+$one->equals($two); // true
+```
+
+### Create a `Patch` from a `string`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Version;
+
+$patch = Version\Patch::fromString('1');
+
+echo $patch->toString(); // 1
+```
+
+### Compare a `Patch` with another `Patch`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Version;
+
+$one = Version\Patch::::fromString('1');
+$two = Version\Patch::fromString('1');
+$three = Version\Patch::fromString('2');
 
 $one->equals($two); // true
 $one->equals($three); // false
