@@ -15,6 +15,7 @@ For a full diff see [`64ced12...main`][64ced12...main].
 - Added `Minor` as a value object ([#4]), by [@localheinz]
 - Added `Patch` as a value object ([#5]), by [@localheinz]
 - Added `PreRelease` as a value object ([#8]), by [@localheinz]
+- Added `BuildMetaData` as a value object ([#9]), by [@localheinz]
 
 [64ced12...main]: https://github.com/ergebnis/version/compare/64ced12...main
 
@@ -23,5 +24,6 @@ For a full diff see [`64ced12...main`][64ced12...main].
 [#4]: https://github.com/ergebnis/version/pull/4
 [#5]: https://github.com/ergebnis/version/pull/5
 [#8]: https://github.com/ergebnis/version/pull/8
+[#9]: https://github.com/ergebnis/version/pull/9
 
 [@localheinz]: https://github.com/localheinz

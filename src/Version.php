@@ -27,6 +27,7 @@ final class Version
         private readonly Minor $minor,
         private readonly Patch $patch,
         private readonly PreRelease $preRelease,
+        private readonly BuildMetaData $buildMetaData,
     ) {
     }
 
@@ -48,12 +49,22 @@ final class Version
             $preRelease = PreRelease::fromString($matches['prerelease']);
         }
 
+        $buildMetaData = BuildMetaData::empty();
+
+        if (
+            \array_key_exists('buildmetadata', $matches)
+            && '' !== $matches['buildmetadata']
+        ) {
+            $buildMetaData = BuildMetaData::fromString($matches['buildmetadata']);
+        }
+
         return new self(
             $value,
             Major::fromString($matches['major']),
             Minor::fromString($matches['minor']),
             Patch::fromString($matches['patch']),
             $preRelease,
+            $buildMetaData,
         );
     }
 
@@ -85,5 +96,10 @@ final class Version
     public function preRelease(): PreRelease
     {
         return $this->preRelease;
+    }
+
+    public function buildMetaData(): BuildMetaData
+    {
+        return $this->buildMetaData;
     }
 }
