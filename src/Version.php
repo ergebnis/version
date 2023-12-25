@@ -24,6 +24,7 @@ final class Version
     private function __construct(
         private readonly string $value,
         private readonly Major $major,
+        private readonly Minor $minor,
     ) {
     }
 
@@ -39,6 +40,7 @@ final class Version
         return new self(
             $value,
             Major::fromString($matches['major']),
+            Minor::fromString($matches['minor']),
         );
     }
 
@@ -55,5 +57,10 @@ final class Version
     public function major(): Major
     {
         return $this->major;
+    }
+
+    public function minor(): Minor
+    {
+        return $this->minor;
     }
 }

@@ -38,6 +38,7 @@ $version = Version\Version::fromString('1.2.3');
 echo $version->toString(); // 1.2.3
 
 echo $version->major()->toString(); // 1
+echo $version->minor()->toString(); // 2
 ```
 
 ### Compare a `Version` with another `Version`
@@ -83,6 +84,39 @@ use Ergebnis\Version;
 $one = Version\Major::::fromString('1');
 $two = Version\Major::fromString('1');
 $three = Version\Major::fromString('2');
+
+$one->equals($two); // true
+$one->equals($three); // false
+
+$one->equals($two); // true
+```
+
+### Create a `Minor` from a `string`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Version;
+
+$minor = Version\Minor::fromString('1');
+
+echo $minor->toString(); // 1
+```
+
+### Compare a `Minor` with another `Minor`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Version;
+
+$one = Version\Minor::::fromString('1');
+$two = Version\Minor::fromString('1');
+$three = Version\Minor::fromString('2');
 
 $one->equals($two); // true
 $one->equals($three); // false
