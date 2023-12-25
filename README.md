@@ -16,8 +16,6 @@ This project provides a [`composer`](https://getcomposer.org) package with an ab
 
 ## Installation
 
-💡 This is a great place for showing how to install the package, see below:
-
 Run
 
 ```sh
