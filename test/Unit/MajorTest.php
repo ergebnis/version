@@ -11,6 +11,8 @@ declare(strict_types=1);
  * @see https://github.com/ergebnis/version
  */
 
+namespace Ergebnis\Version\Test\Unit;
+
 use Ergebnis\Version\Exception;
 use Ergebnis\Version\Major;
 use Ergebnis\Version\Test;
@@ -34,9 +36,9 @@ final class MajorTest extends Framework\TestCase
      * @see https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
      * @see https://regex101.com/r/Ly7O1x/3/
      *
-     * @return Generator<string, array{0: string}>
+     * @return \Generator<string, array{0: string}>
      */
-    public static function provideInvalidValue(): Generator
+    public static function provideInvalidValue(): \Generator
     {
         $faker = self::faker();
 
@@ -67,9 +69,9 @@ final class MajorTest extends Framework\TestCase
      * @see https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
      * @see https://regex101.com/r/Ly7O1x/3/
      *
-     * @return Generator<string, array{0: string}>
+     * @return \Generator<string, array{0: string}>
      */
-    public static function provideValidValue(): Generator
+    public static function provideValidValue(): \Generator
     {
         $values = [
             'zero' => '0',
