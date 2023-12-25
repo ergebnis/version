@@ -21,8 +21,10 @@ final class Version
      */
     private const REGEX = '/^(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>0|[1-9]\d*)(?:-(?P<prerelease>(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+(?P<buildmetadata>[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/';
 
-    private function __construct(private readonly string $value)
-    {
+    private function __construct(
+        private readonly string $value,
+        private readonly Major $major,
+    ) {
     }
 
     /**
@@ -30,11 +32,14 @@ final class Version
      */
     public static function fromString(string $value): self
     {
-        if (1 !== \preg_match(self::REGEX, $value)) {
+        if (1 !== \preg_match(self::REGEX, $value, $matches)) {
             throw Exception\InvalidVersion::fromString($value);
         }
 
-        return new self($value);
+        return new self(
+            $value,
+            Major::fromString($matches['major']),
+        );
     }
 
     public function toString(): string
@@ -45,5 +50,10 @@ final class Version
     public function equals(self $other): bool
     {
         return $this->value === $other->value;
+    }
+
+    public function major(): Major
+    {
+        return $this->major;
     }
 }

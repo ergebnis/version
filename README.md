@@ -38,6 +38,8 @@ use Ergebnis\Version;
 $version = Version\Version::fromString('1.2.3');
 
 echo $version->toString(); // 1.2.3
+
+echo $version->major()->toString(); // 1
 ```
 
 ### Compare a `Version` with another `Version`
@@ -55,6 +57,39 @@ $three = Version\Version::fromString('1.2.4');
 
 $one->equals($two); // true
 $one->equals($three); // false
+```
+
+### Create a `Major` from a `string`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Version;
+
+$major = Version\Major::fromString('1');
+
+echo $major->toString(); // 1
+```
+
+### Compare a `Major` with another `Major`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Version;
+
+$one = Version\Major::::fromString('1');
+$two = Version\Major::fromString('1');
+$three = Version\Major::fromString('2');
+
+$one->equals($two); // true
+$one->equals($three); // false
+
+$one->equals($two); // true
 ```
 
 ## Changelog

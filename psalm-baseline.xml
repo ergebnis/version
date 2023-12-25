@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="5.18.0@b113f3ed0259fd6e212d87c3df80eec95a6abf19">
+  <file src="test/Unit/MajorTest.php">
+    <PossiblyUnusedMethod>
+      <code>provideInvalidValue</code>
+      <code>provideValidValue</code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="test/Unit/VersionTest.php">
     <PossiblyUnusedMethod>
       <code>provideInvalidValue</code>
