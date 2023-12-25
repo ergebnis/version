@@ -26,6 +26,7 @@ final class Version
         private readonly Major $major,
         private readonly Minor $minor,
         private readonly Patch $patch,
+        private readonly PreRelease $preRelease,
     ) {
     }
 
@@ -38,11 +39,21 @@ final class Version
             throw Exception\InvalidVersion::fromString($value);
         }
 
+        $preRelease = PreRelease::empty();
+
+        if (
+            \array_key_exists('prerelease', $matches)
+            && '' !== $matches['prerelease']
+        ) {
+            $preRelease = PreRelease::fromString($matches['prerelease']);
+        }
+
         return new self(
             $value,
             Major::fromString($matches['major']),
             Minor::fromString($matches['minor']),
             Patch::fromString($matches['patch']),
+            $preRelease,
         );
     }
 
@@ -69,5 +80,10 @@ final class Version
     public function patch(): Patch
     {
         return $this->patch;
+    }
+
+    public function preRelease(): PreRelease
+    {
+        return $this->preRelease;
     }
 }

@@ -18,6 +18,12 @@
       <code>provideValidValue</code>
     </PossiblyUnusedMethod>
   </file>
+  <file src="test/Unit/PreReleaseTest.php">
+    <PossiblyUnusedMethod>
+      <code>provideInvalidValue</code>
+      <code>provideValidValue</code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="test/Unit/VersionTest.php">
     <PossiblyUnusedMethod>
       <code>provideInvalidValue</code>
