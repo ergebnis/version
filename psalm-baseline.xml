@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="5.18.0@b113f3ed0259fd6e212d87c3df80eec95a6abf19">
+  <file src="src/Major.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$this->value]]></code>
+    </ArgumentTypeCoercion>
+  </file>
+  <file src="src/Minor.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$this->value]]></code>
+    </ArgumentTypeCoercion>
+  </file>
+  <file src="src/Patch.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$this->value]]></code>
+    </ArgumentTypeCoercion>
+  </file>
   <file src="test/Unit/BuildMetaDataTest.php">
     <PossiblyUnusedMethod>
       <code>provideInvalidValue</code>
@@ -10,18 +25,21 @@
     <PossiblyUnusedMethod>
       <code>provideInvalidStringValue</code>
       <code>provideValidStringValue</code>
+      <code>provideValueAndBumpedValue</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="test/Unit/MinorTest.php">
     <PossiblyUnusedMethod>
       <code>provideInvalidStringValue</code>
       <code>provideValidStringValue</code>
+      <code>provideValueAndBumpedValue</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="test/Unit/PatchTest.php">
     <PossiblyUnusedMethod>
       <code>provideInvalidStringValue</code>
       <code>provideValidStringValue</code>
+      <code>provideValueAndBumpedValue</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="test/Unit/PreReleaseTest.php">

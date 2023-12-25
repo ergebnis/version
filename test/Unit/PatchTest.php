@@ -39,7 +39,7 @@ final class PatchTest extends Framework\TestCase
     {
         $patch = Patch::fromInt($value);
 
-        self::assertSame($value, $patch->toInt());
+        self::assertSame((string) $value, $patch->toString());
     }
 
     #[Framework\Attributes\DataProvider('provideInvalidStringValue')]
@@ -104,14 +104,48 @@ final class PatchTest extends Framework\TestCase
         }
     }
 
-    public function testBumpReturnsPatchWithIncrementedValue(): void
-    {
-        $one = Patch::fromInt(self::faker()->numberBetween(0, \PHP_INT_MAX - 1));
+    #[Framework\Attributes\DataProvider('provideValueAndBumpedValue')]
+    public function testBumpReturnsPatchWithIncrementedValue(
+        string $value,
+        string $bumpedValue,
+    ): void {
+        $one = Patch::fromString($value);
 
         $two = $one->bump();
 
         self::assertNotSame($one, $two);
-        self::assertSame($one->toInt() + 1, $two->toInt());
+        self::assertSame($bumpedValue, $two->toString());
+    }
+
+    /**
+     * @return \Generator<string, array{0: string, 1: string}>
+     */
+    public static function provideValueAndBumpedValue(): \Generator
+    {
+        $values = [
+            'zero' => [
+                '0',
+                '1',
+            ],
+            'one' => [
+                '1',
+                '2',
+            ],
+            'php-int-max' => [
+                (string) \PHP_INT_MAX,
+                \bcadd(
+                    (string) \PHP_INT_MAX,
+                    '1',
+                ),
+            ],
+        ];
+
+        foreach ($values as $key => [$value, $bumpedValue]) {
+            yield $key => [
+                $value,
+                $bumpedValue,
+            ];
+        }
     }
 
     public function testEqualsReturnsFalseWhenValuesAreDifferent(): void

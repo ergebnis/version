@@ -21,7 +21,7 @@ final class Minor
      */
     private const REGEX = '/^(?P<minor>0|[1-9]\d*)$/';
 
-    private function __construct(private readonly int $value)
+    private function __construct(private readonly string $value)
     {
     }
 
@@ -34,7 +34,7 @@ final class Minor
             throw Exception\InvalidMinor::fromInt($value);
         }
 
-        return new self($value);
+        return new self((string) $value);
     }
 
     /**
@@ -46,22 +46,33 @@ final class Minor
             throw Exception\InvalidMinor::fromString($value);
         }
 
-        return new self((int) $value);
-    }
-
-    public function toInt(): int
-    {
-        return $this->value;
+        return new self($value);
     }
 
     public function toString(): string
     {
-        return (string) $this->value;
+        return $this->value;
     }
 
+    /**
+     * @throws Exception\ExtensionMissing
+     */
     public function bump(): self
     {
-        return new self($this->value + 1);
+        $valueCastedToInt = (int) $this->value;
+
+        if (\PHP_INT_MAX === $valueCastedToInt) {
+            if (!\extension_loaded('bcmath')) {
+                throw Exception\ExtensionMissing::bcmath();
+            }
+
+            return new self(\bcadd(
+                $this->value,
+                '1',
+            ));
+        }
+
+        return new self((string) ($valueCastedToInt + 1));
     }
 
     public function equals(self $other): bool
