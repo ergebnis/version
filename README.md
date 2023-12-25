@@ -36,6 +36,8 @@ declare(strict_types=1);
 use Ergebnis\Version;
 
 $version = Version\Version::fromString('1.2.3');
+
+echo $version->toString(); // 1.2.3
 ```
 
 ### Compare a `Version` with another `Version`
