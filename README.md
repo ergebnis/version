@@ -33,13 +33,14 @@ declare(strict_types=1);
 
 use Ergebnis\Version;
 
-$version = Version\Version::fromString('1.2.3');
+$version = Version\Version::fromString('1.2.3-alpha');
 
 echo $version->toString(); // 1.2.3
 
 echo $version->major()->toString(); // 1
 echo $version->minor()->toString(); // 2
 echo $version->patch()->toString(); // 3
+echo $version->preRelease()->toString(); // alpha
 ```
 
 ### Compare a `Version` with another `Version`
@@ -151,6 +152,53 @@ use Ergebnis\Version;
 $one = Version\Patch::::fromString('1');
 $two = Version\Patch::fromString('1');
 $three = Version\Patch::fromString('2');
+
+$one->equals($two); // true
+$one->equals($three); // false
+
+$one->equals($two); // true
+```
+
+### Create a `PreRelease` from a `string`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Version;
+
+$preRelease = Version\PreRelease::fromString('alpha');
+
+echo $preRelease->toString(); // alpha
+```
+
+### Create an empty `PreRelease`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Version;
+
+$preRelease = Version\PreRelease::empty();
+
+echo $preRelease->toString(); // empty
+```
+
+### Compare a `PreRelease` with another `PreRelease`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Version;
+
+$one = Version\PreRelease::::fromString('alpha');
+$two = Version\PreRelease::fromString('alpha');
+$three = Version\PreRelease::fromString('beta');
 
 $one->equals($two); // true
 $one->equals($three); // false
