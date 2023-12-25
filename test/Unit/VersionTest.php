@@ -359,6 +359,120 @@ final class VersionTest extends Framework\TestCase
         }
     }
 
+    #[Framework\Attributes\DataProvider('provideValidValueAndValueWithBumpedMajor')]
+    public function testBumpMajorReturnsVersionWithBumpedMajor(
+        string $value,
+        string $valueWithBumpedMajor,
+    ): void {
+        $one = Version::fromString($value);
+
+        $two = $one->bumpMajor();
+
+        self::assertNotSame($one, $two);
+        self::assertSame($valueWithBumpedMajor, $two->toString());
+    }
+
+    /**
+     * @see https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
+     * @see https://regex101.com/r/Ly7O1x/3/
+     *
+     * @return \Generator<string, array{0: string, 1: string}>
+     */
+    public static function provideValidValueAndValueWithBumpedMajor(): \Generator
+    {
+        $values = [
+            '0.0.4' => '1.0.0',
+            '1.2.3' => '2.0.0',
+            '10.20.30' => '11.0.0',
+            '1.1.2-prerelease+meta' => '2.0.0',
+            '1.1.2+meta' => '2.0.0',
+            '1.0.0-alpha' => '2.0.0',
+        ];
+
+        foreach ($values as $value => $valueWithBumpedMajor) {
+            yield $value => [
+                $value,
+                $valueWithBumpedMajor,
+            ];
+        }
+    }
+
+    #[Framework\Attributes\DataProvider('provideValidValueAndValueWithBumpedMinor')]
+    public function testBumpMinorReturnsVersionWithBumpedMinor(
+        string $value,
+        string $valueWithBumpedMinor,
+    ): void {
+        $one = Version::fromString($value);
+
+        $two = $one->bumpMinor();
+
+        self::assertNotSame($one, $two);
+        self::assertSame($valueWithBumpedMinor, $two->toString());
+    }
+
+    /**
+     * @see https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
+     * @see https://regex101.com/r/Ly7O1x/3/
+     *
+     * @return \Generator<string, array{0: string, 1: string}>
+     */
+    public static function provideValidValueAndValueWithBumpedMinor(): \Generator
+    {
+        $values = [
+            '0.0.4' => '0.1.0',
+            '1.2.3' => '1.3.0',
+            '10.20.30' => '10.21.0',
+            '1.1.2-prerelease+meta' => '1.2.0',
+            '1.1.2+meta' => '1.2.0',
+            '1.0.0-alpha' => '1.1.0',
+        ];
+
+        foreach ($values as $value => $valueWithBumpedMinor) {
+            yield $value => [
+                $value,
+                $valueWithBumpedMinor,
+            ];
+        }
+    }
+
+    #[Framework\Attributes\DataProvider('provideValidValueAndValueWithBumpedPatch')]
+    public function testBumpPatchReturnsVersionWithBumpedPatch(
+        string $value,
+        string $valueWithBumpedPatch,
+    ): void {
+        $one = Version::fromString($value);
+
+        $two = $one->bumpPatch();
+
+        self::assertNotSame($one, $two);
+        self::assertSame($valueWithBumpedPatch, $two->toString());
+    }
+
+    /**
+     * @see https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
+     * @see https://regex101.com/r/Ly7O1x/3/
+     *
+     * @return \Generator<string, array{0: string, 1: string}>
+     */
+    public static function provideValidValueAndValueWithBumpedPatch(): \Generator
+    {
+        $values = [
+            '0.0.4' => '0.0.5',
+            '1.2.3' => '1.2.4',
+            '10.20.30' => '10.20.31',
+            '1.1.2-prerelease+meta' => '1.1.3',
+            '1.1.2+meta' => '1.1.3',
+            '1.0.0-alpha' => '1.0.1',
+        ];
+
+        foreach ($values as $value => $valueWithBumpedPatch) {
+            yield $value => [
+                $value,
+                $valueWithBumpedPatch,
+            ];
+        }
+    }
+
     public function testEqualsReturnsFalseWhenValuesAreDifferent(): void
     {
         $faker = self::faker()->unique();

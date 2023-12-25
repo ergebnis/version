@@ -44,6 +44,78 @@ echo $version->preRelease()->toString(); // alpha
 echo $version->buildMetaData()->toString(); // build.9001
 ```
 
+### Bump a `Version`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Version;
+
+$version = Version\Version::fromString('1.2.3');
+
+$one = $version->bumpMajor();
+
+echo $one->toString(); // 2.0.0
+
+$two = $version->bumpMinor();
+
+echo $two->toString(); // 1.3.0
+
+$three = $version->bumpPatch();
+
+echo $three->toString(); // 1.2.4
+```
+
+### Bump a `Version` with `PreRelease`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Version;
+
+$version = Version\Version::fromString('1.2.3-alpha');
+
+$one = $version->bumpMajor();
+
+echo $one->toString(); // 2.0.0
+
+$two = $version->bumpMinor();
+
+echo $two->toString(); // 1.3.0
+
+$three = $version->bumpPatch();
+
+echo $three->toString(); // 1.2.3
+```
+
+### Bump a `Version` with `BuildMetaData`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Version;
+
+$version = Version\Version::fromString('1.2.3+build.9001');
+
+$one = $version->bumpMajor();
+
+echo $one->toString(); // 2.0.0
+
+$two = $version->bumpMinor();
+
+echo $two->toString(); // 1.3.0
+
+$three = $version->bumpPatch();
+
+echo $three->toString(); // 1.2.4
+```
+
 ### Compare a `Version` with another `Version`
 
 ```php
