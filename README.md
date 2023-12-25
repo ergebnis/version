@@ -33,7 +33,7 @@ declare(strict_types=1);
 
 use Ergebnis\Version;
 
-$version = Version\Version::fromString('1.2.3-alpha');
+$version = Version\Version::fromString('1.2.3-alpha+build.9001');
 
 echo $version->toString(); // 1.2.3
 
@@ -41,6 +41,7 @@ echo $version->major()->toString(); // 1
 echo $version->minor()->toString(); // 2
 echo $version->patch()->toString(); // 3
 echo $version->preRelease()->toString(); // alpha
+echo $version->buildMetaData()->toString(); // build.9001
 ```
 
 ### Compare a `Version` with another `Version`
@@ -199,6 +200,53 @@ use Ergebnis\Version;
 $one = Version\PreRelease::::fromString('alpha');
 $two = Version\PreRelease::fromString('alpha');
 $three = Version\PreRelease::fromString('beta');
+
+$one->equals($two); // true
+$one->equals($three); // false
+
+$one->equals($two); // true
+```
+
+### Create a `BuildMetaData` from a `string`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Version;
+
+$buildMetaData = Version\BuildMetaData::fromString('build.9001');
+
+echo $buildMetaData->toString(); // build.9001
+```
+
+### Create an empty `BuildMetaData`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Version;
+
+$buildMetaData = Version\BuildMetaData::empty();
+
+echo $buildMetaData->toString(); // empty
+```
+
+### Compare a `BuildMetaData` with another `BuildMetaData`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Version;
+
+$one = Version\BuildMetaData::::fromString('build.9001');
+$two = Version\BuildMetaData::fromString('build.9001');
+$three = Version\BuildMetaData::fromString('build.9000');
 
 $one->equals($two); // true
 $one->equals($three); // false
