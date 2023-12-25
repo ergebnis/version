@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Ergebnis\Version\Test\Unit;
 
-use Ergebnis\DataProvider;
 use Ergebnis\Version\Exception;
 use Ergebnis\Version\Test;
 use Ergebnis\Version\Version;
@@ -25,8 +24,7 @@ final class VersionTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 
-    #[Framework\Attributes\DataProviderExternal(DataProvider\StringProvider::class, 'blank')]
-    #[Framework\Attributes\DataProviderExternal(DataProvider\StringProvider::class, 'empty')]
+    #[Framework\Attributes\DataProvider('provideInvalidValue')]
     public function testFromStringRejectsInvalidValue(string $value): void
     {
         $this->expectException(Exception\InvalidVersion::class);
@@ -73,7 +71,6 @@ final class VersionTest extends Framework\TestCase
             '01.1.1',
             '1.01.1',
             '1.1.01',
-            '1.2',
             '1.2.3.DEV',
             '1.2-SNAPSHOT',
             '1.2.31.2.3----RC-SNAPSHOT.12.09.1--..12+788',
