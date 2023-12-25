@@ -22,7 +22,6 @@ final class Version
     private const REGEX = '/^(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>0|[1-9]\d*)(?:-(?P<prerelease>(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+(?P<buildmetadata>[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/';
 
     private function __construct(
-        private readonly string $value,
         private readonly Major $major,
         private readonly Minor $minor,
         private readonly Patch $patch,
@@ -59,7 +58,6 @@ final class Version
         }
 
         return new self(
-            $value,
             Major::fromString($matches['major']),
             Minor::fromString($matches['minor']),
             Patch::fromString($matches['patch']),
@@ -70,12 +68,35 @@ final class Version
 
     public function toString(): string
     {
-        return $this->value;
+        $value = \sprintf(
+            '%s.%s.%s',
+            $this->major->toString(),
+            $this->minor->toString(),
+            $this->patch->toString(),
+        );
+
+        if (!$this->preRelease->equals(PreRelease::empty())) {
+            $value = \sprintf(
+                '%s-%s',
+                $value,
+                $this->preRelease->toString(),
+            );
+        }
+
+        if (!$this->buildMetaData->equals(BuildMetaData::empty())) {
+            $value = \sprintf(
+                '%s+%s',
+                $value,
+                $this->buildMetaData->toString(),
+            );
+        }
+
+        return $value;
     }
 
     public function equals(self $other): bool
     {
-        return $this->value === $other->value;
+        return $this->toString() === $other->toString();
     }
 
     public function major(): Major
