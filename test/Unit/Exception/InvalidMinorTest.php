@@ -22,6 +22,20 @@ final class InvalidMinorTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 
+    public function testFromIntReturnsException(): void
+    {
+        $value = self::faker()->numberBetween(0);
+
+        $exception = Exception\InvalidMinor::fromInt($value);
+
+        $message = \sprintf(
+            'Value "%d" does not appear to be valid.',
+            $value,
+        );
+
+        self::assertSame($message, $exception->getMessage());
+    }
+
     public function testFromStringReturnsException(): void
     {
         $value = self::faker()->word();

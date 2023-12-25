@@ -21,8 +21,20 @@ final class Minor
      */
     private const REGEX = '/^(?P<minor>0|[1-9]\d*)$/';
 
-    private function __construct(private readonly string $value)
+    private function __construct(private readonly int $value)
     {
+    }
+
+    /**
+     * @throws Exception\InvalidMinor
+     */
+    public static function fromInt(int $value): self
+    {
+        if (0 > $value) {
+            throw Exception\InvalidMinor::fromInt($value);
+        }
+
+        return new self($value);
     }
 
     /**
@@ -34,12 +46,17 @@ final class Minor
             throw Exception\InvalidMinor::fromString($value);
         }
 
-        return new self($value);
+        return new self((int) $value);
+    }
+
+    public function toInt(): int
+    {
+        return $this->value;
     }
 
     public function toString(): string
     {
-        return $this->value;
+        return (string) $this->value;
     }
 
     public function equals(self $other): bool

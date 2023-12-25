@@ -15,6 +15,14 @@ namespace Ergebnis\Version\Exception;
 
 final class InvalidMajor extends \InvalidArgumentException
 {
+    public static function fromInt(int $value): self
+    {
+        return new self(\sprintf(
+            'Value "%d" does not appear to be valid.',
+            $value,
+        ));
+    }
+
     public static function fromString(string $value): self
     {
         return new self(\sprintf(

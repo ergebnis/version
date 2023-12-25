@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Version\Test\Unit;
 
+use Ergebnis\DataProvider;
 use Ergebnis\Version\Exception;
 use Ergebnis\Version\Major;
 use Ergebnis\Version\Test;
@@ -24,8 +25,25 @@ final class MajorTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 
-    #[Framework\Attributes\DataProvider('provideInvalidValue')]
-    public function testFromStringRejectsInvalidValue(string $value): void
+    #[Framework\Attributes\DataProviderExternal(DataProvider\IntProvider::class, 'lessThanZero')]
+    public function testFromIntRejectsInvalidIntValue(int $value): void
+    {
+        $this->expectException(Exception\InvalidMajor::class);
+
+        Major::fromInt($value);
+    }
+
+    #[Framework\Attributes\DataProviderExternal(DataProvider\IntProvider::class, 'zero')]
+    #[Framework\Attributes\DataProviderExternal(DataProvider\IntProvider::class, 'greaterThanZero')]
+    public function testFromIntReturnsMajor(int $value): void
+    {
+        $major = Major::fromInt($value);
+
+        self::assertSame($value, $major->toInt());
+    }
+
+    #[Framework\Attributes\DataProvider('provideInvalidStringValue')]
+    public function testFromStringRejectsInvalidStringValue(string $value): void
     {
         $this->expectException(Exception\InvalidMajor::class);
 
@@ -38,7 +56,7 @@ final class MajorTest extends Framework\TestCase
      *
      * @return \Generator<string, array{0: string}>
      */
-    public static function provideInvalidValue(): \Generator
+    public static function provideInvalidStringValue(): \Generator
     {
         $faker = self::faker();
 
@@ -57,7 +75,7 @@ final class MajorTest extends Framework\TestCase
         }
     }
 
-    #[Framework\Attributes\DataProvider('provideValidValue')]
+    #[Framework\Attributes\DataProvider('provideValidStringValue')]
     public function testFromStringReturnsMajor(string $value): void
     {
         $major = Major::fromString($value);
@@ -71,7 +89,7 @@ final class MajorTest extends Framework\TestCase
      *
      * @return \Generator<string, array{0: string}>
      */
-    public static function provideValidValue(): \Generator
+    public static function provideValidStringValue(): \Generator
     {
         $values = [
             'zero' => '0',
