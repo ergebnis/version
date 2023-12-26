@@ -347,23 +347,45 @@ final class VersionTest extends Framework\TestCase
         self::assertSame($valueWithBumpedPatch, $two->toString());
     }
 
-    public function testEqualsReturnsFalseWhenValuesAreDifferent(): void
-    {
-        $faker = self::faker()->unique();
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valuesWhereFirstValueIsSmallerThanSecondValue')]
+    public function testCompareReturnsMinusOneWhenFirstValueIsSmallerThanSecondValue(
+        string $firstValue,
+        string $secondValue,
+    ): void {
+        $one = Version::fromString($firstValue);
+        $two = Version::fromString($secondValue);
 
-        $one = Version::fromString($faker->regexify('(0|[1-9]+)\.(0|[1-9]+)\.(0|[1-9]+)'));
-        $two = Version::fromString($faker->regexify('(0|[1-9]+)\.(0|[1-9]+)\.(0|[1-9]+)'));
-
-        self::assertFalse($one->equals($two));
+        self::assertSame(-1, $one->compare($two));
     }
 
-    public function testEqualsReturnsTrueWhenValueIsSame(): void
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valid')]
+    public function testCompareReturnsZeroWhenFirstValueIsIdenticalToSecondValue(string $value): void
     {
-        $value = self::faker()->regexify('(0|[1-9]+)\.(0|[1-9]+)\.(0|[1-9]+)');
-
         $one = Version::fromString($value);
         $two = Version::fromString($value);
 
-        self::assertTrue($one->equals($two));
+        self::assertSame(0, $one->compare($two));
+    }
+
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valuesWhereFirstValueIsEqualToSecondValue')]
+    public function testCompareReturnsZeroWhenFirstValueIsEqualToSecondValue(
+        string $firstValue,
+        string $secondValue,
+    ): void {
+        $one = Version::fromString($firstValue);
+        $two = Version::fromString($secondValue);
+
+        self::assertSame(0, $one->compare($two));
+    }
+
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valuesWhereFirstValueIsGreaterThanSecondValue')]
+    public function testCompareReturnsMinusOneWhenFirstValueIsGreaterThanSecondValue(
+        string $firstValue,
+        string $secondValue,
+    ): void {
+        $one = Version::fromString($firstValue);
+        $two = Version::fromString($secondValue);
+
+        self::assertSame(1, $one->compare($two));
     }
 }

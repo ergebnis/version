@@ -199,4 +199,163 @@ final class VersionProvider
             ];
         }
     }
+
+    /**
+     * @return \Generator<string, array{0: string, 1: string}>
+     */
+    public static function valuesWhereFirstValueIsSmallerThanSecondValue(): \Generator
+    {
+        $values = self::valuesOrderedByPrecedence();
+
+        $count = \count($values);
+
+        for ($i = 0; $count - 1 > $i; ++$i) {
+            $value = $values[$i];
+
+            for ($j = $i + 1; $count > $j; ++$j) {
+                $otherValue = $values[$j];
+
+                $key = \sprintf(
+                    '%s-smaller-than-%s',
+                    $value,
+                    $otherValue,
+                );
+
+                yield $key => [
+                    $value,
+                    $otherValue,
+                    -1,
+                ];
+            }
+        }
+    }
+
+    /**
+     * @return \Generator<string, array{0: string, 1: string}>
+     */
+    public static function valuesWhereFirstValueIsGreaterThanSecondValue(): \Generator
+    {
+        $values = \array_reverse(self::valuesOrderedByPrecedence());
+
+        $count = \count($values);
+
+        for ($i = 0; $count - 1 > $i; ++$i) {
+            $value = $values[$i];
+
+            for ($j = $i + 1; $count > $j; ++$j) {
+                $otherValue = $values[$j];
+
+                $key = \sprintf(
+                    '%s-greater-than-%s',
+                    $value,
+                    $otherValue,
+                );
+
+                yield $key => [
+                    $value,
+                    $otherValue,
+                    -1,
+                ];
+            }
+        }
+    }
+
+    /**
+     * @see https://semver.org/#spec-item-11
+     * @see https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
+     * @see https://regex101.com/r/Ly7O1x/3/
+     *
+     * @return \Generator<string, array{0: string, 1: string}
+     */
+    public static function valuesWhereFirstValueIsEqualToSecondValue(): \Generator
+    {
+        $values = [
+            [
+                '1.0.0',
+                '1.0.0+0.build.1-rc.10000aaa-kk-0.1',
+            ],
+            [
+                '1.0.0-rc.1',
+                '1.0.0-rc.1+build.1',
+                '1.0.0-rc.1+build.9000',
+            ],
+            [
+                '1.1.2',
+                '1.1.2+meta',
+                '1.1.2+meta-valid',
+            ],
+            [
+                '1.2.3----RC-SNAPSHOT.12.9.1--.12',
+                '1.2.3----RC-SNAPSHOT.12.9.1--.12+788',
+            ],
+            [
+                '2.0.0',
+                '2.0.0+build.1848',
+            ],
+        ];
+
+        foreach ($values as $valuesWithBuildMetaData) {
+            $count = \count($valuesWithBuildMetaData);
+
+            for ($i = 0; $count - 1 > $i; ++$i) {
+                $value = $valuesWithBuildMetaData[$i];
+
+                for ($j = $i + 1; $j < $count; ++$j) {
+                    $otherValue = $valuesWithBuildMetaData[$j];
+
+                    $key = \sprintf(
+                        '%s-equal-to-%s',
+                        $value,
+                        $otherValue,
+                    );
+
+                    yield $key => [
+                        $value,
+                        $otherValue,
+                        -1,
+                    ];
+                }
+            }
+        }
+    }
+
+    /**
+     * @see https://semver.org/#spec-item-11
+     * @see https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
+     * @see https://regex101.com/r/Ly7O1x/3/
+     * @see https://www.sfu.ca/sasdoc/sashtml/proc/z1epts.htm
+     *
+     * @return list<string>
+     */
+    private static function valuesOrderedByPrecedence(): array
+    {
+        return [
+            '0.0.4',
+            '1.0.0-0A.is.legal',
+            '1.0.0-alpha',
+            '1.0.0-alpha.1',
+            '1.0.0-alpha.0valid',
+            '1.0.0-alpha.beta',
+            '1.0.0-alpha.beta.1',
+            '1.0.0-alpha-a.b-c-somethinglong+build.1-aef.1-its-okay',
+            '1.0.0-alpha0.valid',
+            '1.0.0-beta',
+            '1.0.0-rc.1+build.1',
+            '1.0.0',
+            '1.1.2-prerelease+meta',
+            '1.1.2+meta',
+            '1.1.7',
+            '1.2.3----R-S.12.9.1--.12',
+            '1.2.3----RC-SNAPSHOT.12.9.1--.12',
+            '1.2.3-SNAPSHOT-123',
+            '1.2.3-beta',
+            '1.2.3',
+            '2.0.0-rc.1+build.123',
+            '2.0.0',
+            '2.0.1-alpha.1227',
+            '10.2.3-DEV-SNAPSHOT',
+            '10.20.30',
+            '99999999999999999999999.999999999999999999.99999999999999999',
+        ];
+    }
 }

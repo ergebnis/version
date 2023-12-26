@@ -30,12 +30,34 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="test/DataProvider/VersionProvider.php">
+    <InvalidArrayOffset>
+      <code>$valuesWithBuildMetaData[$i]</code>
+      <code>$valuesWithBuildMetaData[$j]</code>
+    </InvalidArrayOffset>
+    <InvalidDocblock>
+      <code>public static function valuesWhereFirstValueIsEqualToSecondValue(): \Generator</code>
+    </InvalidDocblock>
+    <InvalidReturnType>
+      <code><![CDATA[\Generator<string, array{0: string, 1: string}>]]></code>
+      <code><![CDATA[\Generator<string, array{0: string, 1: string}>]]></code>
+    </InvalidReturnType>
+    <MixedArgument>
+      <code>$otherValue</code>
+      <code>$value</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$otherValue</code>
+      <code>$value</code>
+    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code>invalid</code>
       <code>valid</code>
       <code>valueAndValueWithBumpedMajor</code>
       <code>valueAndValueWithBumpedMinor</code>
       <code>valueAndValueWithBumpedPatch</code>
+      <code>valuesWhereFirstValueIsEqualToSecondValue</code>
+      <code>valuesWhereFirstValueIsGreaterThanSecondValue</code>
+      <code>valuesWhereFirstValueIsSmallerThanSecondValue</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="test/Unit/BuildMetaDataTest.php">

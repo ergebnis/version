@@ -145,9 +145,45 @@ final class Version
         );
     }
 
-    public function equals(self $other): bool
+    public function compare(self $other): int
     {
-        return $this->toString() === $other->toString();
+        $major = $this->major->compare($other->major);
+
+        if (0 !== $major) {
+            return $major;
+        }
+
+        $minor = $this->minor->compare($other->minor);
+
+        if (0 !== $minor) {
+            return $minor;
+        }
+
+        $patch = $this->patch->compare($other->patch);
+
+        if (0 !== $patch) {
+            return $patch;
+        }
+
+        if ($this->preRelease->equals(PreRelease::empty())) {
+            if ($other->preRelease->equals(PreRelease::empty())) {
+                return 0;
+            }
+
+            return 1;
+        }
+
+        if ($other->preRelease->equals(PreRelease::empty())) {
+            return -1;
+        }
+
+        $preRelease = $this->preRelease->compare($other->preRelease);
+
+        if (0 !== $preRelease) {
+            return $preRelease;
+        }
+
+        return 0;
     }
 
     public function major(): Major
