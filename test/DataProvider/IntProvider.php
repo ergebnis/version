@@ -31,8 +31,9 @@ final class IntProvider extends DataProvider\AbstractProvider
         $count = \count($values);
 
         for ($i = 0; $count - 1 > $i; ++$i) {
+            $value = $values[$i];
+
             for ($j = $i + 1; $count > $j; ++$j) {
-                $value = $values[$i];
                 $otherValue = $values[$j];
 
                 $key = \sprintf(
@@ -66,8 +67,9 @@ final class IntProvider extends DataProvider\AbstractProvider
         $reverse = \array_reverse($values);
 
         for ($i = 0; $count - 1 > $i; ++$i) {
+            $value = $reverse[$i];
+
             for ($j = $i + 1; $count > $j; ++$j) {
-                $value = $reverse[$i];
                 $otherValue = $reverse[$j];
 
                 $key = \sprintf(
