@@ -54,10 +54,10 @@
   <file src="test/Unit/VersionTest.php">
     <PossiblyUnusedMethod>
       <code>provideInvalidValue</code>
-      <code>provideValidValueAndValueWithBumpedMajor</code>
-      <code>provideValidValueAndValueWithBumpedMinor</code>
-      <code>provideValidValueAndValueWithBumpedPatch</code>
       <code>provideValidValueMajorMinorPatchPreReleaseAndBuildMetaData</code>
+      <code>provideValueAndValueWithBumpedMajor</code>
+      <code>provideValueAndValueWithBumpedMinor</code>
+      <code>provideValueAndValueWithBumpedPatch</code>
     </PossiblyUnusedMethod>
   </file>
 </files>

@@ -363,7 +363,7 @@ final class VersionTest extends Framework\TestCase
         }
     }
 
-    #[Framework\Attributes\DataProvider('provideValidValueAndValueWithBumpedMajor')]
+    #[Framework\Attributes\DataProvider('provideValueAndValueWithBumpedMajor')]
     public function testBumpMajorReturnsVersionWithBumpedMajor(
         string $value,
         string $valueWithBumpedMajor,
@@ -382,7 +382,7 @@ final class VersionTest extends Framework\TestCase
      *
      * @return \Generator<string, array{0: string, 1: string}>
      */
-    public static function provideValidValueAndValueWithBumpedMajor(): \Generator
+    public static function provideValueAndValueWithBumpedMajor(): \Generator
     {
         $values = [
             '0.0.4' => '1.0.0',
@@ -401,7 +401,7 @@ final class VersionTest extends Framework\TestCase
         }
     }
 
-    #[Framework\Attributes\DataProvider('provideValidValueAndValueWithBumpedMinor')]
+    #[Framework\Attributes\DataProvider('provideValueAndValueWithBumpedMinor')]
     public function testBumpMinorReturnsVersionWithBumpedMinor(
         string $value,
         string $valueWithBumpedMinor,
@@ -420,7 +420,7 @@ final class VersionTest extends Framework\TestCase
      *
      * @return \Generator<string, array{0: string, 1: string}>
      */
-    public static function provideValidValueAndValueWithBumpedMinor(): \Generator
+    public static function provideValueAndValueWithBumpedMinor(): \Generator
     {
         $values = [
             '0.0.4' => '0.1.0',
@@ -439,7 +439,7 @@ final class VersionTest extends Framework\TestCase
         }
     }
 
-    #[Framework\Attributes\DataProvider('provideValidValueAndValueWithBumpedPatch')]
+    #[Framework\Attributes\DataProvider('provideValueAndValueWithBumpedPatch')]
     public function testBumpPatchReturnsVersionWithBumpedPatch(
         string $value,
         string $valueWithBumpedPatch,
@@ -458,7 +458,7 @@ final class VersionTest extends Framework\TestCase
      *
      * @return \Generator<string, array{0: string, 1: string}>
      */
-    public static function provideValidValueAndValueWithBumpedPatch(): \Generator
+    public static function provideValueAndValueWithBumpedPatch(): \Generator
     {
         $values = [
             '0.0.4' => '0.0.5',
