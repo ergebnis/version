@@ -90,6 +90,10 @@ final class VersionTest extends Framework\TestCase
             '9.8.7+meta+meta',
             '9.8.7-whatever+meta+meta',
             '99999999999999999999999.999999999999999999.99999999999999999----RC-SNAPSHOT.12.09.1--------------------------------..12',
+            /**
+             * @see https://github.com/ergebnis/version/issues/14
+             */
+            '1.2.3-.+b',
         ];
 
         foreach ($values as $value) {
