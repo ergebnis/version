@@ -68,6 +68,9 @@ final class Version
 
     public function toString(): string
     {
+        /**
+         * @see https://semver.org/#spec-item-2
+         */
         $value = \sprintf(
             '%s.%s.%s',
             $this->major->toString(),
@@ -75,6 +78,9 @@ final class Version
             $this->patch->toString(),
         );
 
+        /**
+         * @see https://semver.org/#spec-item-9
+         */
         if (!$this->preRelease->equals(PreRelease::empty())) {
             $value = \sprintf(
                 '%s-%s',
@@ -83,6 +89,9 @@ final class Version
             );
         }
 
+        /**
+         * @see https://semver.org/#spec-item-10
+         */
         if (!$this->buildMetaData->equals(BuildMetaData::empty())) {
             $value = \sprintf(
                 '%s+%s',
@@ -94,6 +103,9 @@ final class Version
         return $value;
     }
 
+    /**
+     * @see https://semver.org/#spec-item-8
+     */
     public function bumpMajor(): self
     {
         return new self(
@@ -105,6 +117,9 @@ final class Version
         );
     }
 
+    /**
+     * @see https://semver.org/#spec-item-7
+     */
     public function bumpMinor(): self
     {
         return new self(
@@ -116,6 +131,9 @@ final class Version
         );
     }
 
+    /**
+     * @see https://semver.org/#spec-item-6
+     */
     public function bumpPatch(): self
     {
         return new self(
