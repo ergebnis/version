@@ -58,26 +58,7 @@ final class PreReleaseProvider
      */
     public static function valid(): \Generator
     {
-        $values = [
-            'prerelease',
-            'alpha',
-            'beta',
-            'alpha.beta',
-            'alpha.beta.1',
-            'alpha.1',
-            'alpha0.valid',
-            'alpha.0valid',
-            'alpha-a.b-c-somethinglong',
-            'rc.1',
-            'DEV-SNAPSHOT',
-            'SNAPSHOT-123',
-            'alpha.1227',
-            '---RC-SNAPSHOT.12.9.1--.12',
-            '---R-S.12.9.1--.12',
-            '0A.is.legal',
-        ];
-
-        foreach ($values as $value) {
+        foreach (self::valuesOrderedByPrecedence() as $value) {
             yield $value => [
                 $value,
             ];
@@ -85,34 +66,11 @@ final class PreReleaseProvider
     }
 
     /**
-     * @see https://semver.org/#spec-item-11
-     * @see https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
-     * @see https://regex101.com/r/Ly7O1x/3/
-     * @see https://www.sfu.ca/sasdoc/sashtml/proc/z1epts.htm
-     *
      * @return \Generator<string, array{0: string, 1: string, 2: int}>
      */
-    public static function valueOtherValueAndResult(): \Generator
+    public static function valuesWhereFirstValueIsSmallerThanSecondValue(): \Generator
     {
-        $values = [
-            '---R-S.12.9.1--.12',
-            '---RC-SNAPSHOT.12.9.1--.12',
-            '0A.is.legal',
-            'DEV-SNAPSHOT',
-            'SNAPSHOT-123',
-            'alpha',
-            'alpha.1',
-            'alpha.1227',
-            'alpha.beta',
-            'alpha.beta.1',
-            'alpha-a.b-c-somethinglong',
-            'alpha0.valid',
-            'beta',
-            'beta.2',
-            'beta.11',
-            'prerelease',
-            'rc.1',
-        ];
+        $values = self::valuesOrderedByPrecedence();
 
         $count = \count($values);
 
@@ -135,28 +93,22 @@ final class PreReleaseProvider
                 ];
             }
         }
+    }
 
-        foreach ($values as $value) {
-            $key = \sprintf(
-                '%s-equal-to-%s',
-                $value,
-                $value,
-            );
+    /**
+     * @return \Generator<string, array{0: string, 1: string, 2: int}>
+     */
+    public static function valuesWhereFirstValueIsGreaterThanSecondValue(): \Generator
+    {
+        $values = \array_reverse(self::valuesOrderedByPrecedence());
 
-            yield $key => [
-                $value,
-                $value,
-                0,
-            ];
-        }
-
-        $reverse = \array_reverse($values);
+        $count = \count($values);
 
         for ($i = 0; $count - 1 > $i; ++$i) {
-            $value = $reverse[$i];
+            $value = $values[$i];
 
             for ($j = $i + 1; $count > $j; ++$j) {
-                $otherValue = $reverse[$j];
+                $otherValue = $values[$j];
 
                 $key = \sprintf(
                     '%s-greater-than-%s',
@@ -167,9 +119,40 @@ final class PreReleaseProvider
                 yield $key => [
                     $value,
                     $otherValue,
-                    1,
+                    -1,
                 ];
             }
         }
+    }
+
+    /**
+     * @see https://regex101.com/r/Ly7O1x/3/     *
+     * @see https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
+     * @see https://semver.org/#spec-item-11
+     * @see https://www.sfu.ca/sasdoc/sashtml/proc/z1epts.htm
+     *
+     * @return list<string>
+     */
+    private static function valuesOrderedByPrecedence(): array
+    {
+        return [
+            '---R-S.12.9.1--.12',
+            '---RC-SNAPSHOT.12.9.1--.12',
+            '0A.is.legal',
+            'DEV-SNAPSHOT',
+            'SNAPSHOT-123',
+            'alpha',
+            'alpha.1',
+            'alpha.1227',
+            'alpha.beta',
+            'alpha.beta.1',
+            'alpha-a.b-c-somethinglong',
+            'alpha0.valid',
+            'beta',
+            'beta.2',
+            'beta.11',
+            'prerelease',
+            'rc.1',
+        ];
     }
 }

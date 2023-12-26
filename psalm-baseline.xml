@@ -22,31 +22,11 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="test/DataProvider/PreReleaseProvider.php">
-    <InvalidArrayOffset>
-      <code>$reverse[$i]</code>
-      <code>$reverse[$j]</code>
-      <code>$values[$i]</code>
-      <code>$values[$j]</code>
-    </InvalidArrayOffset>
-    <MixedArgument>
-      <code>$otherValue</code>
-      <code>$otherValue</code>
-      <code>$value</code>
-      <code>$value</code>
-    </MixedArgument>
-    <MixedAssignment>
-      <code>$otherValue</code>
-      <code>$otherValue</code>
-      <code>$value</code>
-      <code>$value</code>
-    </MixedAssignment>
-    <MixedReturnTypeCoercion>
-      <code><![CDATA[\Generator<string, array{0: string, 1: string, 2: int}>]]></code>
-    </MixedReturnTypeCoercion>
     <PossiblyUnusedMethod>
       <code>invalid</code>
       <code>valid</code>
-      <code>valueOtherValueAndResult</code>
+      <code>valuesWhereFirstValueIsGreaterThanSecondValue</code>
+      <code>valuesWhereFirstValueIsSmallerThanSecondValue</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="test/Unit/BuildMetaDataTest.php">

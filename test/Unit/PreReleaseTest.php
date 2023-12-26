@@ -47,16 +47,35 @@ final class PreReleaseTest extends Framework\TestCase
         self::assertSame('', $preRelease->toString());
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\PreReleaseProvider::class, 'valueOtherValueAndResult')]
-    public function testCompareReturnsResultOfComparingValues(
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\PreReleaseProvider::class, 'valuesWhereFirstValueIsSmallerThanSecondValue')]
+    public function testCompareReturnsMinusOneWhenFirstValueIsSmallerThanSecondValue(
         string $value,
         string $otherValue,
-        int $result,
     ): void {
         $one = PreRelease::fromString($value);
         $two = PreRelease::fromString($otherValue);
 
-        self::assertSame($result, $one->compare($two));
+        self::assertSame(-1, $one->compare($two));
+    }
+
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\PreReleaseProvider::class, 'valid')]
+    public function testCompareReturnsZeroWhenFirstValueIsEqualToSecondValue(string $value): void
+    {
+        $one = PreRelease::fromString($value);
+        $two = PreRelease::fromString($value);
+
+        self::assertSame(0, $one->compare($two));
+    }
+
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\PreReleaseProvider::class, 'valuesWhereFirstValueIsGreaterThanSecondValue')]
+    public function testCompareReturnsPlusOneWhenFirstValueIsGreaterThanSecondValue(
+        string $value,
+        string $otherValue,
+    ): void {
+        $one = PreRelease::fromString($value);
+        $two = PreRelease::fromString($otherValue);
+
+        self::assertSame(1, $one->compare($two));
     }
 
     public function testEqualsReturnsFalseWhenValuesAreDifferent(): void
