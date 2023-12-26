@@ -18,72 +18,56 @@ use Ergebnis\DataProvider;
 final class IntProvider extends DataProvider\AbstractProvider
 {
     /**
-     * @return \Generator<string, array{0: string, 1: string, 2: int}>
+     * @return \Generator<string, array{0: string, 1: string}>
      */
-    public static function valuesAndResultOfComparison(): \Generator
+    public static function valuesWhereFirstValueIsSmallerThanSecondValue(): \Generator
     {
-        $values = [
+        foreach (self::values() as $firstValue) {
+            $secondValue = $firstValue + 1;
+
+            $key = \sprintf(
+                '%d-smaller-than-%d',
+                $firstValue,
+                $secondValue,
+            );
+
+            yield $key => [
+                (string) $firstValue,
+                (string) $secondValue,
+            ];
+        }
+    }
+
+    /**
+     * @return \Generator<string, array{0: string, 1: string}>
+     */
+    public static function valuesWhereFirstValueIsGreaterThanSecondValue(): \Generator
+    {
+        foreach (self::values() as $secondValue) {
+            $firstValue = $secondValue + 1;
+
+            $key = \sprintf(
+                '%d-greater-than-%d',
+                $firstValue,
+                $secondValue,
+            );
+
+            yield $key => [
+                (string) $firstValue,
+                (string) $secondValue,
+            ];
+        }
+    }
+
+    /**
+     * @return list<int>
+     */
+    private static function values(): array
+    {
+        return [
             0,
             1,
             self::faker()->numberBetween(2),
         ];
-
-        $count = \count($values);
-
-        for ($i = 0; $count - 1 > $i; ++$i) {
-            $value = $values[$i];
-
-            for ($j = $i + 1; $count > $j; ++$j) {
-                $otherValue = $values[$j];
-
-                $key = \sprintf(
-                    '%d-smaller-than-%d',
-                    $value,
-                    $otherValue,
-                );
-
-                yield $key => [
-                    (string) $value,
-                    (string) $otherValue,
-                    -1,
-                ];
-            }
-        }
-
-        foreach ($values as $value) {
-            $key = \sprintf(
-                '%d-equal-to-%d',
-                $value,
-                $value,
-            );
-
-            yield $key => [
-                (string) $value,
-                (string) $value,
-                0,
-            ];
-        }
-
-        $reverse = \array_reverse($values);
-
-        for ($i = 0; $count - 1 > $i; ++$i) {
-            $value = $reverse[$i];
-
-            for ($j = $i + 1; $count > $j; ++$j) {
-                $otherValue = $reverse[$j];
-
-                $key = \sprintf(
-                    '%d-greater-than-%d',
-                    $value,
-                    $otherValue,
-                );
-
-                yield $key => [
-                    (string) $value,
-                    (string) $otherValue,
-                    1,
-                ];
-            }
-        }
     }
 }

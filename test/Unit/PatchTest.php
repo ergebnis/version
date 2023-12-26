@@ -148,15 +148,35 @@ final class PatchTest extends Framework\TestCase
         }
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\IntProvider::class, 'valuesAndResultOfComparison')]
-    public function testCompareReturnsResultOfComparingValues(
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\IntProvider::class, 'valuesWhereFirstValueIsSmallerThanSecondValue')]
+    public function testCompareReturnsMinusOneWhenFirstValueIsSmallerThanSecondValue(
         string $value,
         string $otherValue,
-        int $result,
     ): void {
         $one = Patch::fromString($value);
         $two = Patch::fromString($otherValue);
 
-        self::assertSame($result, $one->compare($two));
+        self::assertSame(-1, $one->compare($two));
+    }
+
+    #[Framework\Attributes\DataProviderExternal(DataProvider\IntProvider::class, 'zero')]
+    #[Framework\Attributes\DataProviderExternal(DataProvider\IntProvider::class, 'greaterThanZero')]
+    public function testCompareReturnsZeroWhenFirstValueIsEqualToSecondValue(int $value): void
+    {
+        $one = Patch::fromInt($value);
+        $two = Patch::fromInt($value);
+
+        self::assertSame(0, $one->compare($two));
+    }
+
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\IntProvider::class, 'valuesWhereFirstValueIsGreaterThanSecondValue')]
+    public function testCompareReturnsPlusOneWhenFirstValueIsGreaterThanSecondValue(
+        string $value,
+        string $otherValue,
+    ): void {
+        $one = Patch::fromString($value);
+        $two = Patch::fromString($otherValue);
+
+        self::assertSame(1, $one->compare($two));
     }
 }

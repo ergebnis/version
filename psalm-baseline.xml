@@ -16,26 +16,9 @@
     </ArgumentTypeCoercion>
   </file>
   <file src="test/DataProvider/IntProvider.php">
-    <InvalidArrayOffset>
-      <code>$reverse[$i]</code>
-      <code>$reverse[$j]</code>
-      <code>$values[$i]</code>
-      <code>$values[$j]</code>
-    </InvalidArrayOffset>
-    <MixedArgument>
-      <code>$otherValue</code>
-      <code>$otherValue</code>
-      <code>$value</code>
-      <code>$value</code>
-    </MixedArgument>
-    <MixedAssignment>
-      <code>$otherValue</code>
-      <code>$otherValue</code>
-      <code>$value</code>
-      <code>$value</code>
-    </MixedAssignment>
     <PossiblyUnusedMethod>
-      <code>valuesAndResultOfComparison</code>
+      <code>valuesWhereFirstValueIsGreaterThanSecondValue</code>
+      <code>valuesWhereFirstValueIsSmallerThanSecondValue</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="test/Unit/BuildMetaDataTest.php">
