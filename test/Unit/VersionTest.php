@@ -103,8 +103,65 @@ final class VersionTest extends Framework\TestCase
         }
     }
 
-    #[Framework\Attributes\DataProvider('provideValidValueMajorMinorPatchPreReleaseAndBuildMetaData')]
-    public function testFromStringReturnsVersion(
+    #[Framework\Attributes\DataProvider('provideValidValue')]
+    public function testFromStringReturnsVersion(string $value): void
+    {
+        $version = Version::fromString($value);
+
+        self::assertSame($value, $version->toString());
+    }
+
+    /**
+     * @see https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
+     * @see https://regex101.com/r/Ly7O1x/3/
+     *
+     * @return \Generator<string, array{0: string}>
+     */
+    public static function provideValidValue(): \Generator
+    {
+        $values = [
+            '0.0.4',
+            '1.2.3',
+            '10.20.30',
+            '1.1.2-prerelease+meta',
+            '1.1.2+meta',
+            '1.1.2+meta-valid',
+            '1.0.0-alpha',
+            '1.0.0-beta',
+            '1.0.0-alpha.beta',
+            '1.0.0-alpha.beta.1',
+            '1.0.0-alpha.1',
+            '1.0.0-alpha0.valid',
+            '1.0.0-alpha.0valid',
+            '1.0.0-alpha-a.b-c-somethinglong+build.1-aef.1-its-okay',
+            '1.0.0-rc.1+build.1',
+            '2.0.0-rc.1+build.123',
+            '1.2.3-beta',
+            '10.2.3-DEV-SNAPSHOT',
+            '1.2.3-SNAPSHOT-123',
+            '1.0.0',
+            '2.0.0',
+            '1.1.7',
+            '2.0.0+build.1848',
+            '2.0.1-alpha.1227',
+            '1.0.0-alpha+beta',
+            '1.2.3----RC-SNAPSHOT.12.9.1--.12+788',
+            '1.2.3----R-S.12.9.1--.12+meta',
+            '1.2.3----RC-SNAPSHOT.12.9.1--.12',
+            '1.0.0+0.build.1-rc.10000aaa-kk-0.1',
+            '99999999999999999999999.999999999999999999.99999999999999999',
+            '1.0.0-0A.is.legal',
+        ];
+
+        foreach ($values as $value) {
+            yield $value => [
+                $value,
+            ];
+        }
+    }
+
+    #[Framework\Attributes\DataProvider('provideValueMajorMinorPatchPreReleaseAndBuildMetaData')]
+    public function testFromStringReturnsVersionWithMajorMinorPatchPreReleaseAndBuildMetaData(
         string $value,
         Major $major,
         Minor $minor,
@@ -113,8 +170,6 @@ final class VersionTest extends Framework\TestCase
         BuildMetaData $buildMetaData,
     ): void {
         $version = Version::fromString($value);
-
-        self::assertSame($value, $version->toString());
 
         self::assertEquals($major, $version->major());
         self::assertEquals($minor, $version->minor());
@@ -129,7 +184,7 @@ final class VersionTest extends Framework\TestCase
      *
      * @return \Generator<string, array{0: string, 1: Major, 2: Minor, 3: Patch, 4: PreRelease, 5: BuildMetaData}>
      */
-    public static function provideValidValueMajorMinorPatchPreReleaseAndBuildMetaData(): \Generator
+    public static function provideValueMajorMinorPatchPreReleaseAndBuildMetaData(): \Generator
     {
         $values = [
             '0.0.4' => [
