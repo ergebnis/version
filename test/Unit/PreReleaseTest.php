@@ -59,7 +59,7 @@ final class PreReleaseTest extends Framework\TestCase
     }
 
     #[Framework\Attributes\DataProviderExternal(Test\DataProvider\PreReleaseProvider::class, 'valid')]
-    public function testCompareReturnsZeroWhenFirstValueIsEqualToSecondValue(string $value): void
+    public function testCompareReturnsZeroWhenFirstValueIsIdenticalToSecondValue(string $value): void
     {
         $one = PreRelease::fromString($value);
         $two = PreRelease::fromString($value);

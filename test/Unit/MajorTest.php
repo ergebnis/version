@@ -161,7 +161,7 @@ final class MajorTest extends Framework\TestCase
 
     #[Framework\Attributes\DataProviderExternal(DataProvider\IntProvider::class, 'zero')]
     #[Framework\Attributes\DataProviderExternal(DataProvider\IntProvider::class, 'greaterThanZero')]
-    public function testCompareReturnsZeroWhenFirstValueIsEqualToSecondValue(int $value): void
+    public function testCompareReturnsZeroWhenFirstValueIsIdenticalToSecondValue(int $value): void
     {
         $one = Major::fromInt($value);
         $two = Major::fromInt($value);

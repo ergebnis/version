@@ -161,7 +161,7 @@ final class MinorTest extends Framework\TestCase
 
     #[Framework\Attributes\DataProviderExternal(DataProvider\IntProvider::class, 'zero')]
     #[Framework\Attributes\DataProviderExternal(DataProvider\IntProvider::class, 'greaterThanZero')]
-    public function testCompareReturnsZeroWhenFirstValueIsEqualToSecondValue(int $value): void
+    public function testCompareReturnsZeroWhenFirstValueIsIdenticalToSecondValue(int $value): void
     {
         $one = Minor::fromInt($value);
         $two = Minor::fromInt($value);
