@@ -148,23 +148,47 @@ final class MinorTest extends Framework\TestCase
         }
     }
 
-    public function testEqualsReturnsFalseWhenValuesAreDifferent(): void
-    {
-        $faker = self::faker()->unique();
+    #[Framework\Attributes\DataProvider('provideValueOtherValueAndResult')]
+    public function testCompareReturnsResultOfComparingValues(
+        string $value,
+        string $otherValue,
+        int $result,
+    ): void {
+        $one = Minor::fromString($value);
+        $two = Minor::fromString($otherValue);
 
-        $one = Minor::fromString((string) $faker->numberBetween(0));
-        $two = Minor::fromString((string) $faker->numberBetween(0));
-
-        self::assertFalse($one->equals($two));
+        self::assertSame($result, $one->compare($two));
     }
 
-    public function testEqualsReturnsTrueWhenValueIsSame(): void
+    /**
+     * @return \Generator<string, array{0: string, 1: string, 2: int}>
+     */
+    public static function provideValueOtherValueAndResult(): \Generator
     {
-        $value = (string) self::faker()->numberBetween(0);
+        $values = [
+            'less' => [
+                '0',
+                '1',
+                -1,
+            ],
+            'same' => [
+                '1',
+                '1',
+                0,
+            ],
+            'greater' => [
+                '2',
+                '1',
+                1,
+            ],
+        ];
 
-        $one = Minor::fromString($value);
-        $two = Minor::fromString($value);
-
-        self::assertTrue($one->equals($two));
+        foreach ($values as $key => [$value, $otherValue, $result]) {
+            yield $key => [
+                $value,
+                $otherValue,
+                $result,
+            ];
+        }
     }
 }

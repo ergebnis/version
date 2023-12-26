@@ -75,8 +75,8 @@ final class Minor
         return new self((string) ($valueCastedToInt + 1));
     }
 
-    public function equals(self $other): bool
+    public function compare(self $other): int
     {
-        return $this->value === $other->value;
+        return $this->value <=> $other->value;
     }
 }
