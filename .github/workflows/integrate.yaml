@@ -59,7 +59,7 @@ jobs:
           dependencies: "${{ matrix.dependencies }}"
 
       - name: "Run backward-compatibility analysis with roave/backward-compatibility-check"
-        run: "vendor/bin/roave-backward-compatibility-check --ansi --format=github-actions --from=421ce5b"
+        run: "vendor/bin/roave-backward-compatibility-check --ansi --format=github-actions --from=43b3334"
 
   code-coverage:
     name: "Code Coverage"

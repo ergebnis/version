@@ -125,12 +125,13 @@ declare(strict_types=1);
 
 use Ergebnis\Version;
 
-$one = Version\Version::fromString('1.2.3');
+$one = Version\Version::fromString('1.2.3-alpha');
 $two = Version\Version::fromString('1.2.3');
-$three = Version\Version::fromString('1.2.4');
+$three = Version\Version::fromString('1.2.4+build.9001');
 
-$one->equals($two); // true
-$one->equals($three); // false
+$one->compare($two); // -1
+$one->compare($one); // 0
+$three->compare($one); // 1
 ```
 
 ### Create a `Major` from an `int`
