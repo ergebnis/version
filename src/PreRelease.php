@@ -47,8 +47,71 @@ final class PreRelease
         return $this->value;
     }
 
+    /**
+     * @see https://semver.org/#spec-item-11
+     */
+    public function compare(self $other): int
+    {
+        $identifiers = \explode(
+            '.',
+            $this->value,
+        );
+
+        $otherIdentifiers = \explode(
+            '.',
+            $other->value,
+        );
+
+        $maxCount = \max(
+            \count($identifiers),
+            \count($otherIdentifiers),
+        );
+
+        for ($i = 0; $maxCount > $i; ++$i) {
+            if (!\array_key_exists($i, $identifiers)) {
+                return -1;
+            }
+
+            $identifier = $identifiers[$i];
+
+            if (!\array_key_exists($i, $otherIdentifiers)) {
+                return 1;
+            }
+
+            $otherIdentifier = $otherIdentifiers[$i];
+
+            if ($identifier === $otherIdentifier) {
+                continue;
+            }
+
+            if (self::isNumericIdentifier($identifier)) {
+                if (self::isNumericIdentifier($otherIdentifier)) {
+                    return $identifier <=> $otherIdentifier;
+                }
+
+                return -1;
+            }
+
+            if (self::isNumericIdentifier($otherIdentifier)) {
+                return 1;
+            }
+
+            return \strnatcmp(
+                $identifier,
+                $otherIdentifier,
+            );
+        }
+
+        return 0;
+    }
+
     public function equals(self $other): bool
     {
         return $this->value === $other->value;
+    }
+
+    private static function isNumericIdentifier(string $value): bool
+    {
+        return 1 === \preg_match('/^\d+$/', $value);
     }
 }
