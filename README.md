@@ -248,13 +248,11 @@ declare(strict_types=1);
 use Ergebnis\Version;
 
 $one = Version\Minor::fromString('1');
-$two = Version\Minor::fromString('1');
-$three = Version\Minor::fromString('2');
+$two = Version\Minor::fromString('2');
 
-$one->equals($two); // true
-$one->equals($three); // false
-
-$one->equals($two); // true
+$one->compare($two); // -1
+$one->compare($one); // 0
+$two->compare($one); // 1
 ```
 
 ### Create a `Patch` from an `int`
