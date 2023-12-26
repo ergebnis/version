@@ -354,13 +354,11 @@ declare(strict_types=1);
 use Ergebnis\Version;
 
 $one = Version\PreRelease::fromString('alpha');
-$two = Version\PreRelease::fromString('alpha');
-$three = Version\PreRelease::fromString('beta');
+$two = Version\PreRelease::fromString('rc.1');
 
-$one->equals($two); // true
-$one->equals($three); // false
-
-$one->equals($two); // true
+$one->compare($two); // -1
+$one->compare($one); // 0
+$two->compare($one); // 1
 ```
 
 ### Create a `BuildMetaData` from a `string`
