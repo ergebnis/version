@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Ergebnis\Version\Test\DataProvider;
 
-final class IntProvider
+use Ergebnis\DataProvider;
+
+final class IntProvider extends DataProvider\AbstractProvider
 {
     /**
      * @return \Generator<string, array{0: string, 1: string, 2: int}>
@@ -21,29 +23,65 @@ final class IntProvider
     public static function valuesAndResultOfComparison(): \Generator
     {
         $values = [
-            'less' => [
-                '0',
-                '1',
-                -1,
-            ],
-            'same' => [
-                '1',
-                '1',
-                0,
-            ],
-            'greater' => [
-                '2',
-                '1',
-                1,
-            ],
+            0,
+            1,
+            self::faker()->numberBetween(2),
         ];
 
-        foreach ($values as $key => [$value, $otherValue, $result]) {
-            yield $key => [
+        $count = \count($values);
+
+        for ($i = 0; $count - 1 > $i; ++$i) {
+            for ($j = $i + 1; $count > $j; ++$j) {
+                $value = $values[$i];
+                $otherValue = $values[$j];
+
+                $key = \sprintf(
+                    '%d-smaller-than-%d',
+                    $value,
+                    $otherValue,
+                );
+
+                yield $key => [
+                    (string) $value,
+                    (string) $otherValue,
+                    -1,
+                ];
+            }
+        }
+
+        foreach ($values as $value) {
+            $key = \sprintf(
+                '%d-equal-to-%d',
                 $value,
-                $otherValue,
-                $result,
+                $value,
+            );
+
+            yield $key => [
+                (string) $value,
+                (string) $value,
+                0,
             ];
+        }
+
+        $reverse = \array_reverse($values);
+
+        for ($i = 0; $count - 1 > $i; ++$i) {
+            for ($j = $i + 1; $count > $j; ++$j) {
+                $value = $reverse[$i];
+                $otherValue = $reverse[$j];
+
+                $key = \sprintf(
+                    '%d-greater-than-%d',
+                    $value,
+                    $otherValue,
+                );
+
+                yield $key => [
+                    (string) $value,
+                    (string) $otherValue,
+                    1,
+                ];
+            }
         }
     }
 }
