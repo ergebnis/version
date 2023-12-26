@@ -148,7 +148,7 @@ final class MajorTest extends Framework\TestCase
         }
     }
 
-    #[Framework\Attributes\DataProvider('provideValueOtherValueAndResult')]
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\IntProvider::class, 'valuesAndResultOfComparison')]
     public function testCompareReturnsResultOfComparingValues(
         string $value,
         string $otherValue,
@@ -158,37 +158,5 @@ final class MajorTest extends Framework\TestCase
         $two = Major::fromString($otherValue);
 
         self::assertSame($result, $one->compare($two));
-    }
-
-    /**
-     * @return \Generator<string, array{0: string, 1: string, 2: int}>
-     */
-    public static function provideValueOtherValueAndResult(): \Generator
-    {
-        $values = [
-            'less' => [
-                '0',
-                '1',
-                -1,
-            ],
-            'same' => [
-                '1',
-                '1',
-                0,
-            ],
-            'greater' => [
-                '2',
-                '1',
-                1,
-            ],
-        ];
-
-        foreach ($values as $key => [$value, $otherValue, $result]) {
-            yield $key => [
-                $value,
-                $otherValue,
-                $result,
-            ];
-        }
     }
 }

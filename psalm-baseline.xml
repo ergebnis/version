@@ -15,6 +15,11 @@
       <code><![CDATA[$this->value]]></code>
     </ArgumentTypeCoercion>
   </file>
+  <file src="test/DataProvider/IntProvider.php">
+    <PossiblyUnusedMethod>
+      <code>valuesAndResultOfComparison</code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="test/Unit/BuildMetaDataTest.php">
     <PossiblyUnusedMethod>
       <code>provideInvalidValue</code>
@@ -26,7 +31,6 @@
       <code>provideInvalidStringValue</code>
       <code>provideValidStringValue</code>
       <code>provideValueAndBumpedValue</code>
-      <code>provideValueOtherValueAndResult</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="test/Unit/MinorTest.php">
@@ -34,7 +38,6 @@
       <code>provideInvalidStringValue</code>
       <code>provideValidStringValue</code>
       <code>provideValueAndBumpedValue</code>
-      <code>provideValueOtherValueAndResult</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="test/Unit/PatchTest.php">
@@ -42,7 +45,6 @@
       <code>provideInvalidStringValue</code>
       <code>provideValidStringValue</code>
       <code>provideValueAndBumpedValue</code>
-      <code>provideValueOtherValueAndResult</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="test/Unit/PreReleaseTest.php">
