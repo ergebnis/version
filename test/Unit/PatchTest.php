@@ -150,11 +150,11 @@ final class PatchTest extends Framework\TestCase
 
     #[Framework\Attributes\DataProviderExternal(Test\DataProvider\IntProvider::class, 'valuesWhereFirstValueIsSmallerThanSecondValue')]
     public function testCompareReturnsMinusOneWhenFirstValueIsSmallerThanSecondValue(
-        string $value,
-        string $otherValue,
+        string $firstValue,
+        string $secondValue,
     ): void {
-        $one = Patch::fromString($value);
-        $two = Patch::fromString($otherValue);
+        $one = Patch::fromString($firstValue);
+        $two = Patch::fromString($secondValue);
 
         self::assertSame(-1, $one->compare($two));
     }
@@ -171,11 +171,11 @@ final class PatchTest extends Framework\TestCase
 
     #[Framework\Attributes\DataProviderExternal(Test\DataProvider\IntProvider::class, 'valuesWhereFirstValueIsGreaterThanSecondValue')]
     public function testCompareReturnsPlusOneWhenFirstValueIsGreaterThanSecondValue(
-        string $value,
-        string $otherValue,
+        string $firstValue,
+        string $secondValue,
     ): void {
-        $one = Patch::fromString($value);
-        $two = Patch::fromString($otherValue);
+        $one = Patch::fromString($firstValue);
+        $two = Patch::fromString($secondValue);
 
         self::assertSame(1, $one->compare($two));
     }

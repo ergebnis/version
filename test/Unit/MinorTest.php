@@ -150,11 +150,11 @@ final class MinorTest extends Framework\TestCase
 
     #[Framework\Attributes\DataProviderExternal(Test\DataProvider\IntProvider::class, 'valuesWhereFirstValueIsSmallerThanSecondValue')]
     public function testCompareReturnsMinusOneWhenFirstValueIsSmallerThanSecondValue(
-        string $value,
-        string $otherValue,
+        string $firstValue,
+        string $secondValue,
     ): void {
-        $one = Minor::fromString($value);
-        $two = Minor::fromString($otherValue);
+        $one = Minor::fromString($firstValue);
+        $two = Minor::fromString($secondValue);
 
         self::assertSame(-1, $one->compare($two));
     }
@@ -171,11 +171,11 @@ final class MinorTest extends Framework\TestCase
 
     #[Framework\Attributes\DataProviderExternal(Test\DataProvider\IntProvider::class, 'valuesWhereFirstValueIsGreaterThanSecondValue')]
     public function testCompareReturnsPlusOneWhenFirstValueIsGreaterThanSecondValue(
-        string $value,
-        string $otherValue,
+        string $firstValue,
+        string $secondValue,
     ): void {
-        $one = Minor::fromString($value);
-        $two = Minor::fromString($otherValue);
+        $one = Minor::fromString($firstValue);
+        $two = Minor::fromString($secondValue);
 
         self::assertSame(1, $one->compare($two));
     }
