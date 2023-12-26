@@ -26,6 +26,7 @@
       <code>provideInvalidStringValue</code>
       <code>provideValidStringValue</code>
       <code>provideValueAndBumpedValue</code>
+      <code>provideValueOtherValueAndResult</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="test/Unit/MinorTest.php">
