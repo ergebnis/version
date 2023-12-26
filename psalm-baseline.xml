@@ -29,6 +29,15 @@
       <code>valuesWhereFirstValueIsSmallerThanSecondValue</code>
     </PossiblyUnusedMethod>
   </file>
+  <file src="test/DataProvider/VersionProvider.php">
+    <PossiblyUnusedMethod>
+      <code>invalid</code>
+      <code>valid</code>
+      <code>valueAndValueWithBumpedMajor</code>
+      <code>valueAndValueWithBumpedMinor</code>
+      <code>valueAndValueWithBumpedPatch</code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="test/Unit/BuildMetaDataTest.php">
     <PossiblyUnusedMethod>
       <code>provideInvalidValue</code>
@@ -58,11 +67,6 @@
   </file>
   <file src="test/Unit/VersionTest.php">
     <PossiblyUnusedMethod>
-      <code>provideInvalidValue</code>
-      <code>provideValidValue</code>
-      <code>provideValueAndValueWithBumpedMajor</code>
-      <code>provideValueAndValueWithBumpedMinor</code>
-      <code>provideValueAndValueWithBumpedPatch</code>
       <code>provideValueMajorMinorPatchPreReleaseAndBuildMetaData</code>
     </PossiblyUnusedMethod>
   </file>
