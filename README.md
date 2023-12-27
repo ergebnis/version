@@ -24,7 +24,18 @@ composer require ergebnis/version
 
 ## Usage
 
-### Create a `Version` from a `string`
+This project comes with the following components:
+
+- [`Ergebnis\Version\Version`](#version)
+- [`Ergebnis\Version\Major`](#major)
+- [`Ergebnis\Version\Minor`](#minor)
+- [`Ergebnis\Version\Patch`](#patch)
+- [`Ergebnis\Version\PreRelease`](#prerelease)
+- [`Ergebnis\Version\BuildMetaData`](#buildmetadata)
+
+### `Version`
+
+#### Create a `Version` from a `string`
 
 ```php
 <?php
@@ -44,7 +55,7 @@ echo $version->preRelease()->toString(); // alpha
 echo $version->buildMetaData()->toString(); // build.9001
 ```
 
-### Bump a `Version`
+#### Bump a `Version`
 
 ```php
 <?php
@@ -68,7 +79,7 @@ $three = $version->bumpPatch();
 echo $three->toString(); // 1.2.4
 ```
 
-### Bump a `Version` with `PreRelease`
+#### Bump a `Version` with `PreRelease`
 
 ```php
 <?php
@@ -92,7 +103,7 @@ $three = $version->bumpPatch();
 echo $three->toString(); // 1.2.3
 ```
 
-### Bump a `Version` with `BuildMetaData`
+#### Bump a `Version` with `BuildMetaData`
 
 ```php
 <?php
@@ -116,7 +127,7 @@ $three = $version->bumpPatch();
 echo $three->toString(); // 1.2.4
 ```
 
-### Compare a `Version` with another `Version`
+#### Compare a `Version` with another `Version`
 
 ```php
 <?php
@@ -140,7 +151,9 @@ $one->equals($three); // false
 $three->equals($four); // true
 ```
 
-### Create a `Major` from an `int`
+### `Major`
+
+#### Create a `Major` from an `int`
 
 ```php
 <?php
@@ -154,7 +167,7 @@ $major = Version\Major::fromInt(1);
 echo $major->toString(); // 1
 ```
 
-### Create a `Major` from a `string`
+#### Create a `Major` from a `string`
 
 ```php
 <?php
@@ -168,7 +181,7 @@ $major = Version\Major::fromString('1');
 echo $major->toString(); // 1
 ```
 
-### Bump a `Major`
+#### Bump a `Major`
 
 ```php
 <?php
@@ -184,7 +197,7 @@ $two = $one->bump();
 echo $two->toString(); // 2
 ```
 
-### Compare a `Major` with another `Major`
+#### Compare a `Major` with another `Major`
 
 ```php
 <?php
@@ -204,7 +217,9 @@ $one->equals($two); // false
 $one->equals($one); // true
 ```
 
-### Create a `Minor` from an `int`
+### `Minor`
+
+#### Create a `Minor` from an `int`
 
 ```php
 <?php
@@ -218,7 +233,7 @@ $minor = Version\Minor::fromInt(1);
 echo $minor->toString(); // 1
 ```
 
-### Create a `Minor` from a `string`
+#### Create a `Minor` from a `string`
 
 ```php
 <?php
@@ -232,7 +247,7 @@ $minor = Version\Minor::fromString('1');
 echo $minor->toString(); // 1
 ```
 
-### Bump a `Minor`
+#### Bump a `Minor`
 
 ```php
 <?php
@@ -248,7 +263,7 @@ $two = $one->bump();
 echo $two->toString(); // 2
 ```
 
-### Compare a `Minor` with another `Minor`
+#### Compare a `Minor` with another `Minor`
 
 ```php
 <?php
@@ -268,7 +283,9 @@ $one->equals($two); // false
 $one->equals($one); // true
 ```
 
-### Create a `Patch` from an `int`
+### `Patch`
+
+#### Create a `Patch` from an `int`
 
 ```php
 <?php
@@ -282,7 +299,7 @@ $patch = Version\Patch::fromInt(1);
 echo $patch->toString(); // 1
 ```
 
-### Create a `Patch` from a `string`
+#### Create a `Patch` from a `string`
 
 ```php
 <?php
@@ -296,7 +313,7 @@ $patch = Version\Patch::fromString('1');
 echo $patch->toString(); // 1
 ```
 
-### Bump a `Patch`
+#### Bump a `Patch`
 
 ```php
 <?php
@@ -312,7 +329,7 @@ $two = $one->bump();
 echo $two->toString(); // 2
 ```
 
-### Compare a `Patch` with another `Patch`
+#### Compare a `Patch` with another `Patch`
 
 ```php
 <?php
@@ -332,7 +349,9 @@ $one->equals($two); // false
 $one->equals($one); // true
 ```
 
-### Create a `PreRelease` from a `string`
+### `PreRelease`
+
+#### Create a `PreRelease` from a `string`
 
 ```php
 <?php
@@ -346,7 +365,7 @@ $preRelease = Version\PreRelease::fromString('alpha');
 echo $preRelease->toString(); // alpha
 ```
 
-### Create an empty `PreRelease`
+#### Create an empty `PreRelease`
 
 ```php
 <?php
@@ -360,7 +379,7 @@ $preRelease = Version\PreRelease::empty();
 echo $preRelease->toString(); // empty
 ```
 
-### Compare a `PreRelease` with another `PreRelease`
+#### Compare a `PreRelease` with another `PreRelease`
 
 ```php
 <?php
@@ -380,7 +399,9 @@ $one->equals($two); // false
 $one->equals($one); // true
 ```
 
-### Create a `BuildMetaData` from a `string`
+### `BuildMetaData`
+
+#### Create a `BuildMetaData` from a `string`
 
 ```php
 <?php
@@ -394,7 +415,7 @@ $buildMetaData = Version\BuildMetaData::fromString('build.9001');
 echo $buildMetaData->toString(); // build.9001
 ```
 
-### Create an empty `BuildMetaData`
+#### Create an empty `BuildMetaData`
 
 ```php
 <?php
@@ -408,7 +429,7 @@ $buildMetaData = Version\BuildMetaData::empty();
 echo $buildMetaData->toString(); // empty
 ```
 
-### Compare a `BuildMetaData` with another `BuildMetaData`
+#### Compare a `BuildMetaData` with another `BuildMetaData`
 
 ```php
 <?php
