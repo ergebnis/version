@@ -378,7 +378,6 @@ $two->compare($one); // 1
 
 $one->equals($two); // false
 $one->equals($one); // true
-
 ```
 
 ### Create a `BuildMetaData` from a `string`
