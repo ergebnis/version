@@ -179,4 +179,24 @@ final class MajorTest extends Framework\TestCase
 
         self::assertSame(1, $one->compare($two));
     }
+
+    public function testEqualsReturnsFalseWhenValuesAreDifferent(): void
+    {
+        $faker = self::faker()->unique();
+
+        $one = Major::fromInt($faker->numberBetween(0));
+        $two = Major::fromInt($faker->numberBetween(0));
+
+        self::assertFalse($one->equals($two));
+    }
+
+    public function testEqualsReturnsFalseWhenValuesAreSame(): void
+    {
+        $value = self::faker()->numberBetween(0);
+
+        $one = Major::fromInt($value);
+        $two = Major::fromInt($value);
+
+        self::assertTrue($one->equals($two));
+    }
 }

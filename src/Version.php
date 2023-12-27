@@ -186,6 +186,11 @@ final class Version
         return 0;
     }
 
+    public function equals(self $other): bool
+    {
+        return 0 === $this->compare($other);
+    }
+
     public function major(): Major
     {
         return $this->major;

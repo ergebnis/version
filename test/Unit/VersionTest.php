@@ -388,4 +388,35 @@ final class VersionTest extends Framework\TestCase
 
         self::assertSame(1, $one->compare($two));
     }
+
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valuesWhereFirstValueIsGreaterThanSecondValue')]
+    public function testEqualsReturnsFalseWhenValuesAreDifferent(
+        string $firstValue,
+        string $secondValue,
+    ): void {
+        $one = Version::fromString($firstValue);
+        $two = Version::fromString($secondValue);
+
+        self::assertFalse($one->equals($two));
+    }
+
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valuesWhereFirstValueIsEqualToSecondValue')]
+    public function testEqualsReturnsTrueWhenValuesAreEqual(
+        string $firstValue,
+        string $secondValue,
+    ): void {
+        $one = Version::fromString($firstValue);
+        $two = Version::fromString($secondValue);
+
+        self::assertTrue($one->equals($two));
+    }
+
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valid')]
+    public function testEqualsReturnsTrueWhenValuesAreIdentical(string $value): void
+    {
+        $one = Version::fromString($value);
+        $two = Version::fromString($value);
+
+        self::assertTrue($one->equals($two));
+    }
 }

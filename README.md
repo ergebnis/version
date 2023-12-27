@@ -127,11 +127,17 @@ use Ergebnis\Version;
 
 $one = Version\Version::fromString('1.2.3-alpha');
 $two = Version\Version::fromString('1.2.3');
-$three = Version\Version::fromString('1.2.4+build.9001');
+$three = Version\Version::fromString('1.2.4');
+$four = Version\Version::fromString('1.2.4+build.9001');
 
 $one->compare($two); // -1
 $one->compare($one); // 0
 $three->compare($one); // 1
+
+$one->equals($two); // false
+$one->equals($one); // true
+$one->equals($three); // false
+$three->equals($four); // true
 ```
 
 ### Create a `Major` from an `int`
@@ -193,6 +199,9 @@ $two = Version\Major::fromString('2');
 $one->compare($two); // -1
 $one->compare($one); // 0
 $two->compare($one); // 1
+
+$one->equals($two); // false
+$one->equals($one); // true
 ```
 
 ### Create a `Minor` from an `int`
@@ -254,6 +263,9 @@ $two = Version\Minor::fromString('2');
 $one->compare($two); // -1
 $one->compare($one); // 0
 $two->compare($one); // 1
+
+$one->equals($two); // false
+$one->equals($one); // true
 ```
 
 ### Create a `Patch` from an `int`
@@ -315,6 +327,9 @@ $two = Version\Patch::fromString('2');
 $one->compare($two); // -1
 $one->compare($one); // 0
 $two->compare($one); // 1
+
+$one->equals($two); // false
+$one->equals($one); // true
 ```
 
 ### Create a `PreRelease` from a `string`
@@ -360,6 +375,10 @@ $two = Version\PreRelease::fromString('rc.1');
 $one->compare($two); // -1
 $one->compare($one); // 0
 $two->compare($one); // 1
+
+$one->equals($two); // false
+$one->equals($one); // true
+
 ```
 
 ### Create a `BuildMetaData` from a `string`
@@ -400,13 +419,10 @@ declare(strict_types=1);
 use Ergebnis\Version;
 
 $one = Version\BuildMetaData::fromString('build.9001');
-$two = Version\BuildMetaData::fromString('build.9001');
-$three = Version\BuildMetaData::fromString('build.9000');
+$two = Version\BuildMetaData::fromString('build.9000');
 
-$one->equals($two); // true
-$one->equals($three); // false
-
-$one->equals($two); // true
+$one->equals($two); // false
+$one->equals($one); // true
 ```
 
 ## Changelog
