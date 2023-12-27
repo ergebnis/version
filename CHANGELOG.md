@@ -6,7 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-For a full diff see [`64ced12...main`][64ced12...main].
+For a full diff see [`1.0.0...main`][1.0.0...main].
+
+## [`1.0.0`][1.0.0]
+
+For a full diff see [`64ced12...1.0.0`][64ced12...1.0.0].
 
 ### Added
 
@@ -17,7 +21,10 @@ For a full diff see [`64ced12...main`][64ced12...main].
 - Added `PreRelease` as a value object ([#8]), by [@localheinz]
 - Added `BuildMetaData` as a value object ([#9]), by [@localheinz]
 
-[64ced12...main]: https://github.com/ergebnis/version/compare/64ced12...main
+[1.0.0]: https://github.com/ergebnis/version/releases/tag/1.0.0
+
+[64ced12...1.0.0]: https://github.com/ergebnis/version/compare/64ced12...1.0.0
+[1.0.0...main]: https://github.com/ergebnis/version/compare/1.0.0...main
 
 [#1]: https://github.com/ergebnis/version/pull/1
 [#3]: https://github.com/ergebnis/version/pull/3

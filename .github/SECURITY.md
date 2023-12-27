@@ -4,13 +4,13 @@
 
 The following versions of `ergebnis/version` have active support:
 
-- `x.y.z`
+- `^1.0.0`
 
 ## Unsupported Versions
 
 The following versions of `ergebnis/version` have reached their end of life:
 
-- `x.y.z`
+- `<1.0.0`
 
 ## Reporting a Vulnerability
 
