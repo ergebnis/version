@@ -231,4 +231,36 @@ final class MinorTest extends Framework\TestCase
 
         self::assertTrue($one->equals($two));
     }
+
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\IntProvider::class, 'valuesWhereFirstValueIsSmallerThanSecondValue')]
+    public function testIsGreaterThanReturnsFalseWhenFirstValueIsSmallerThanSecondValue(
+        string $firstValue,
+        string $secondValue,
+    ): void {
+        $one = Minor::fromString($firstValue);
+        $two = Minor::fromString($secondValue);
+
+        self::assertFalse($one->isGreaterThan($two));
+    }
+
+    #[Framework\Attributes\DataProviderExternal(DataProvider\IntProvider::class, 'zero')]
+    #[Framework\Attributes\DataProviderExternal(DataProvider\IntProvider::class, 'greaterThanZero')]
+    public function testIsGreaterThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(int $value): void
+    {
+        $one = Minor::fromInt($value);
+        $two = Minor::fromInt($value);
+
+        self::assertFalse($one->isGreaterThan($two));
+    }
+
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\IntProvider::class, 'valuesWhereFirstValueIsGreaterThanSecondValue')]
+    public function testIsGreaterThanReturnsTrueWhenFirstValueIsGreaterThanSecondValue(
+        string $firstValue,
+        string $secondValue,
+    ): void {
+        $one = Minor::fromString($firstValue);
+        $two = Minor::fromString($secondValue);
+
+        self::assertTrue($one->isGreaterThan($two));
+    }
 }

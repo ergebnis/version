@@ -115,6 +115,11 @@ final class PreRelease
         return $this->value === $other->value;
     }
 
+    public function isGreaterThan(self $other): bool
+    {
+        return 1 === $this->compare($other);
+    }
+
     private static function isNumericIdentifier(string $value): bool
     {
         return 1 === \preg_match('/^\d+$/', $value);

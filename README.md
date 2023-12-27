@@ -154,6 +154,11 @@ $one->equals($two); // false
 $one->equals($one); // true
 $one->equals($three); // false
 $three->equals($four); // true
+
+$one->isGreaterThan($one); // false
+$two->isGreaterThan($one); // true
+$three->isGreaterThan($one); // true
+$four->isGreaterThan($one); // true
 ```
 
 ### `Major`
@@ -223,6 +228,9 @@ $one->isSmallerThan($two); // true
 
 $one->equals($two); // false
 $one->equals($one); // true
+
+$one->isGreaterThan($one); // false
+$two->isGreaterThan($one); // true
 ```
 
 ### `Minor`
@@ -292,6 +300,9 @@ $one->isSmallerThan($two); // true
 
 $one->equals($two); // false
 $one->equals($one); // true
+
+$one->isGreaterThan($one); // false
+$two->isGreaterThan($one); // true
 ```
 
 ### `Patch`
@@ -361,6 +372,9 @@ $one->isSmallerThan($two); // true
 
 $one->equals($two); // false
 $one->equals($one); // true
+
+$one->isGreaterThan($one); // false
+$two->isGreaterThan($one); // true
 ```
 
 ### `PreRelease`
@@ -414,6 +428,9 @@ $one->isSmallerThan($two); // true
 
 $one->equals($two); // false
 $one->equals($one); // true
+
+$one->isGreaterThan($one); // false
+$two->isGreaterThan($one); // true
 ```
 
 ### `BuildMetaData`
