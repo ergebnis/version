@@ -461,4 +461,46 @@ final class VersionTest extends Framework\TestCase
 
         self::assertTrue($one->equals($two));
     }
+
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valuesWhereFirstValueIsSmallerThanSecondValue')]
+    public function testIsGreaterThanReturnsFalseWhenFirstValueIsSmallerThanSecondValue(
+        string $firstValue,
+        string $secondValue,
+    ): void {
+        $one = Version::fromString($firstValue);
+        $two = Version::fromString($secondValue);
+
+        self::assertFalse($one->isGreaterThan($two));
+    }
+
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valid')]
+    public function testIsGreaterThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(string $value): void
+    {
+        $one = Version::fromString($value);
+        $two = Version::fromString($value);
+
+        self::assertFalse($one->isGreaterThan($two));
+    }
+
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valuesWhereFirstValueIsEqualToSecondValue')]
+    public function testIsGreaterThanReturnsFalseWhenFirstValueIsEqualToSecondValue(
+        string $firstValue,
+        string $secondValue,
+    ): void {
+        $one = Version::fromString($firstValue);
+        $two = Version::fromString($secondValue);
+
+        self::assertFalse($one->isGreaterThan($two));
+    }
+
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valuesWhereFirstValueIsGreaterThanSecondValue')]
+    public function testIsGreaterThanReturnsTrueWhenFirstValueIsGreaterThanSecondValue(
+        string $firstValue,
+        string $secondValue,
+    ): void {
+        $one = Version::fromString($firstValue);
+        $two = Version::fromString($secondValue);
+
+        self::assertTrue($one->isGreaterThan($two));
+    }
 }

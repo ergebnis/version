@@ -196,6 +196,11 @@ final class Version
         return 0 === $this->compare($other);
     }
 
+    public function isGreaterThan(self $other): bool
+    {
+        return 1 === $this->compare($other);
+    }
+
     public function major(): Major
     {
         return $this->major;
