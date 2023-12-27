@@ -179,4 +179,24 @@ final class PatchTest extends Framework\TestCase
 
         self::assertSame(1, $one->compare($two));
     }
+
+    public function testEqualsReturnsFalseWhenValuesAreDifferent(): void
+    {
+        $faker = self::faker()->unique();
+
+        $one = Patch::fromInt($faker->numberBetween(0));
+        $two = Patch::fromInt($faker->numberBetween(0));
+
+        self::assertFalse($one->equals($two));
+    }
+
+    public function testEqualsReturnsFalseWhenValuesAreSame(): void
+    {
+        $value = self::faker()->numberBetween(0);
+
+        $one = Patch::fromInt($value);
+        $two = Patch::fromInt($value);
+
+        self::assertTrue($one->equals($two));
+    }
 }

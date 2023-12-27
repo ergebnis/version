@@ -179,4 +179,24 @@ final class MinorTest extends Framework\TestCase
 
         self::assertSame(1, $one->compare($two));
     }
+
+    public function testEqualsReturnsFalseWhenValuesAreDifferent(): void
+    {
+        $faker = self::faker()->unique();
+
+        $one = Minor::fromInt($faker->numberBetween(0));
+        $two = Minor::fromInt($faker->numberBetween(0));
+
+        self::assertFalse($one->equals($two));
+    }
+
+    public function testEqualsReturnsFalseWhenValuesAreSame(): void
+    {
+        $value = self::faker()->numberBetween(0);
+
+        $one = Minor::fromInt($value);
+        $two = Minor::fromInt($value);
+
+        self::assertTrue($one->equals($two));
+    }
 }
