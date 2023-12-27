@@ -191,7 +191,7 @@ final class PatchTest extends Framework\TestCase
     }
 
     #[Framework\Attributes\DataProviderExternal(Test\DataProvider\IntProvider::class, 'valuesWhereFirstValueIsGreaterThanSecondValue')]
-    public function testIsSmallerThanReturnsFalseOneWhenFirstValueIsGreaterThanSecondValue(
+    public function testIsSmallerThanReturnsFalseWhenFirstValueIsGreaterThanSecondValue(
         string $firstValue,
         string $secondValue,
     ): void {
