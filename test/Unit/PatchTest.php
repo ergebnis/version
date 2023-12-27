@@ -180,6 +180,38 @@ final class PatchTest extends Framework\TestCase
         self::assertSame(1, $one->compare($two));
     }
 
+    #[Framework\Attributes\DataProviderExternal(DataProvider\IntProvider::class, 'zero')]
+    #[Framework\Attributes\DataProviderExternal(DataProvider\IntProvider::class, 'greaterThanZero')]
+    public function testIsSmallerThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(int $value): void
+    {
+        $one = Patch::fromInt($value);
+        $two = Patch::fromInt($value);
+
+        self::assertFalse($one->isSmallerThan($two));
+    }
+
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\IntProvider::class, 'valuesWhereFirstValueIsGreaterThanSecondValue')]
+    public function testIsSmallerThanReturnsFalseOneWhenFirstValueIsGreaterThanSecondValue(
+        string $firstValue,
+        string $secondValue,
+    ): void {
+        $one = Patch::fromString($firstValue);
+        $two = Patch::fromString($secondValue);
+
+        self::assertFalse($one->isSmallerThan($two));
+    }
+
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\IntProvider::class, 'valuesWhereFirstValueIsSmallerThanSecondValue')]
+    public function testIsSmallerThanReturnsTrueWhenFirstValueIsSmallerThanSecondValue(
+        string $firstValue,
+        string $secondValue,
+    ): void {
+        $one = Patch::fromString($firstValue);
+        $two = Patch::fromString($secondValue);
+
+        self::assertTrue($one->isSmallerThan($two));
+    }
+
     public function testEqualsReturnsFalseWhenValuesAreDifferent(): void
     {
         $faker = self::faker()->unique();

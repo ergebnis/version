@@ -389,6 +389,48 @@ final class VersionTest extends Framework\TestCase
         self::assertSame(1, $one->compare($two));
     }
 
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valid')]
+    public function testIsSmallerThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(string $value): void
+    {
+        $one = Version::fromString($value);
+        $two = Version::fromString($value);
+
+        self::assertFalse($one->isSmallerThan($two));
+    }
+
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valuesWhereFirstValueIsEqualToSecondValue')]
+    public function testIsSmallerThanReturnsFalseWhenFirstValueIsEqualToSecondValue(
+        string $firstValue,
+        string $secondValue,
+    ): void {
+        $one = Version::fromString($firstValue);
+        $two = Version::fromString($secondValue);
+
+        self::assertFalse($one->isSmallerThan($two));
+    }
+
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valuesWhereFirstValueIsGreaterThanSecondValue')]
+    public function testIsSmallerThanReturnsFalseWhenFirstValueIsGreaterThanSecondValue(
+        string $firstValue,
+        string $secondValue,
+    ): void {
+        $one = Version::fromString($firstValue);
+        $two = Version::fromString($secondValue);
+
+        self::assertFalse($one->isSmallerThan($two));
+    }
+
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valuesWhereFirstValueIsSmallerThanSecondValue')]
+    public function testIsSmallerThanReturnsTrueWhenFirstValueIsSmallerThanSecondValue(
+        string $firstValue,
+        string $secondValue,
+    ): void {
+        $one = Version::fromString($firstValue);
+        $two = Version::fromString($secondValue);
+
+        self::assertTrue($one->isSmallerThan($two));
+    }
+
     #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valuesWhereFirstValueIsGreaterThanSecondValue')]
     public function testEqualsReturnsFalseWhenValuesAreDifferent(
         string $firstValue,

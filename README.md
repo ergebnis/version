@@ -145,6 +145,11 @@ $one->compare($two); // -1
 $one->compare($one); // 0
 $three->compare($one); // 1
 
+$one->isSmallerThan($one); // false
+$one->isSmallerThan($two); // true
+$one->isSmallerThan($three); // true
+$one->isSmallerThan($four); // true
+
 $one->equals($two); // false
 $one->equals($one); // true
 $one->equals($three); // false
@@ -213,6 +218,9 @@ $one->compare($two); // -1
 $one->compare($one); // 0
 $two->compare($one); // 1
 
+$one->isSmallerThan($one); // false
+$one->isSmallerThan($two); // true
+
 $one->equals($two); // false
 $one->equals($one); // true
 ```
@@ -278,6 +286,9 @@ $two = Version\Minor::fromString('2');
 $one->compare($two); // -1
 $one->compare($one); // 0
 $two->compare($one); // 1
+
+$one->isSmallerThan($one); // false
+$one->isSmallerThan($two); // true
 
 $one->equals($two); // false
 $one->equals($one); // true
@@ -345,6 +356,9 @@ $one->compare($two); // -1
 $one->compare($one); // 0
 $two->compare($one); // 1
 
+$one->isSmallerThan($one); // false
+$one->isSmallerThan($two); // true
+
 $one->equals($two); // false
 $one->equals($one); // true
 ```
@@ -394,6 +408,9 @@ $two = Version\PreRelease::fromString('rc.1');
 $one->compare($two); // -1
 $one->compare($one); // 0
 $two->compare($one); // 1
+
+$one->isSmallerThan($one); // false
+$one->isSmallerThan($two); // true
 
 $one->equals($two); // false
 $one->equals($one); // true

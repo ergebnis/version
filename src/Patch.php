@@ -80,6 +80,11 @@ final class Patch
         return $this->value <=> $other->value;
     }
 
+    public function isSmallerThan(self $other): bool
+    {
+        return $this->value < $other->value;
+    }
+
     public function equals(self $other): bool
     {
         return $this->value === $other->value;
