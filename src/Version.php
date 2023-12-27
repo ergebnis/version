@@ -147,6 +147,26 @@ final class Version
 
     public function compare(self $other): int
     {
+        if (
+            $this->preRelease->equals(PreRelease::empty())
+            && $other->preRelease->equals(PreRelease::empty())
+        ) {
+            $normalize = static function (Version $version): Version {
+                return new self(
+                    $version->major,
+                    $version->minor,
+                    $version->patch,
+                    PreRelease::empty(),
+                    BuildMetaData::empty(),
+                );
+            };
+
+            return \version_compare(
+                $normalize($this)->toString(),
+                $normalize($other)->toString(),
+            );
+        }
+
         $major = $this->major->compare($other->major);
 
         if (0 !== $major) {
@@ -166,10 +186,6 @@ final class Version
         }
 
         if ($this->preRelease->equals(PreRelease::empty())) {
-            if ($other->preRelease->equals(PreRelease::empty())) {
-                return 0;
-            }
-
             return 1;
         }
 
