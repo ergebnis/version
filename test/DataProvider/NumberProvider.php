@@ -50,15 +50,9 @@ final class NumberProvider extends DataProvider\AbstractProvider
      */
     public static function valid(): \Generator
     {
-        $values = [
-            'zero' => '0',
-            'one' => '1',
-            'greater-than-one' => (string) self::faker()->numberBetween(2),
-        ];
-
-        foreach ($values as $key => $value) {
+        foreach (self::values() as $key => $value) {
             yield $key => [
-                $value,
+                (string) $value,
             ];
         }
     }
@@ -137,14 +131,14 @@ final class NumberProvider extends DataProvider\AbstractProvider
     }
 
     /**
-     * @return list<int>
+     * @return array<string, int>
      */
     private static function values(): array
     {
         return [
-            0,
-            1,
-            self::faker()->numberBetween(2),
+            'zero' => 0,
+            'one' => 1,
+            'greater-than-one' => self::faker()->numberBetween(2),
         ];
     }
 }
