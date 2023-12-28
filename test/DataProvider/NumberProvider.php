@@ -25,19 +25,61 @@ final class NumberProvider extends DataProvider\AbstractProvider
      */
     public static function invalid(): \Generator
     {
-        $faker = self::faker();
+        $values = self::values();
 
-        $values = [
-            'leading-zero' => \sprintf(
-                '0%d',
-                $faker->numberBetween(1),
-            ),
-            'word' => $faker->word(),
-        ];
+        foreach ($values as $key => $value) {
+            $adjustedKey = \sprintf(
+                '%s-with-leading-zero',
+                $key,
+            );
 
-        foreach ($values as $value) {
-            yield $value => [
-                $value,
+            yield $adjustedKey => [
+                \sprintf(
+                    '0%d',
+                    $value,
+                ),
+            ];
+        }
+
+        foreach ($values as $key => $value) {
+            $adjustedKey = \sprintf(
+                '%s-with-leading-space',
+                $key,
+            );
+
+            yield $adjustedKey => [
+                \sprintf(
+                    ' %d',
+                    $value,
+                ),
+            ];
+        }
+
+        foreach ($values as $key => $value) {
+            $adjustedKey = \sprintf(
+                '%s-with-trailing-space',
+                $key,
+            );
+
+            yield $adjustedKey => [
+                \sprintf(
+                    '%d ',
+                    $value,
+                ),
+            ];
+        }
+
+        foreach ($values as $key => $value) {
+            $adjustedKey = \sprintf(
+                '%s-with-leading-and-trailing-space',
+                $key,
+            );
+
+            yield $adjustedKey => [
+                \sprintf(
+                    ' %d ',
+                    $value,
+                ),
             ];
         }
     }
