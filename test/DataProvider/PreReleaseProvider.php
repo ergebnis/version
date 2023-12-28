@@ -48,6 +48,48 @@ final class PreReleaseProvider
                 $value,
             ];
         }
+
+        foreach (self::valuesOrderedByPrecedence() as $key => $value) {
+            $adjustedKey = \sprintf(
+                '%s-with-leading-space',
+                $key,
+            );
+
+            yield $adjustedKey => [
+                \sprintf(
+                    ' %d',
+                    $value,
+                ),
+            ];
+        }
+
+        foreach (self::valuesOrderedByPrecedence() as $key => $value) {
+            $adjustedKey = \sprintf(
+                '%s-with-trailing-space',
+                $key,
+            );
+
+            yield $adjustedKey => [
+                \sprintf(
+                    '%d ',
+                    $value,
+                ),
+            ];
+        }
+
+        foreach (self::valuesOrderedByPrecedence() as $key => $value) {
+            $adjustedKey = \sprintf(
+                '%s-with-leading-and-trailing-space',
+                $key,
+            );
+
+            yield $adjustedKey => [
+                \sprintf(
+                    ' %d ',
+                    $value,
+                ),
+            ];
+        }
     }
 
     /**
