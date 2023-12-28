@@ -33,6 +33,48 @@ final class BuildMetaDataProvider
                 $value,
             ];
         }
+
+        foreach (self::values() as $value) {
+            $key = \sprintf(
+                '%s-with-leading-space',
+                $value,
+            );
+
+            yield $key => [
+                \sprintf(
+                    ' %s',
+                    $value,
+                ),
+            ];
+        }
+
+        foreach (self::values() as $value) {
+            $key = \sprintf(
+                '%s-with-trailing-space',
+                $value,
+            );
+
+            yield $key => [
+                \sprintf(
+                    '%s ',
+                    $value,
+                ),
+            ];
+        }
+
+        foreach (self::values() as $value) {
+            $key = \sprintf(
+                '%s-with-leading-and-trailing-space',
+                $value,
+            );
+
+            yield $key => [
+                \sprintf(
+                    ' %s ',
+                    $value,
+                ),
+            ];
+        }
     }
 
     /**
