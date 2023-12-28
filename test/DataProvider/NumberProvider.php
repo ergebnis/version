@@ -62,30 +62,20 @@ final class NumberProvider extends DataProvider\AbstractProvider
      */
     public static function valueAndBumpedValue(): \Generator
     {
-        $values = [
-            'zero' => [
-                '0',
-                '1',
-            ],
-            'one' => [
-                '1',
-                '2',
-            ],
-            'php-int-max' => [
-                (string) \PHP_INT_MAX,
-                \bcadd(
-                    (string) \PHP_INT_MAX,
-                    '1',
-                ),
-            ],
-        ];
-
-        foreach ($values as $key => [$value, $bumpedValue]) {
+        foreach (self::values() as $key => $value) {
             yield $key => [
-                $value,
-                $bumpedValue,
+                (string) $value,
+                (string) ($value + 1),
             ];
         }
+
+        yield 'php-int-max' => [
+            (string) \PHP_INT_MAX,
+            \bcadd(
+                (string) \PHP_INT_MAX,
+                '1',
+            ),
+        ];
     }
 
     /**
