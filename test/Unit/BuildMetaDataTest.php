@@ -24,7 +24,7 @@ final class BuildMetaDataTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 
-    #[Framework\Attributes\DataProvider('provideInvalidValue')]
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\BuildMetaDataProvider::class, 'invalid')]
     public function testFromStringRejectsInvalidValue(string $value): void
     {
         $this->expectException(Exception\InvalidBuildMetaData::class);
@@ -32,59 +32,12 @@ final class BuildMetaDataTest extends Framework\TestCase
         BuildMetaData::fromString($value);
     }
 
-    /**
-     * @see https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
-     * @see https://regex101.com/r/Ly7O1x/3/
-     *
-     * @return \Generator<string, array{0: string}>
-     */
-    public static function provideInvalidValue(): \Generator
-    {
-        $values = [
-            'meta+meta',
-            'whatever+meta+meta',
-        ];
-
-        foreach ($values as $value) {
-            yield $value => [
-                $value,
-            ];
-        }
-    }
-
-    #[Framework\Attributes\DataProvider('provideValidValue')]
+    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\BuildMetaDataProvider::class, 'valid')]
     public function testFromStringReturnsBuildMetaData(string $value): void
     {
         $buildMetaData = BuildMetaData::fromString($value);
 
         self::assertSame($value, $buildMetaData->toString());
-    }
-
-    /**
-     * @see https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
-     * @see https://regex101.com/r/Ly7O1x/3/
-     *
-     * @return \Generator<string, array{0: string}>
-     */
-    public static function provideValidValue(): \Generator
-    {
-        $values = [
-            'meta',
-            'meta-valid',
-            'build.1-aef.1-its-okay',
-            'build.1',
-            'build.123',
-            'build.1848',
-            'beta',
-            '788',
-            '0.build.1-rc.10000aaa-kk-0.1',
-        ];
-
-        foreach ($values as $value) {
-            yield $value => [
-                $value,
-            ];
-        }
     }
 
     public function testEmptyReturnsBuildMetaData(): void

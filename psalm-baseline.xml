@@ -15,6 +15,12 @@
       <code><![CDATA[$this->value]]></code>
     </ArgumentTypeCoercion>
   </file>
+  <file src="test/DataProvider/BuildMetaDataProvider.php">
+    <PossiblyUnusedMethod>
+      <code>invalid</code>
+      <code>valid</code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="test/DataProvider/NumberProvider.php">
     <PossiblyUnusedMethod>
       <code>invalid</code>
@@ -61,12 +67,6 @@
       <code>valuesWhereFirstValueIsEqualToSecondValue</code>
       <code>valuesWhereFirstValueIsGreaterThanSecondValue</code>
       <code>valuesWhereFirstValueIsSmallerThanSecondValue</code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="test/Unit/BuildMetaDataTest.php">
-    <PossiblyUnusedMethod>
-      <code>provideInvalidValue</code>
-      <code>provideValidValue</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="test/Unit/VersionTest.php">
