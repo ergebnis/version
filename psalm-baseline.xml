@@ -15,7 +15,7 @@
       <code><![CDATA[$this->value]]></code>
     </ArgumentTypeCoercion>
   </file>
-  <file src="test/DataProvider/IntProvider.php">
+  <file src="test/DataProvider/NumberProvider.php">
     <PossiblyUnusedMethod>
       <code>valuesWhereFirstValueIsGreaterThanSecondValue</code>
       <code>valuesWhereFirstValueIsSmallerThanSecondValue</code>

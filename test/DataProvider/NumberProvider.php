@@ -15,7 +15,7 @@ namespace Ergebnis\Version\Test\DataProvider;
 
 use Ergebnis\DataProvider;
 
-final class IntProvider extends DataProvider\AbstractProvider
+final class NumberProvider extends DataProvider\AbstractProvider
 {
     /**
      * @return \Generator<string, array{0: string, 1: string}>
