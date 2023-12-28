@@ -17,6 +17,9 @@
   </file>
   <file src="test/DataProvider/NumberProvider.php">
     <PossiblyUnusedMethod>
+      <code>invalid</code>
+      <code>valid</code>
+      <code>valueAndBumpedValue</code>
       <code>valuesWhereFirstValueIsGreaterThanSecondValue</code>
       <code>valuesWhereFirstValueIsSmallerThanSecondValue</code>
     </PossiblyUnusedMethod>
@@ -64,27 +67,6 @@
     <PossiblyUnusedMethod>
       <code>provideInvalidValue</code>
       <code>provideValidValue</code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="test/Unit/MajorTest.php">
-    <PossiblyUnusedMethod>
-      <code>provideInvalidStringValue</code>
-      <code>provideValidStringValue</code>
-      <code>provideValueAndBumpedValue</code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="test/Unit/MinorTest.php">
-    <PossiblyUnusedMethod>
-      <code>provideInvalidStringValue</code>
-      <code>provideValidStringValue</code>
-      <code>provideValueAndBumpedValue</code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="test/Unit/PatchTest.php">
-    <PossiblyUnusedMethod>
-      <code>provideInvalidStringValue</code>
-      <code>provideValidStringValue</code>
-      <code>provideValueAndBumpedValue</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="test/Unit/VersionTest.php">
