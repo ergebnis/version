@@ -43,7 +43,19 @@ final class BuildMetaDataProvider
      */
     public static function valid(): \Generator
     {
-        $values = [
+        foreach (self::values() as $value) {
+            yield $value => [
+                $value,
+            ];
+        }
+    }
+
+    /**
+     * @return list<string>
+     */
+    private static function values(): array
+    {
+        return [
             'meta',
             'meta-valid',
             'build.1-aef.1-its-okay',
@@ -54,11 +66,5 @@ final class BuildMetaDataProvider
             '788',
             '0.build.1-rc.10000aaa-kk-0.1',
         ];
-
-        foreach ($values as $value) {
-            yield $value => [
-                $value,
-            ];
-        }
     }
 }
