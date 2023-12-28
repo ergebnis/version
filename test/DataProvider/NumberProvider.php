@@ -25,9 +25,7 @@ final class NumberProvider extends DataProvider\AbstractProvider
      */
     public static function invalid(): \Generator
     {
-        $values = self::values();
-
-        foreach ($values as $key => $value) {
+        foreach (self::values() as $key => $value) {
             $adjustedKey = \sprintf(
                 '%s-with-leading-zero',
                 $key,
@@ -41,7 +39,7 @@ final class NumberProvider extends DataProvider\AbstractProvider
             ];
         }
 
-        foreach ($values as $key => $value) {
+        foreach (self::values() as $key => $value) {
             $adjustedKey = \sprintf(
                 '%s-with-leading-space',
                 $key,
@@ -55,7 +53,7 @@ final class NumberProvider extends DataProvider\AbstractProvider
             ];
         }
 
-        foreach ($values as $key => $value) {
+        foreach (self::values() as $key => $value) {
             $adjustedKey = \sprintf(
                 '%s-with-trailing-space',
                 $key,
@@ -69,7 +67,7 @@ final class NumberProvider extends DataProvider\AbstractProvider
             ];
         }
 
-        foreach ($values as $key => $value) {
+        foreach (self::values() as $key => $value) {
             $adjustedKey = \sprintf(
                 '%s-with-leading-and-trailing-space',
                 $key,
