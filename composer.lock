@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3926ac95f6ea8ce24b8c4d617adb310e",
+    "content-hash": "2f113dd165cd2641b2a5de3aa7953b6a",
     "packages": [],
     "packages-dev": [
         {
@@ -4170,16 +4170,16 @@
         },
         {
             "name": "rector/rector",
-            "version": "0.19.4",
+            "version": "0.19.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "0d3dcc384284aff5f865480186a620166af6d031"
+                "reference": "89c895d127b9d248d2af007068a824b5348ef81f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/0d3dcc384284aff5f865480186a620166af6d031",
-                "reference": "0d3dcc384284aff5f865480186a620166af6d031",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/89c895d127b9d248d2af007068a824b5348ef81f",
+                "reference": "89c895d127b9d248d2af007068a824b5348ef81f",
                 "shasum": ""
             },
             "require": {
@@ -4214,7 +4214,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/0.19.4"
+                "source": "https://github.com/rectorphp/rector/tree/0.19.5"
             },
             "funding": [
                 {
@@ -4222,7 +4222,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-29T21:18:03+00:00"
+            "time": "2024-01-29T23:53:47+00:00"
         },
         {
             "name": "revolt/event-loop",
