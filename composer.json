@@ -21,7 +21,7 @@
     "security": "https://github.com/ergebnis/version/blob/main/.github/SECURITY.md"
   },
   "require": {
-    "php": "~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0"
+    "php": "~7.4.0 || ~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0"
   },
   "require-dev": {
     "ext-bcmath": "*",
@@ -31,7 +31,7 @@
     "ergebnis/php-cs-fixer-config": "^6.23.0",
     "ergebnis/phpunit-slow-test-detector": "^2.10.0",
     "fakerphp/faker": "^1.23.1",
-    "infection/infection": "~0.26.19",
+    "infection/infection": "~0.26.6",
     "phpunit/phpunit": "^9.6.17",
     "psalm/plugin-phpunit": "~0.18.4",
     "rector/rector": "^1.0.2",
@@ -60,7 +60,7 @@
       "abandoned": "report"
     },
     "platform": {
-      "php": "8.0.30"
+      "php": "7.4.33"
     },
     "preferred-install": "dist",
     "sort-packages": true

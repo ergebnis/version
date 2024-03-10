@@ -1,5 +1,9 @@
 {
   "symbol-whitelist": [
-    "bcadd"
+    "bcadd",
+    "bool",
+    "int",
+    "self",
+    "string"
   ]
 }

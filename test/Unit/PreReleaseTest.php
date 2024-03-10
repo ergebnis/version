@@ -59,7 +59,7 @@ final class PreReleaseTest extends Framework\TestCase
      */
     public function testCompareReturnsMinusOneWhenFirstValueIsSmallerThanSecondValue(
         string $value,
-        string $otherValue,
+        string $otherValue
     ): void {
         $one = PreRelease::fromString($value);
         $two = PreRelease::fromString($otherValue);
@@ -83,7 +83,7 @@ final class PreReleaseTest extends Framework\TestCase
      */
     public function testCompareReturnsPlusOneWhenFirstValueIsGreaterThanSecondValue(
         string $value,
-        string $otherValue,
+        string $otherValue
     ): void {
         $one = PreRelease::fromString($value);
         $two = PreRelease::fromString($otherValue);
@@ -107,7 +107,7 @@ final class PreReleaseTest extends Framework\TestCase
      */
     public function testIsSmallerThanReturnsFalseWhenFirstValueIsGreaterThanSecondValue(
         string $value,
-        string $otherValue,
+        string $otherValue
     ): void {
         $one = PreRelease::fromString($value);
         $two = PreRelease::fromString($otherValue);
@@ -120,7 +120,7 @@ final class PreReleaseTest extends Framework\TestCase
      */
     public function testIsSmallerThanReturnsTrueWhenFirstValueIsSmallerThanSecondValue(
         string $value,
-        string $otherValue,
+        string $otherValue
     ): void {
         $one = PreRelease::fromString($value);
         $two = PreRelease::fromString($otherValue);
@@ -153,7 +153,7 @@ final class PreReleaseTest extends Framework\TestCase
      */
     public function testIsGreaterThanReturnsFalseWhenFirstValueIsSmallerThanSecondValue(
         string $value,
-        string $otherValue,
+        string $otherValue
     ): void {
         $one = PreRelease::fromString($value);
         $two = PreRelease::fromString($otherValue);
@@ -177,7 +177,7 @@ final class PreReleaseTest extends Framework\TestCase
      */
     public function testIsGreaterThanReturnsTrueWhenFirstValueIsGreaterThanSecondValue(
         string $value,
-        string $otherValue,
+        string $otherValue
     ): void {
         $one = PreRelease::fromString($value);
         $two = PreRelease::fromString($otherValue);

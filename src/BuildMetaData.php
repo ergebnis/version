@@ -20,9 +20,11 @@ final class BuildMetaData
      * @see https://regex101.com/r/Ly7O1x/3/
      */
     private const REGEX = '/^(?P<buildmetadata>[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*)$/';
+    private string $value;
 
-    private function __construct(private string $value)
+    private function __construct(string $value)
     {
+        $this->value = $value;
     }
 
     /**

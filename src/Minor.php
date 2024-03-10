@@ -20,9 +20,11 @@ final class Minor
      * @see https://regex101.com/r/Ly7O1x/3/
      */
     private const REGEX = '/^(?P<minor>0|[1-9]\d*)$/';
+    private string $value;
 
-    private function __construct(private string $value)
+    private function __construct(string $value)
     {
+        $this->value = $value;
     }
 
     /**
