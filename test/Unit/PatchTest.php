@@ -74,7 +74,7 @@ final class PatchTest extends Framework\TestCase
      */
     public function testBumpReturnsPatchWithIncrementedValue(
         string $value,
-        string $bumpedValue,
+        string $bumpedValue
     ): void {
         $one = Patch::fromString($value);
 
@@ -89,7 +89,7 @@ final class PatchTest extends Framework\TestCase
      */
     public function testCompareReturnsMinusOneWhenFirstValueIsSmallerThanSecondValue(
         string $firstValue,
-        string $secondValue,
+        string $secondValue
     ): void {
         $one = Patch::fromString($firstValue);
         $two = Patch::fromString($secondValue);
@@ -114,7 +114,7 @@ final class PatchTest extends Framework\TestCase
      */
     public function testCompareReturnsPlusOneWhenFirstValueIsGreaterThanSecondValue(
         string $firstValue,
-        string $secondValue,
+        string $secondValue
     ): void {
         $one = Patch::fromString($firstValue);
         $two = Patch::fromString($secondValue);
@@ -139,7 +139,7 @@ final class PatchTest extends Framework\TestCase
      */
     public function testIsSmallerThanReturnsFalseWhenFirstValueIsGreaterThanSecondValue(
         string $firstValue,
-        string $secondValue,
+        string $secondValue
     ): void {
         $one = Patch::fromString($firstValue);
         $two = Patch::fromString($secondValue);
@@ -152,7 +152,7 @@ final class PatchTest extends Framework\TestCase
      */
     public function testIsSmallerThanReturnsTrueWhenFirstValueIsSmallerThanSecondValue(
         string $firstValue,
-        string $secondValue,
+        string $secondValue
     ): void {
         $one = Patch::fromString($firstValue);
         $two = Patch::fromString($secondValue);
@@ -185,7 +185,7 @@ final class PatchTest extends Framework\TestCase
      */
     public function testIsGreaterThanReturnsFalseWhenFirstValueIsSmallerThanSecondValue(
         string $firstValue,
-        string $secondValue,
+        string $secondValue
     ): void {
         $one = Patch::fromString($firstValue);
         $two = Patch::fromString($secondValue);
@@ -210,7 +210,7 @@ final class PatchTest extends Framework\TestCase
      */
     public function testIsGreaterThanReturnsTrueWhenFirstValueIsGreaterThanSecondValue(
         string $firstValue,
-        string $secondValue,
+        string $secondValue
     ): void {
         $one = Patch::fromString($firstValue);
         $two = Patch::fromString($secondValue);

@@ -66,7 +66,7 @@ final class VersionTest extends Framework\TestCase
         Minor $minor,
         Patch $patch,
         PreRelease $preRelease,
-        BuildMetaData $buildMetaData,
+        BuildMetaData $buildMetaData
     ): void {
         $version = Version::fromString($value);
 
@@ -322,7 +322,7 @@ final class VersionTest extends Framework\TestCase
      */
     public function testBumpMajorReturnsVersionWithBumpedMajor(
         string $value,
-        string $valueWithBumpedMajor,
+        string $valueWithBumpedMajor
     ): void {
         $one = Version::fromString($value);
 
@@ -337,7 +337,7 @@ final class VersionTest extends Framework\TestCase
      */
     public function testBumpMinorReturnsVersionWithBumpedMinor(
         string $value,
-        string $valueWithBumpedMinor,
+        string $valueWithBumpedMinor
     ): void {
         $one = Version::fromString($value);
 
@@ -352,7 +352,7 @@ final class VersionTest extends Framework\TestCase
      */
     public function testBumpPatchReturnsVersionWithBumpedPatch(
         string $value,
-        string $valueWithBumpedPatch,
+        string $valueWithBumpedPatch
     ): void {
         $one = Version::fromString($value);
 
@@ -367,7 +367,7 @@ final class VersionTest extends Framework\TestCase
      */
     public function testCompareReturnsMinusOneWhenFirstValueIsSmallerThanSecondValue(
         string $firstValue,
-        string $secondValue,
+        string $secondValue
     ): void {
         $one = Version::fromString($firstValue);
         $two = Version::fromString($secondValue);
@@ -391,7 +391,7 @@ final class VersionTest extends Framework\TestCase
      */
     public function testCompareReturnsZeroWhenFirstValueIsEqualToSecondValue(
         string $firstValue,
-        string $secondValue,
+        string $secondValue
     ): void {
         $one = Version::fromString($firstValue);
         $two = Version::fromString($secondValue);
@@ -404,7 +404,7 @@ final class VersionTest extends Framework\TestCase
      */
     public function testCompareReturnsMinusOneWhenFirstValueIsGreaterThanSecondValue(
         string $firstValue,
-        string $secondValue,
+        string $secondValue
     ): void {
         $one = Version::fromString($firstValue);
         $two = Version::fromString($secondValue);
@@ -428,7 +428,7 @@ final class VersionTest extends Framework\TestCase
      */
     public function testIsSmallerThanReturnsFalseWhenFirstValueIsEqualToSecondValue(
         string $firstValue,
-        string $secondValue,
+        string $secondValue
     ): void {
         $one = Version::fromString($firstValue);
         $two = Version::fromString($secondValue);
@@ -441,7 +441,7 @@ final class VersionTest extends Framework\TestCase
      */
     public function testIsSmallerThanReturnsFalseWhenFirstValueIsGreaterThanSecondValue(
         string $firstValue,
-        string $secondValue,
+        string $secondValue
     ): void {
         $one = Version::fromString($firstValue);
         $two = Version::fromString($secondValue);
@@ -454,7 +454,7 @@ final class VersionTest extends Framework\TestCase
      */
     public function testIsSmallerThanReturnsTrueWhenFirstValueIsSmallerThanSecondValue(
         string $firstValue,
-        string $secondValue,
+        string $secondValue
     ): void {
         $one = Version::fromString($firstValue);
         $two = Version::fromString($secondValue);
@@ -467,7 +467,7 @@ final class VersionTest extends Framework\TestCase
      */
     public function testEqualsReturnsFalseWhenValuesAreDifferent(
         string $firstValue,
-        string $secondValue,
+        string $secondValue
     ): void {
         $one = Version::fromString($firstValue);
         $two = Version::fromString($secondValue);
@@ -480,7 +480,7 @@ final class VersionTest extends Framework\TestCase
      */
     public function testEqualsReturnsTrueWhenValuesAreEqual(
         string $firstValue,
-        string $secondValue,
+        string $secondValue
     ): void {
         $one = Version::fromString($firstValue);
         $two = Version::fromString($secondValue);
@@ -504,7 +504,7 @@ final class VersionTest extends Framework\TestCase
      */
     public function testIsGreaterThanReturnsFalseWhenFirstValueIsSmallerThanSecondValue(
         string $firstValue,
-        string $secondValue,
+        string $secondValue
     ): void {
         $one = Version::fromString($firstValue);
         $two = Version::fromString($secondValue);
@@ -528,7 +528,7 @@ final class VersionTest extends Framework\TestCase
      */
     public function testIsGreaterThanReturnsFalseWhenFirstValueIsEqualToSecondValue(
         string $firstValue,
-        string $secondValue,
+        string $secondValue
     ): void {
         $one = Version::fromString($firstValue);
         $two = Version::fromString($secondValue);
@@ -541,7 +541,7 @@ final class VersionTest extends Framework\TestCase
      */
     public function testIsGreaterThanReturnsTrueWhenFirstValueIsGreaterThanSecondValue(
         string $firstValue,
-        string $secondValue,
+        string $secondValue
     ): void {
         $one = Version::fromString($firstValue);
         $two = Version::fromString($secondValue);

@@ -11,6 +11,7 @@ For a full diff see [`1.0.0...main`][1.0.0...main].
 ### Added
 
 - Added support for PHP 8.0 ([#77]), by [@localheinz]
+- Added support for PHP 7.4 ([#78]), by [@localheinz]
 
 ## [`1.0.0`][1.0.0]
 

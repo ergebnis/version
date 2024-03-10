@@ -20,14 +20,24 @@ final class Version
      * @see https://regex101.com/r/Ly7O1x/3/
      */
     private const REGEX = '/^(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>0|[1-9]\d*)(?:-(?P<prerelease>(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+(?P<buildmetadata>[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/';
+    private Major $major;
+    private Minor $minor;
+    private Patch $patch;
+    private PreRelease $preRelease;
+    private BuildMetaData $buildMetaData;
 
     private function __construct(
-        private Major $major,
-        private Minor $minor,
-        private Patch $patch,
-        private PreRelease $preRelease,
-        private BuildMetaData $buildMetaData,
+        Major $major,
+        Minor $minor,
+        Patch $patch,
+        PreRelease $preRelease,
+        BuildMetaData $buildMetaData
     ) {
+        $this->major = $major;
+        $this->minor = $minor;
+        $this->patch = $patch;
+        $this->preRelease = $preRelease;
+        $this->buildMetaData = $buildMetaData;
     }
 
     /**
