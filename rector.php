@@ -26,13 +26,13 @@ return static function (Config\RectorConfig $rectorConfig): void {
         __DIR__ . '/test/',
     ]);
 
-    $rectorConfig->phpVersion(ValueObject\PhpVersion::PHP_81);
+    $rectorConfig->phpVersion(ValueObject\PhpVersion::PHP_80);
 
     $rectorConfig->rules([
         Php81\Rector\Property\ReadOnlyPropertyRector::class,
     ]);
 
     $rectorConfig->sets([
-        PHPUnit\Set\PHPUnitSetList::PHPUNIT_100,
+        PHPUnit\Set\PHPUnitSetList::PHPUNIT_90,
     ]);
 };

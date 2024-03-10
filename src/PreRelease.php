@@ -21,7 +21,7 @@ final class PreRelease
      */
     private const REGEX = '/^(?P<prerelease>(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*)$/';
 
-    private function __construct(private readonly string $value)
+    private function __construct(private string $value)
     {
     }
 

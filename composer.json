@@ -21,7 +21,7 @@
     "security": "https://github.com/ergebnis/version/blob/main/.github/SECURITY.md"
   },
   "require": {
-    "php": "~8.1.0 || ~8.2.0 || ~8.3.0"
+    "php": "~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0"
   },
   "require-dev": {
     "ext-bcmath": "*",
@@ -31,12 +31,11 @@
     "ergebnis/php-cs-fixer-config": "^6.23.0",
     "ergebnis/phpunit-slow-test-detector": "^2.10.0",
     "fakerphp/faker": "^1.23.1",
-    "infection/infection": "~0.27.10",
-    "phpunit/phpunit": "^10.5.11",
+    "infection/infection": "~0.26.19",
+    "phpunit/phpunit": "^9.6.17",
     "psalm/plugin-phpunit": "~0.18.4",
     "rector/rector": "^1.0.2",
-    "roave/backward-compatibility-check": "^8.6.0",
-    "vimeo/psalm": "^5.22.2"
+    "vimeo/psalm": "^5.23.0"
   },
   "suggest": {
     "ext-bcmath": "If you want to bump Major, Minor, or Patch versions greater than PHP_MAX_INT."
@@ -61,7 +60,7 @@
       "abandoned": "report"
     },
     "platform": {
-      "php": "8.1.26"
+      "php": "8.0.30"
     },
     "preferred-install": "dist",
     "sort-packages": true

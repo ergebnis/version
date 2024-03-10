@@ -19,13 +19,18 @@ use Ergebnis\Version\Patch;
 use Ergebnis\Version\Test;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(Patch::class)]
-#[Framework\Attributes\UsesClass(Exception\InvalidPatch::class)]
+/**
+ * @covers \Ergebnis\Version\Patch
+ *
+ * @uses \Ergebnis\Version\Exception\InvalidPatch
+ */
 final class PatchTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 
-    #[Framework\Attributes\DataProviderExternal(DataProvider\IntProvider::class, 'lessThanZero')]
+    /**
+     * @dataProvider \Ergebnis\DataProvider\IntProvider::lessThanZero
+     */
     public function testFromIntRejectsInvalidIntValue(int $value): void
     {
         $this->expectException(Exception\InvalidPatch::class);
@@ -33,8 +38,10 @@ final class PatchTest extends Framework\TestCase
         Patch::fromInt($value);
     }
 
-    #[Framework\Attributes\DataProviderExternal(DataProvider\IntProvider::class, 'zero')]
-    #[Framework\Attributes\DataProviderExternal(DataProvider\IntProvider::class, 'greaterThanZero')]
+    /**
+     * @dataProvider \Ergebnis\DataProvider\IntProvider::greaterThanZero
+     * @dataProvider \Ergebnis\DataProvider\IntProvider::zero
+     */
     public function testFromIntReturnsPatch(int $value): void
     {
         $patch = Patch::fromInt($value);
@@ -42,7 +49,9 @@ final class PatchTest extends Framework\TestCase
         self::assertSame((string) $value, $patch->toString());
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\NumberProvider::class, 'invalid')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::invalid
+     */
     public function testFromStringRejectsInvalidStringValue(string $value): void
     {
         $this->expectException(Exception\InvalidPatch::class);
@@ -50,7 +59,9 @@ final class PatchTest extends Framework\TestCase
         Patch::fromString($value);
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\NumberProvider::class, 'valid')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valid
+     */
     public function testFromStringReturnsPatch(string $value): void
     {
         $patch = Patch::fromString($value);
@@ -58,7 +69,9 @@ final class PatchTest extends Framework\TestCase
         self::assertSame($value, $patch->toString());
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\NumberProvider::class, 'valueAndBumpedValue')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valueAndBumpedValue
+     */
     public function testBumpReturnsPatchWithIncrementedValue(
         string $value,
         string $bumpedValue,
@@ -71,7 +84,9 @@ final class PatchTest extends Framework\TestCase
         self::assertSame($bumpedValue, $two->toString());
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\NumberProvider::class, 'valuesWhereFirstValueIsSmallerThanSecondValue')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsSmallerThanSecondValue
+     */
     public function testCompareReturnsMinusOneWhenFirstValueIsSmallerThanSecondValue(
         string $firstValue,
         string $secondValue,
@@ -82,8 +97,10 @@ final class PatchTest extends Framework\TestCase
         self::assertSame(-1, $one->compare($two));
     }
 
-    #[Framework\Attributes\DataProviderExternal(DataProvider\IntProvider::class, 'zero')]
-    #[Framework\Attributes\DataProviderExternal(DataProvider\IntProvider::class, 'greaterThanZero')]
+    /**
+     * @dataProvider \Ergebnis\DataProvider\IntProvider::greaterThanZero
+     * @dataProvider \Ergebnis\DataProvider\IntProvider::zero
+     */
     public function testCompareReturnsZeroWhenFirstValueIsIdenticalToSecondValue(int $value): void
     {
         $one = Patch::fromInt($value);
@@ -92,7 +109,9 @@ final class PatchTest extends Framework\TestCase
         self::assertSame(0, $one->compare($two));
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\NumberProvider::class, 'valuesWhereFirstValueIsGreaterThanSecondValue')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsGreaterThanSecondValue
+     */
     public function testCompareReturnsPlusOneWhenFirstValueIsGreaterThanSecondValue(
         string $firstValue,
         string $secondValue,
@@ -103,8 +122,10 @@ final class PatchTest extends Framework\TestCase
         self::assertSame(1, $one->compare($two));
     }
 
-    #[Framework\Attributes\DataProviderExternal(DataProvider\IntProvider::class, 'zero')]
-    #[Framework\Attributes\DataProviderExternal(DataProvider\IntProvider::class, 'greaterThanZero')]
+    /**
+     * @dataProvider \Ergebnis\DataProvider\IntProvider::greaterThanZero
+     * @dataProvider \Ergebnis\DataProvider\IntProvider::zero
+     */
     public function testIsSmallerThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(int $value): void
     {
         $one = Patch::fromInt($value);
@@ -113,7 +134,9 @@ final class PatchTest extends Framework\TestCase
         self::assertFalse($one->isSmallerThan($two));
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\NumberProvider::class, 'valuesWhereFirstValueIsGreaterThanSecondValue')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsGreaterThanSecondValue
+     */
     public function testIsSmallerThanReturnsFalseWhenFirstValueIsGreaterThanSecondValue(
         string $firstValue,
         string $secondValue,
@@ -124,7 +147,9 @@ final class PatchTest extends Framework\TestCase
         self::assertFalse($one->isSmallerThan($two));
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\NumberProvider::class, 'valuesWhereFirstValueIsSmallerThanSecondValue')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsSmallerThanSecondValue
+     */
     public function testIsSmallerThanReturnsTrueWhenFirstValueIsSmallerThanSecondValue(
         string $firstValue,
         string $secondValue,
@@ -155,7 +180,9 @@ final class PatchTest extends Framework\TestCase
         self::assertTrue($one->equals($two));
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\NumberProvider::class, 'valuesWhereFirstValueIsSmallerThanSecondValue')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsSmallerThanSecondValue
+     */
     public function testIsGreaterThanReturnsFalseWhenFirstValueIsSmallerThanSecondValue(
         string $firstValue,
         string $secondValue,
@@ -166,8 +193,10 @@ final class PatchTest extends Framework\TestCase
         self::assertFalse($one->isGreaterThan($two));
     }
 
-    #[Framework\Attributes\DataProviderExternal(DataProvider\IntProvider::class, 'zero')]
-    #[Framework\Attributes\DataProviderExternal(DataProvider\IntProvider::class, 'greaterThanZero')]
+    /**
+     * @dataProvider \Ergebnis\DataProvider\IntProvider::greaterThanZero
+     * @dataProvider \Ergebnis\DataProvider\IntProvider::zero
+     */
     public function testIsGreaterThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(int $value): void
     {
         $one = Patch::fromInt($value);
@@ -176,7 +205,9 @@ final class PatchTest extends Framework\TestCase
         self::assertFalse($one->isGreaterThan($two));
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\NumberProvider::class, 'valuesWhereFirstValueIsGreaterThanSecondValue')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsGreaterThanSecondValue
+     */
     public function testIsGreaterThanReturnsTrueWhenFirstValueIsGreaterThanSecondValue(
         string $firstValue,
         string $secondValue,

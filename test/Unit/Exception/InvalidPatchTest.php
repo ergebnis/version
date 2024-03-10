@@ -17,7 +17,9 @@ use Ergebnis\Version\Exception;
 use Ergebnis\Version\Test;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(Exception\InvalidPatch::class)]
+/**
+ * @covers \Ergebnis\Version\Exception\InvalidPatch
+ */
 final class InvalidPatchTest extends Framework\TestCase
 {
     use Test\Util\Helper;

@@ -17,7 +17,9 @@ use Ergebnis\Version\Exception;
 use Ergebnis\Version\Test;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(Exception\InvalidMajor::class)]
+/**
+ * @covers \Ergebnis\Version\Exception\InvalidMajor
+ */
 final class InvalidMajorTest extends Framework\TestCase
 {
     use Test\Util\Helper;

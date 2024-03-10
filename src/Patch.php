@@ -21,7 +21,7 @@ final class Patch
      */
     private const REGEX = '/^(?P<patch>0|[1-9]\d*)$/';
 
-    private function __construct(private readonly string $value)
+    private function __construct(private string $value)
     {
     }
 

@@ -23,18 +23,23 @@ use Ergebnis\Version\Test;
 use Ergebnis\Version\Version;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(Version::class)]
-#[Framework\Attributes\UsesClass(Exception\InvalidVersion::class)]
-#[Framework\Attributes\UsesClass(BuildMetaData::class)]
-#[Framework\Attributes\UsesClass(Major::class)]
-#[Framework\Attributes\UsesClass(Minor::class)]
-#[Framework\Attributes\UsesClass(Patch::class)]
-#[Framework\Attributes\UsesClass(PreRelease::class)]
+/**
+ * @covers \Ergebnis\Version\Version
+ *
+ * @uses \Ergebnis\Version\BuildMetaData
+ * @uses \Ergebnis\Version\Exception\InvalidVersion
+ * @uses \Ergebnis\Version\Major
+ * @uses \Ergebnis\Version\Minor
+ * @uses \Ergebnis\Version\Patch
+ * @uses \Ergebnis\Version\PreRelease
+ */
 final class VersionTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'invalid')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::invalid
+     */
     public function testFromStringRejectsInvalidValue(string $value): void
     {
         $this->expectException(Exception\InvalidVersion::class);
@@ -42,7 +47,9 @@ final class VersionTest extends Framework\TestCase
         Version::fromString($value);
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valid')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valid
+     */
     public function testFromStringReturnsVersion(string $value): void
     {
         $version = Version::fromString($value);
@@ -50,7 +57,9 @@ final class VersionTest extends Framework\TestCase
         self::assertSame($value, $version->toString());
     }
 
-    #[Framework\Attributes\DataProvider('provideValueMajorMinorPatchPreReleaseAndBuildMetaData')]
+    /**
+     * @dataProvider provideValueMajorMinorPatchPreReleaseAndBuildMetaData
+     */
     public function testFromStringReturnsVersionWithMajorMinorPatchPreReleaseAndBuildMetaData(
         string $value,
         Major $major,
@@ -74,7 +83,7 @@ final class VersionTest extends Framework\TestCase
      *
      * @return \Generator<string, array{0: string, 1: Major, 2: Minor, 3: Patch, 4: PreRelease, 5: BuildMetaData}>
      */
-    public static function provideValueMajorMinorPatchPreReleaseAndBuildMetaData(): \Generator
+    public static function provideValueMajorMinorPatchPreReleaseAndBuildMetaData(): iterable
     {
         $values = [
             '0.0.4' => [
@@ -308,7 +317,9 @@ final class VersionTest extends Framework\TestCase
         }
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valueAndValueWithBumpedMajor')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valueAndValueWithBumpedMajor
+     */
     public function testBumpMajorReturnsVersionWithBumpedMajor(
         string $value,
         string $valueWithBumpedMajor,
@@ -321,7 +332,9 @@ final class VersionTest extends Framework\TestCase
         self::assertSame($valueWithBumpedMajor, $two->toString());
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valueAndValueWithBumpedMinor')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valueAndValueWithBumpedMinor
+     */
     public function testBumpMinorReturnsVersionWithBumpedMinor(
         string $value,
         string $valueWithBumpedMinor,
@@ -334,7 +347,9 @@ final class VersionTest extends Framework\TestCase
         self::assertSame($valueWithBumpedMinor, $two->toString());
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valueAndValueWithBumpedPatch')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valueAndValueWithBumpedPatch
+     */
     public function testBumpPatchReturnsVersionWithBumpedPatch(
         string $value,
         string $valueWithBumpedPatch,
@@ -347,7 +362,9 @@ final class VersionTest extends Framework\TestCase
         self::assertSame($valueWithBumpedPatch, $two->toString());
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valuesWhereFirstValueIsSmallerThanSecondValue')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsSmallerThanSecondValue
+     */
     public function testCompareReturnsMinusOneWhenFirstValueIsSmallerThanSecondValue(
         string $firstValue,
         string $secondValue,
@@ -358,7 +375,9 @@ final class VersionTest extends Framework\TestCase
         self::assertSame(-1, $one->compare($two));
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valid')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valid
+     */
     public function testCompareReturnsZeroWhenFirstValueIsIdenticalToSecondValue(string $value): void
     {
         $one = Version::fromString($value);
@@ -367,7 +386,9 @@ final class VersionTest extends Framework\TestCase
         self::assertSame(0, $one->compare($two));
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valuesWhereFirstValueIsEqualToSecondValue')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsEqualToSecondValue
+     */
     public function testCompareReturnsZeroWhenFirstValueIsEqualToSecondValue(
         string $firstValue,
         string $secondValue,
@@ -378,7 +399,9 @@ final class VersionTest extends Framework\TestCase
         self::assertSame(0, $one->compare($two));
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valuesWhereFirstValueIsGreaterThanSecondValue')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsGreaterThanSecondValue
+     */
     public function testCompareReturnsMinusOneWhenFirstValueIsGreaterThanSecondValue(
         string $firstValue,
         string $secondValue,
@@ -389,7 +412,9 @@ final class VersionTest extends Framework\TestCase
         self::assertSame(1, $one->compare($two));
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valid')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valid
+     */
     public function testIsSmallerThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(string $value): void
     {
         $one = Version::fromString($value);
@@ -398,7 +423,9 @@ final class VersionTest extends Framework\TestCase
         self::assertFalse($one->isSmallerThan($two));
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valuesWhereFirstValueIsEqualToSecondValue')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsEqualToSecondValue
+     */
     public function testIsSmallerThanReturnsFalseWhenFirstValueIsEqualToSecondValue(
         string $firstValue,
         string $secondValue,
@@ -409,7 +436,9 @@ final class VersionTest extends Framework\TestCase
         self::assertFalse($one->isSmallerThan($two));
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valuesWhereFirstValueIsGreaterThanSecondValue')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsGreaterThanSecondValue
+     */
     public function testIsSmallerThanReturnsFalseWhenFirstValueIsGreaterThanSecondValue(
         string $firstValue,
         string $secondValue,
@@ -420,7 +449,9 @@ final class VersionTest extends Framework\TestCase
         self::assertFalse($one->isSmallerThan($two));
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valuesWhereFirstValueIsSmallerThanSecondValue')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsSmallerThanSecondValue
+     */
     public function testIsSmallerThanReturnsTrueWhenFirstValueIsSmallerThanSecondValue(
         string $firstValue,
         string $secondValue,
@@ -431,7 +462,9 @@ final class VersionTest extends Framework\TestCase
         self::assertTrue($one->isSmallerThan($two));
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valuesWhereFirstValueIsGreaterThanSecondValue')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsGreaterThanSecondValue
+     */
     public function testEqualsReturnsFalseWhenValuesAreDifferent(
         string $firstValue,
         string $secondValue,
@@ -442,7 +475,9 @@ final class VersionTest extends Framework\TestCase
         self::assertFalse($one->equals($two));
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valuesWhereFirstValueIsEqualToSecondValue')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsEqualToSecondValue
+     */
     public function testEqualsReturnsTrueWhenValuesAreEqual(
         string $firstValue,
         string $secondValue,
@@ -453,7 +488,9 @@ final class VersionTest extends Framework\TestCase
         self::assertTrue($one->equals($two));
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valid')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valid
+     */
     public function testEqualsReturnsTrueWhenValuesAreIdentical(string $value): void
     {
         $one = Version::fromString($value);
@@ -462,7 +499,9 @@ final class VersionTest extends Framework\TestCase
         self::assertTrue($one->equals($two));
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valuesWhereFirstValueIsSmallerThanSecondValue')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsSmallerThanSecondValue
+     */
     public function testIsGreaterThanReturnsFalseWhenFirstValueIsSmallerThanSecondValue(
         string $firstValue,
         string $secondValue,
@@ -473,7 +512,9 @@ final class VersionTest extends Framework\TestCase
         self::assertFalse($one->isGreaterThan($two));
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valid')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valid
+     */
     public function testIsGreaterThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(string $value): void
     {
         $one = Version::fromString($value);
@@ -482,7 +523,9 @@ final class VersionTest extends Framework\TestCase
         self::assertFalse($one->isGreaterThan($two));
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valuesWhereFirstValueIsEqualToSecondValue')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsEqualToSecondValue
+     */
     public function testIsGreaterThanReturnsFalseWhenFirstValueIsEqualToSecondValue(
         string $firstValue,
         string $secondValue,
@@ -493,7 +536,9 @@ final class VersionTest extends Framework\TestCase
         self::assertFalse($one->isGreaterThan($two));
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\VersionProvider::class, 'valuesWhereFirstValueIsGreaterThanSecondValue')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsGreaterThanSecondValue
+     */
     public function testIsGreaterThanReturnsTrueWhenFirstValueIsGreaterThanSecondValue(
         string $firstValue,
         string $secondValue,
