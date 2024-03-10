@@ -18,13 +18,18 @@ use Ergebnis\Version\Exception;
 use Ergebnis\Version\Test;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(BuildMetaData::class)]
-#[Framework\Attributes\UsesClass(Exception\InvalidBuildMetaData::class)]
+/**
+ * @covers \Ergebnis\Version\BuildMetaData
+ *
+ * @uses \Ergebnis\Version\Exception\InvalidBuildMetaData
+ */
 final class BuildMetaDataTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\BuildMetaDataProvider::class, 'invalid')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\BuildMetaDataProvider::invalid
+     */
     public function testFromStringRejectsInvalidValue(string $value): void
     {
         $this->expectException(Exception\InvalidBuildMetaData::class);
@@ -32,7 +37,9 @@ final class BuildMetaDataTest extends Framework\TestCase
         BuildMetaData::fromString($value);
     }
 
-    #[Framework\Attributes\DataProviderExternal(Test\DataProvider\BuildMetaDataProvider::class, 'valid')]
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\BuildMetaDataProvider::valid
+     */
     public function testFromStringReturnsBuildMetaData(string $value): void
     {
         $buildMetaData = BuildMetaData::fromString($value);

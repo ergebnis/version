@@ -17,7 +17,9 @@ use Ergebnis\Version\Exception;
 use Ergebnis\Version\Test;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(Exception\InvalidBuildMetaData::class)]
+/**
+ * @covers \Ergebnis\Version\Exception\InvalidBuildMetaData
+ */
 final class InvalidBuildMetaDataTest extends Framework\TestCase
 {
     use Test\Util\Helper;

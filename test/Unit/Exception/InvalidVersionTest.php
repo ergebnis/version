@@ -17,7 +17,9 @@ use Ergebnis\Version\Exception;
 use Ergebnis\Version\Test;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(Exception\InvalidVersion::class)]
+/**
+ * @covers \Ergebnis\Version\Exception\InvalidVersion
+ */
 final class InvalidVersionTest extends Framework\TestCase
 {
     use Test\Util\Helper;

@@ -16,7 +16,9 @@ namespace Ergebnis\Version\Test\Unit\Exception;
 use Ergebnis\Version\Exception;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(Exception\ExtensionMissing::class)]
+/**
+ * @covers \Ergebnis\Version\Exception\ExtensionMissing
+ */
 final class ExtensionMissingTest extends Framework\TestCase
 {
     public function testBcmathReturnsException(): void

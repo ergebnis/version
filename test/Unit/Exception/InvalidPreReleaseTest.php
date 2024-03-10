@@ -17,7 +17,9 @@ use Ergebnis\Version\Exception;
 use Ergebnis\Version\Test;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(Exception\InvalidPreRelease::class)]
+/**
+ * @covers \Ergebnis\Version\Exception\InvalidPreRelease
+ */
 final class InvalidPreReleaseTest extends Framework\TestCase
 {
     use Test\Util\Helper;

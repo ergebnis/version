@@ -17,7 +17,9 @@ use Ergebnis\Version\Exception;
 use Ergebnis\Version\Test;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(Exception\InvalidMinor::class)]
+/**
+ * @covers \Ergebnis\Version\Exception\InvalidMinor
+ */
 final class InvalidMinorTest extends Framework\TestCase
 {
     use Test\Util\Helper;
