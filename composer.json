@@ -35,7 +35,7 @@
     "phpunit/phpunit": "^9.6.17",
     "psalm/plugin-phpunit": "~0.18.4",
     "rector/rector": "^1.0.2",
-    "vimeo/psalm": "^5.23.0"
+    "vimeo/psalm": "^5.23.1"
   },
   "suggest": {
     "ext-bcmath": "If you want to bump Major, Minor, or Patch versions greater than PHP_MAX_INT."
