@@ -243,7 +243,7 @@ final class VersionProvider
     }
 
     /**
-     * @return \Generator<string, array{0: string, 1: string}>
+     * @return \Generator<string, array{0: string, 1: string, 2: int}>
      */
     public static function valuesWhereFirstValueIsSmallerThanSecondValue(): \Generator
     {
@@ -273,7 +273,7 @@ final class VersionProvider
     }
 
     /**
-     * @return \Generator<string, array{0: string, 1: string}>
+     * @return \Generator<string, array{0: string, 1: string, 2: int}>
      */
     public static function valuesWhereFirstValueIsGreaterThanSecondValue(): \Generator
     {
@@ -307,7 +307,7 @@ final class VersionProvider
      * @see https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
      * @see https://regex101.com/r/Ly7O1x/3/
      *
-     * @return \Generator<string, array{0: string, 1: string}
+     * @return \Generator<string, array{0: string, 1: string, 2: int}>
      */
     public static function valuesWhereFirstValueIsEqualToSecondValue(): \Generator
     {
