@@ -32,10 +32,13 @@
     "ergebnis/phpunit-slow-test-detector": "^2.16.1",
     "fakerphp/faker": "^1.24.0",
     "infection/infection": "~0.26.6",
+    "phpstan/extension-installer": "^1.4.3",
+    "phpstan/phpstan": "^1.12.10",
+    "phpstan/phpstan-deprecation-rules": "^1.2.1",
+    "phpstan/phpstan-phpunit": "^1.4.0",
+    "phpstan/phpstan-strict-rules": "^1.6.1",
     "phpunit/phpunit": "^9.6.20",
-    "psalm/plugin-phpunit": "~0.19.0",
-    "rector/rector": "^1.2.10",
-    "vimeo/psalm": "^5.26.1"
+    "rector/rector": "^1.2.10"
   },
   "suggest": {
     "ext-bcmath": "If you want to bump Major, Minor, or Patch versions greater than PHP_MAX_INT."
@@ -54,7 +57,8 @@
     "allow-plugins": {
       "composer/package-versions-deprecated": true,
       "ergebnis/composer-normalize": true,
-      "infection/extension-installer": true
+      "infection/extension-installer": true,
+      "phpstan/extension-installer": true
     },
     "audit": {
       "abandoned": "report"
@@ -66,6 +70,9 @@
     "sort-packages": true
   },
   "extra": {
+    "branch-alias": {
+      "dev-main": "1.1-dev"
+    },
     "composer-normalize": {
       "indent-size": 2,
       "indent-style": "space"

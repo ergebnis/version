@@ -1,0 +1,7 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Strict comparison using \\!\\=\\= between '' and non\\-empty\\-string will always evaluate to true\\.$#"
+			count: 1
+			path: src/Version.php
+
