@@ -25,7 +25,7 @@
   },
   "require-dev": {
     "ext-bcmath": "*",
-    "ergebnis/composer-normalize": "^2.47.0",
+    "ergebnis/composer-normalize": "^2.48.2",
     "ergebnis/data-provider": "^3.6.0",
     "ergebnis/license": "^2.7.0",
     "ergebnis/php-cs-fixer-config": "^6.55.0",
