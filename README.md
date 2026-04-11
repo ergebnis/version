@@ -1,6 +1,6 @@
 # version
 
-[![Integrate](https://github.com/ergebnis/version/workflows/Integrate/badge.svg)](https://github.com/ergebnis/version/actions)
+[![Integrate](https://github.com/ergebnis/version/workflows/Integrate/badge.svg?branch=main)](https://github.com/ergebnis/version/actions?query=branch%3Amain)
 [![Merge](https://github.com/ergebnis/version/workflows/Merge/badge.svg)](https://github.com/ergebnis/version/actions)
 [![Release](https://github.com/ergebnis/version/workflows/Release/badge.svg)](https://github.com/ergebnis/version/actions)
 [![Renew](https://github.com/ergebnis/version/workflows/Renew/badge.svg)](https://github.com/ergebnis/version/actions)
