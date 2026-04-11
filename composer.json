@@ -30,15 +30,16 @@
     "ergebnis/license": "^2.7.0",
     "ergebnis/php-cs-fixer-config": "^6.60.2",
     "ergebnis/phpunit-slow-test-detector": "^2.24.0",
+    "ergebnis/rector-rules": "^1.17.0",
     "fakerphp/faker": "^1.24.1",
     "infection/infection": "~0.26.6",
     "phpstan/extension-installer": "^1.4.3",
-    "phpstan/phpstan": "^1.12.10",
-    "phpstan/phpstan-deprecation-rules": "^1.2.1",
-    "phpstan/phpstan-phpunit": "^1.4.0",
-    "phpstan/phpstan-strict-rules": "^1.6.1",
+    "phpstan/phpstan": "^2.1.46",
+    "phpstan/phpstan-deprecation-rules": "^2.0.4",
+    "phpstan/phpstan-phpunit": "^2.0.16",
+    "phpstan/phpstan-strict-rules": "^2.0.10",
     "phpunit/phpunit": "^9.6.33",
-    "rector/rector": "^1.2.10"
+    "rector/rector": "^2.4.1"
   },
   "suggest": {
     "ext-bcmath": "If you want to bump Major, Minor, or Patch versions greater than PHP_MAX_INT."

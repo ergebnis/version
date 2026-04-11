@@ -1,7 +1,26 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Strict comparison using \\!\\=\\= between '' and non\\-empty\\-string will always evaluate to true\\.$#"
+			message: '#^Parameter \#1 \$left_operand of function bcadd expects numeric\-string, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Major.php
+
+		-
+			message: '#^Parameter \#1 \$left_operand of function bcadd expects numeric\-string, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Minor.php
+
+		-
+			message: '#^Parameter \#1 \$left_operand of function bcadd expects numeric\-string, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Patch.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between '''' and non\-empty\-string will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
 			count: 1
 			path: src/Version.php
 
