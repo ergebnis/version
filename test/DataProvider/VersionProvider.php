@@ -177,11 +177,11 @@ final class VersionProvider
     {
         $values = [
             '0.0.4' => '1.0.0',
+            '1.0.0-alpha' => '2.0.0',
+            '1.1.2+meta' => '2.0.0',
+            '1.1.2-prerelease+meta' => '2.0.0',
             '1.2.3' => '2.0.0',
             '10.20.30' => '11.0.0',
-            '1.1.2-prerelease+meta' => '2.0.0',
-            '1.1.2+meta' => '2.0.0',
-            '1.0.0-alpha' => '2.0.0',
         ];
 
         foreach ($values as $value => $valueWithBumpedMajor) {
@@ -202,11 +202,11 @@ final class VersionProvider
     {
         $values = [
             '0.0.4' => '0.1.0',
+            '1.0.0-alpha' => '1.1.0',
+            '1.1.2+meta' => '1.2.0',
+            '1.1.2-prerelease+meta' => '1.2.0',
             '1.2.3' => '1.3.0',
             '10.20.30' => '10.21.0',
-            '1.1.2-prerelease+meta' => '1.2.0',
-            '1.1.2+meta' => '1.2.0',
-            '1.0.0-alpha' => '1.1.0',
         ];
 
         foreach ($values as $value => $valueWithBumpedMinor) {
@@ -227,11 +227,11 @@ final class VersionProvider
     {
         $values = [
             '0.0.4' => '0.0.5',
+            '1.0.0-alpha' => '1.0.1',
+            '1.1.2+meta' => '1.1.3',
+            '1.1.2-prerelease+meta' => '1.1.3',
             '1.2.3' => '1.2.4',
             '10.20.30' => '10.20.31',
-            '1.1.2-prerelease+meta' => '1.1.3',
-            '1.1.2+meta' => '1.1.3',
-            '1.0.0-alpha' => '1.0.1',
         ];
 
         foreach ($values as $value => $valueWithBumpedPatch) {

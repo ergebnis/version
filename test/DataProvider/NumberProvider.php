@@ -166,9 +166,9 @@ final class NumberProvider extends DataProvider\AbstractProvider
     private static function values(): array
     {
         return [
-            'zero' => 0,
-            'one' => 1,
             'greater-than-one' => self::faker()->numberBetween(2),
+            'one' => 1,
+            'zero' => 0,
         ];
     }
 }
