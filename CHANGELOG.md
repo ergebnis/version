@@ -49,6 +49,7 @@ For a full diff see [`64ced12...1.0.0`][64ced12...1.0.0].
 [1.0.0]: https://github.com/ergebnis/version/releases/tag/1.0.0
 [1.1.0]: https://github.com/ergebnis/version/releases/tag/1.1.0
 [1.2.0]: https://github.com/ergebnis/version/releases/tag/1.2.0
+[1.3.0]: https://github.com/ergebnis/version/releases/tag/1.3.0
 
 [64ced12...1.0.0]: https://github.com/ergebnis/version/compare/64ced12...1.0.0
 [1.0.0...1.1.0]: https://github.com/ergebnis/version/compare/1.0.0...1.1.0
@@ -63,6 +64,7 @@ For a full diff see [`64ced12...1.0.0`][64ced12...1.0.0].
 [#8]: https://github.com/ergebnis/version/pull/8
 [#9]: https://github.com/ergebnis/version/pull/9
 [#77]: https://github.com/ergebnis/version/pull/77
+[#78]: https://github.com/ergebnis/version/pull/78
 [#167]: https://github.com/ergebnis/version/pull/167
 [#214]: https://github.com/ergebnis/version/pull/214
 
