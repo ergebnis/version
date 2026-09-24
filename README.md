@@ -9,7 +9,7 @@
 
 [![Latest Stable Version](https://poser.pugx.org/ergebnis/version/v/stable)](https://packagist.org/packages/ergebnis/version)
 [![Total Downloads](https://poser.pugx.org/ergebnis/version/downloads)](https://packagist.org/packages/ergebnis/version)
-[![Monthly Downloads](http://poser.pugx.org/ergebnis/version/d/monthly)](https://packagist.org/packages/ergebnis/version)
+[![Monthly Downloads](https://poser.pugx.org/ergebnis/version/d/monthly)](https://packagist.org/packages/ergebnis/version)
 
 This project provides a [`composer`](https://getcomposer.org) package with an abstraction of a [semantic version](https://semver.org).
 
