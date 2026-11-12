@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`1.5.0...main`][1.5.0...main].
 
+### Added
+
+- Added support for PHP 8.6 ([#414]), by [@localheinz]
+
 ## [`1.5.0`][1.5.0]
 
 For a full diff see [`1.4.0...1.5.0`][1.4.0...1.5.0].
@@ -89,5 +93,6 @@ For a full diff see [`64ced12...1.0.0`][64ced12...1.0.0].
 [#214]: https://github.com/ergebnis/version/pull/214
 [#357]: https://github.com/ergebnis/version/pull/357
 [#397]: https://github.com/ergebnis/version/pull/397
+[#414]: https://github.com/ergebnis/version/pull/414
 
 [@localheinz]: https://github.com/localheinz
