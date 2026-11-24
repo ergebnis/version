@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`1.6.0...main`][1.6.0...main].
 
+### Changed
+
+- Allowed installation on PHP 8.7 ([#421]), by [@localheinz]
+
 ## [`1.6.0`][1.6.0]
 
 For a full diff see [`1.5.0...1.6.0`][1.5.0...1.6.0].
@@ -100,5 +104,6 @@ For a full diff see [`64ced12...1.0.0`][64ced12...1.0.0].
 [#357]: https://github.com/ergebnis/version/pull/357
 [#397]: https://github.com/ergebnis/version/pull/397
 [#414]: https://github.com/ergebnis/version/pull/414
+[#421]: https://github.com/ergebnis/version/pull/421
 
 [@localheinz]: https://github.com/localheinz
