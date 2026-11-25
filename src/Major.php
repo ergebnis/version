@@ -82,6 +82,11 @@ final class Major
         return $this->value <=> $other->value;
     }
 
+    public function isLessThan(self $other): bool
+    {
+        return $this->value < $other->value;
+    }
+
     public function isSmallerThan(self $other): bool
     {
         return $this->value < $other->value;

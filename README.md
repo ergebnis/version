@@ -144,10 +144,10 @@ $one->compare($two); // -1
 $one->compare($one); // 0
 $three->compare($one); // 1
 
-$one->isSmallerThan($one); // false
-$one->isSmallerThan($two); // true
-$one->isSmallerThan($three); // true
-$one->isSmallerThan($four); // true
+$one->isLessThan($one); // false
+$one->isLessThan($two); // true
+$one->isLessThan($three); // true
+$one->isLessThan($four); // true
 
 $one->equals($two); // false
 $one->equals($one); // true
@@ -222,8 +222,8 @@ $one->compare($two); // -1
 $one->compare($one); // 0
 $two->compare($one); // 1
 
-$one->isSmallerThan($one); // false
-$one->isSmallerThan($two); // true
+$one->isLessThan($one); // false
+$one->isLessThan($two); // true
 
 $one->equals($two); // false
 $one->equals($one); // true
@@ -294,8 +294,8 @@ $one->compare($two); // -1
 $one->compare($one); // 0
 $two->compare($one); // 1
 
-$one->isSmallerThan($one); // false
-$one->isSmallerThan($two); // true
+$one->isLessThan($one); // false
+$one->isLessThan($two); // true
 
 $one->equals($two); // false
 $one->equals($one); // true
@@ -366,8 +366,8 @@ $one->compare($two); // -1
 $one->compare($one); // 0
 $two->compare($one); // 1
 
-$one->isSmallerThan($one); // false
-$one->isSmallerThan($two); // true
+$one->isLessThan($one); // false
+$one->isLessThan($two); // true
 
 $one->equals($two); // false
 $one->equals($one); // true
@@ -422,8 +422,8 @@ $one->compare($two); // -1
 $one->compare($one); // 0
 $two->compare($one); // 1
 
-$one->isSmallerThan($one); // false
-$one->isSmallerThan($two); // true
+$one->isLessThan($one); // false
+$one->isLessThan($two); // true
 
 $one->equals($two); // false
 $one->equals($one); // true

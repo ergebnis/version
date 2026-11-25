@@ -107,6 +107,11 @@ final class PreRelease
         return 0;
     }
 
+    public function isLessThan(self $other): bool
+    {
+        return -1 === $this->compare($other);
+    }
+
     public function isSmallerThan(self $other): bool
     {
         return -1 === $this->compare($other);

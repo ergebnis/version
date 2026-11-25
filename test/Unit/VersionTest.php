@@ -415,6 +415,56 @@ final class VersionTest extends Framework\TestCase
     /**
      * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valid
      */
+    public function testIsLessThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(string $value): void
+    {
+        $one = Version::fromString($value);
+        $two = Version::fromString($value);
+
+        self::assertFalse($one->isLessThan($two));
+    }
+
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsEqualToSecondValue
+     */
+    public function testIsLessThanReturnsFalseWhenFirstValueIsEqualToSecondValue(
+        string $firstValue,
+        string $secondValue
+    ): void {
+        $one = Version::fromString($firstValue);
+        $two = Version::fromString($secondValue);
+
+        self::assertFalse($one->isLessThan($two));
+    }
+
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsGreaterThanSecondValue
+     */
+    public function testIsLessThanReturnsFalseWhenFirstValueIsGreaterThanSecondValue(
+        string $firstValue,
+        string $secondValue
+    ): void {
+        $one = Version::fromString($firstValue);
+        $two = Version::fromString($secondValue);
+
+        self::assertFalse($one->isLessThan($two));
+    }
+
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsSmallerThanSecondValue
+     */
+    public function testIsLessThanReturnsTrueWhenFirstValueIsLessThanSecondValue(
+        string $firstValue,
+        string $secondValue
+    ): void {
+        $one = Version::fromString($firstValue);
+        $two = Version::fromString($secondValue);
+
+        self::assertTrue($one->isLessThan($two));
+    }
+
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valid
+     */
     public function testIsSmallerThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(string $value): void
     {
         $one = Version::fromString($value);

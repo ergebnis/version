@@ -126,6 +126,44 @@ final class MinorTest extends Framework\TestCase
      * @dataProvider \Ergebnis\DataProvider\IntProvider::greaterThanZero
      * @dataProvider \Ergebnis\DataProvider\IntProvider::zero
      */
+    public function testIsLessThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(int $value): void
+    {
+        $one = Minor::fromInt($value);
+        $two = Minor::fromInt($value);
+
+        self::assertFalse($one->isLessThan($two));
+    }
+
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsGreaterThanSecondValue
+     */
+    public function testIsLessThanReturnsFalseWhenFirstValueIsGreaterThanSecondValue(
+        string $firstValue,
+        string $secondValue
+    ): void {
+        $one = Minor::fromString($firstValue);
+        $two = Minor::fromString($secondValue);
+
+        self::assertFalse($one->isLessThan($two));
+    }
+
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsSmallerThanSecondValue
+     */
+    public function testIsLessThanReturnsTrueWhenFirstValueIsLessThanSecondValue(
+        string $firstValue,
+        string $secondValue
+    ): void {
+        $one = Minor::fromString($firstValue);
+        $two = Minor::fromString($secondValue);
+
+        self::assertTrue($one->isLessThan($two));
+    }
+
+    /**
+     * @dataProvider \Ergebnis\DataProvider\IntProvider::greaterThanZero
+     * @dataProvider \Ergebnis\DataProvider\IntProvider::zero
+     */
     public function testIsSmallerThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(int $value): void
     {
         $one = Minor::fromInt($value);
