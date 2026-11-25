@@ -121,20 +121,20 @@ final class NumberProvider extends DataProvider\AbstractProvider
     /**
      * @return \Generator<string, array{0: string, 1: string}>
      */
-    public static function valuesWhereFirstValueIsSmallerThanSecondValue(): \Generator
+    public static function valuesWhereFirstValueIsLessThanSecondValue(): \Generator
     {
-        foreach (self::values() as $firstValue) {
-            $secondValue = $firstValue + 1;
+        foreach (self::values() as $valueOne) {
+            $valueTwo = $valueOne + 1;
 
             $key = \sprintf(
-                '%d-smaller-than-%d',
-                $firstValue,
-                $secondValue,
+                '%d-less-than-%d',
+                $valueOne,
+                $valueTwo,
             );
 
             yield $key => [
-                (string) $firstValue,
-                (string) $secondValue,
+                (string) $valueOne,
+                (string) $valueTwo,
             ];
         }
     }
@@ -144,18 +144,18 @@ final class NumberProvider extends DataProvider\AbstractProvider
      */
     public static function valuesWhereFirstValueIsGreaterThanSecondValue(): \Generator
     {
-        foreach (self::values() as $secondValue) {
-            $firstValue = $secondValue + 1;
+        foreach (self::values() as $valueTwo) {
+            $valueOne = $valueTwo + 1;
 
             $key = \sprintf(
                 '%d-greater-than-%d',
-                $firstValue,
-                $secondValue,
+                $valueOne,
+                $valueTwo,
             );
 
             yield $key => [
-                (string) $firstValue,
-                (string) $secondValue,
+                (string) $valueOne,
+                (string) $valueTwo,
             ];
         }
     }

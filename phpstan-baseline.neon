@@ -24,3 +24,48 @@ parameters:
 			count: 1
 			path: src/Version.php
 
+		-
+			message: '''
+				#^Call to deprecated method isSmallerThan\(\) of class Ergebnis\\Version\\Major\:
+				will be removed in 2\.0\.0, use isLessThan\(\) instead$#
+			'''
+			identifier: method.deprecated
+			count: 3
+			path: test/Unit/MajorTest.php
+
+		-
+			message: '''
+				#^Call to deprecated method isSmallerThan\(\) of class Ergebnis\\Version\\Minor\:
+				will be removed in 2\.0\.0, use isLessThan\(\) instead$#
+			'''
+			identifier: method.deprecated
+			count: 3
+			path: test/Unit/MinorTest.php
+
+		-
+			message: '''
+				#^Call to deprecated method isSmallerThan\(\) of class Ergebnis\\Version\\Patch\:
+				will be removed in 2\.0\.0, use isLessThan\(\) instead$#
+			'''
+			identifier: method.deprecated
+			count: 3
+			path: test/Unit/PatchTest.php
+
+		-
+			message: '''
+				#^Call to deprecated method isSmallerThan\(\) of class Ergebnis\\Version\\PreRelease\:
+				will be removed in 2\.0\.0, use isLessThan\(\) instead$#
+			'''
+			identifier: method.deprecated
+			count: 3
+			path: test/Unit/PreReleaseTest.php
+
+		-
+			message: '''
+				#^Call to deprecated method isSmallerThan\(\) of class Ergebnis\\Version\\Version\:
+				will be removed in 2\.0\.0, use isLessThan\(\) instead$#
+			'''
+			identifier: method.deprecated
+			count: 4
+			path: test/Unit/VersionTest.php
+

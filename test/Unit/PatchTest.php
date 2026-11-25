@@ -85,14 +85,14 @@ final class PatchTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsSmallerThanSecondValue
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsLessThanSecondValue
      */
-    public function testCompareReturnsMinusOneWhenFirstValueIsSmallerThanSecondValue(
-        string $firstValue,
-        string $secondValue
+    public function testCompareReturnsMinusOneWhenFirstValueIsLessThanSecondValue(
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Patch::fromString($firstValue);
-        $two = Patch::fromString($secondValue);
+        $one = Patch::fromString($valueOne);
+        $two = Patch::fromString($valueTwo);
 
         self::assertSame(-1, $one->compare($two));
     }
@@ -113,13 +113,51 @@ final class PatchTest extends Framework\TestCase
      * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsGreaterThanSecondValue
      */
     public function testCompareReturnsPlusOneWhenFirstValueIsGreaterThanSecondValue(
-        string $firstValue,
-        string $secondValue
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Patch::fromString($firstValue);
-        $two = Patch::fromString($secondValue);
+        $one = Patch::fromString($valueOne);
+        $two = Patch::fromString($valueTwo);
 
         self::assertSame(1, $one->compare($two));
+    }
+
+    /**
+     * @dataProvider \Ergebnis\DataProvider\IntProvider::greaterThanZero
+     * @dataProvider \Ergebnis\DataProvider\IntProvider::zero
+     */
+    public function testIsLessThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(int $value): void
+    {
+        $one = Patch::fromInt($value);
+        $two = Patch::fromInt($value);
+
+        self::assertFalse($one->isLessThan($two));
+    }
+
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsGreaterThanSecondValue
+     */
+    public function testIsLessThanReturnsFalseWhenFirstValueIsGreaterThanSecondValue(
+        string $valueOne,
+        string $valueTwo
+    ): void {
+        $one = Patch::fromString($valueOne);
+        $two = Patch::fromString($valueTwo);
+
+        self::assertFalse($one->isLessThan($two));
+    }
+
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsLessThanSecondValue
+     */
+    public function testIsLessThanReturnsTrueWhenFirstValueIsLessThanSecondValue(
+        string $valueOne,
+        string $valueTwo
+    ): void {
+        $one = Patch::fromString($valueOne);
+        $two = Patch::fromString($valueTwo);
+
+        self::assertTrue($one->isLessThan($two));
     }
 
     /**
@@ -138,24 +176,24 @@ final class PatchTest extends Framework\TestCase
      * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsGreaterThanSecondValue
      */
     public function testIsSmallerThanReturnsFalseWhenFirstValueIsGreaterThanSecondValue(
-        string $firstValue,
-        string $secondValue
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Patch::fromString($firstValue);
-        $two = Patch::fromString($secondValue);
+        $one = Patch::fromString($valueOne);
+        $two = Patch::fromString($valueTwo);
 
         self::assertFalse($one->isSmallerThan($two));
     }
 
     /**
-     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsSmallerThanSecondValue
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsLessThanSecondValue
      */
     public function testIsSmallerThanReturnsTrueWhenFirstValueIsSmallerThanSecondValue(
-        string $firstValue,
-        string $secondValue
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Patch::fromString($firstValue);
-        $two = Patch::fromString($secondValue);
+        $one = Patch::fromString($valueOne);
+        $two = Patch::fromString($valueTwo);
 
         self::assertTrue($one->isSmallerThan($two));
     }
@@ -181,14 +219,14 @@ final class PatchTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsSmallerThanSecondValue
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsLessThanSecondValue
      */
-    public function testIsGreaterThanReturnsFalseWhenFirstValueIsSmallerThanSecondValue(
-        string $firstValue,
-        string $secondValue
+    public function testIsGreaterThanReturnsFalseWhenFirstValueIsLessThanSecondValue(
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Patch::fromString($firstValue);
-        $two = Patch::fromString($secondValue);
+        $one = Patch::fromString($valueOne);
+        $two = Patch::fromString($valueTwo);
 
         self::assertFalse($one->isGreaterThan($two));
     }
@@ -209,11 +247,11 @@ final class PatchTest extends Framework\TestCase
      * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsGreaterThanSecondValue
      */
     public function testIsGreaterThanReturnsTrueWhenFirstValueIsGreaterThanSecondValue(
-        string $firstValue,
-        string $secondValue
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Patch::fromString($firstValue);
-        $two = Patch::fromString($secondValue);
+        $one = Patch::fromString($valueOne);
+        $two = Patch::fromString($valueTwo);
 
         self::assertTrue($one->isGreaterThan($two));
     }

@@ -55,9 +55,9 @@ final class PreReleaseTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider \Ergebnis\Version\Test\DataProvider\PreReleaseProvider::valuesWhereFirstValueIsSmallerThanSecondValue
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\PreReleaseProvider::valuesWhereFirstValueIsLessThanSecondValue
      */
-    public function testCompareReturnsMinusOneWhenFirstValueIsSmallerThanSecondValue(
+    public function testCompareReturnsMinusOneWhenFirstValueIsLessThanSecondValue(
         string $value,
         string $otherValue
     ): void {
@@ -94,6 +94,43 @@ final class PreReleaseTest extends Framework\TestCase
     /**
      * @dataProvider \Ergebnis\Version\Test\DataProvider\PreReleaseProvider::valid
      */
+    public function testIsLessThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(string $value): void
+    {
+        $one = PreRelease::fromString($value);
+        $two = PreRelease::fromString($value);
+
+        self::assertFalse($one->isLessThan($two));
+    }
+
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\PreReleaseProvider::valuesWhereFirstValueIsGreaterThanSecondValue
+     */
+    public function testIsLessThanReturnsFalseWhenFirstValueIsGreaterThanSecondValue(
+        string $value,
+        string $otherValue
+    ): void {
+        $one = PreRelease::fromString($value);
+        $two = PreRelease::fromString($otherValue);
+
+        self::assertFalse($one->isLessThan($two));
+    }
+
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\PreReleaseProvider::valuesWhereFirstValueIsLessThanSecondValue
+     */
+    public function testIsLessThanReturnsTrueWhenFirstValueIsLessThanSecondValue(
+        string $value,
+        string $otherValue
+    ): void {
+        $one = PreRelease::fromString($value);
+        $two = PreRelease::fromString($otherValue);
+
+        self::assertTrue($one->isLessThan($two));
+    }
+
+    /**
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\PreReleaseProvider::valid
+     */
     public function testIsSmallerThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(string $value): void
     {
         $one = PreRelease::fromString($value);
@@ -116,7 +153,7 @@ final class PreReleaseTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider \Ergebnis\Version\Test\DataProvider\PreReleaseProvider::valuesWhereFirstValueIsSmallerThanSecondValue
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\PreReleaseProvider::valuesWhereFirstValueIsLessThanSecondValue
      */
     public function testIsSmallerThanReturnsTrueWhenFirstValueIsSmallerThanSecondValue(
         string $value,
@@ -149,9 +186,9 @@ final class PreReleaseTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider \Ergebnis\Version\Test\DataProvider\PreReleaseProvider::valuesWhereFirstValueIsSmallerThanSecondValue
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\PreReleaseProvider::valuesWhereFirstValueIsLessThanSecondValue
      */
-    public function testIsGreaterThanReturnsFalseWhenFirstValueIsSmallerThanSecondValue(
+    public function testIsGreaterThanReturnsFalseWhenFirstValueIsLessThanSecondValue(
         string $value,
         string $otherValue
     ): void {

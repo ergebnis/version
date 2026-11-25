@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`1.7.0...main`][1.7.0...main].
 
+### Added
+
+- Added `isLessThan()` to `Major`, `Minor`, `Patch`, `PreRelease`, and `Version` ([#423]), by [@localheinz]
+
+### Deprecated
+
+- Deprecated `isSmallerThan()` in `Major`, `Minor`, `Patch`, `PreRelease`, and `Version` ([#426]), by [@localheinz]
+
 ## [`1.7.0`][1.7.0]
 
 For a full diff see [`1.6.0...1.7.0`][1.6.0...1.7.0].
@@ -111,5 +119,7 @@ For a full diff see [`64ced12...1.0.0`][64ced12...1.0.0].
 [#397]: https://github.com/ergebnis/version/pull/397
 [#414]: https://github.com/ergebnis/version/pull/414
 [#421]: https://github.com/ergebnis/version/pull/421
+[#423]: https://github.com/ergebnis/version/pull/423
+[#426]: https://github.com/ergebnis/version/pull/426
 
 [@localheinz]: https://github.com/localheinz

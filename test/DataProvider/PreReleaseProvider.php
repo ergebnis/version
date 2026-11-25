@@ -110,7 +110,7 @@ final class PreReleaseProvider
     /**
      * @return \Generator<string, array{0: string, 1: string, 2: int}>
      */
-    public static function valuesWhereFirstValueIsSmallerThanSecondValue(): \Generator
+    public static function valuesWhereFirstValueIsLessThanSecondValue(): \Generator
     {
         $values = self::valuesOrderedByPrecedence();
 
@@ -123,7 +123,7 @@ final class PreReleaseProvider
                 $otherValue = $values[$j];
 
                 $key = \sprintf(
-                    '%s-smaller-than-%s',
+                    '%s-less-than-%s',
                     $value,
                     $otherValue,
                 );
