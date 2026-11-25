@@ -55,9 +55,9 @@ final class PreReleaseTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider \Ergebnis\Version\Test\DataProvider\PreReleaseProvider::valuesWhereFirstValueIsSmallerThanSecondValue
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\PreReleaseProvider::valuesWhereFirstValueIsLessThanSecondValue
      */
-    public function testCompareReturnsMinusOneWhenFirstValueIsSmallerThanSecondValue(
+    public function testCompareReturnsMinusOneWhenFirstValueIsLessThanSecondValue(
         string $value,
         string $otherValue
     ): void {
@@ -116,7 +116,7 @@ final class PreReleaseTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider \Ergebnis\Version\Test\DataProvider\PreReleaseProvider::valuesWhereFirstValueIsSmallerThanSecondValue
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\PreReleaseProvider::valuesWhereFirstValueIsLessThanSecondValue
      */
     public function testIsLessThanReturnsTrueWhenFirstValueIsLessThanSecondValue(
         string $value,
@@ -153,7 +153,7 @@ final class PreReleaseTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider \Ergebnis\Version\Test\DataProvider\PreReleaseProvider::valuesWhereFirstValueIsSmallerThanSecondValue
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\PreReleaseProvider::valuesWhereFirstValueIsLessThanSecondValue
      */
     public function testIsSmallerThanReturnsTrueWhenFirstValueIsSmallerThanSecondValue(
         string $value,
@@ -186,9 +186,9 @@ final class PreReleaseTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider \Ergebnis\Version\Test\DataProvider\PreReleaseProvider::valuesWhereFirstValueIsSmallerThanSecondValue
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\PreReleaseProvider::valuesWhereFirstValueIsLessThanSecondValue
      */
-    public function testIsGreaterThanReturnsFalseWhenFirstValueIsSmallerThanSecondValue(
+    public function testIsGreaterThanReturnsFalseWhenFirstValueIsLessThanSecondValue(
         string $value,
         string $otherValue
     ): void {

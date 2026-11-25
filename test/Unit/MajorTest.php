@@ -85,9 +85,9 @@ final class MajorTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsSmallerThanSecondValue
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsLessThanSecondValue
      */
-    public function testCompareReturnsMinusOneWhenFirstValueIsSmallerThanSecondValue(
+    public function testCompareReturnsMinusOneWhenFirstValueIsLessThanSecondValue(
         string $firstValue,
         string $secondValue
     ): void {
@@ -148,7 +148,7 @@ final class MajorTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsSmallerThanSecondValue
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsLessThanSecondValue
      */
     public function testIsLessThanReturnsTrueWhenFirstValueIsLessThanSecondValue(
         string $firstValue,
@@ -186,7 +186,7 @@ final class MajorTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsSmallerThanSecondValue
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsLessThanSecondValue
      */
     public function testIsSmallerThanReturnsTrueWhenFirstValueIsSmallerThanSecondValue(
         string $firstValue,
@@ -219,9 +219,9 @@ final class MajorTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsSmallerThanSecondValue
+     * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsLessThanSecondValue
      */
-    public function testIsGreaterThanReturnsFalseWhenFirstValueIsSmallerThanSecondValue(
+    public function testIsGreaterThanReturnsFalseWhenFirstValueIsLessThanSecondValue(
         string $firstValue,
         string $secondValue
     ): void {

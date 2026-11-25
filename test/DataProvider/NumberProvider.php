@@ -121,13 +121,13 @@ final class NumberProvider extends DataProvider\AbstractProvider
     /**
      * @return \Generator<string, array{0: string, 1: string}>
      */
-    public static function valuesWhereFirstValueIsSmallerThanSecondValue(): \Generator
+    public static function valuesWhereFirstValueIsLessThanSecondValue(): \Generator
     {
         foreach (self::values() as $firstValue) {
             $secondValue = $firstValue + 1;
 
             $key = \sprintf(
-                '%d-smaller-than-%d',
+                '%d-less-than-%d',
                 $firstValue,
                 $secondValue,
             );
