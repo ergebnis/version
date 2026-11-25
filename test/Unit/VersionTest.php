@@ -366,11 +366,11 @@ final class VersionTest extends Framework\TestCase
      * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsLessThanSecondValue
      */
     public function testCompareReturnsMinusOneWhenFirstValueIsLessThanSecondValue(
-        string $firstValue,
-        string $secondValue
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Version::fromString($firstValue);
-        $two = Version::fromString($secondValue);
+        $one = Version::fromString($valueOne);
+        $two = Version::fromString($valueTwo);
 
         self::assertSame(-1, $one->compare($two));
     }
@@ -390,11 +390,11 @@ final class VersionTest extends Framework\TestCase
      * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsEqualToSecondValue
      */
     public function testCompareReturnsZeroWhenFirstValueIsEqualToSecondValue(
-        string $firstValue,
-        string $secondValue
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Version::fromString($firstValue);
-        $two = Version::fromString($secondValue);
+        $one = Version::fromString($valueOne);
+        $two = Version::fromString($valueTwo);
 
         self::assertSame(0, $one->compare($two));
     }
@@ -403,11 +403,11 @@ final class VersionTest extends Framework\TestCase
      * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsGreaterThanSecondValue
      */
     public function testCompareReturnsMinusOneWhenFirstValueIsGreaterThanSecondValue(
-        string $firstValue,
-        string $secondValue
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Version::fromString($firstValue);
-        $two = Version::fromString($secondValue);
+        $one = Version::fromString($valueOne);
+        $two = Version::fromString($valueTwo);
 
         self::assertSame(1, $one->compare($two));
     }
@@ -427,11 +427,11 @@ final class VersionTest extends Framework\TestCase
      * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsEqualToSecondValue
      */
     public function testIsLessThanReturnsFalseWhenFirstValueIsEqualToSecondValue(
-        string $firstValue,
-        string $secondValue
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Version::fromString($firstValue);
-        $two = Version::fromString($secondValue);
+        $one = Version::fromString($valueOne);
+        $two = Version::fromString($valueTwo);
 
         self::assertFalse($one->isLessThan($two));
     }
@@ -440,11 +440,11 @@ final class VersionTest extends Framework\TestCase
      * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsGreaterThanSecondValue
      */
     public function testIsLessThanReturnsFalseWhenFirstValueIsGreaterThanSecondValue(
-        string $firstValue,
-        string $secondValue
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Version::fromString($firstValue);
-        $two = Version::fromString($secondValue);
+        $one = Version::fromString($valueOne);
+        $two = Version::fromString($valueTwo);
 
         self::assertFalse($one->isLessThan($two));
     }
@@ -453,11 +453,11 @@ final class VersionTest extends Framework\TestCase
      * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsLessThanSecondValue
      */
     public function testIsLessThanReturnsTrueWhenFirstValueIsLessThanSecondValue(
-        string $firstValue,
-        string $secondValue
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Version::fromString($firstValue);
-        $two = Version::fromString($secondValue);
+        $one = Version::fromString($valueOne);
+        $two = Version::fromString($valueTwo);
 
         self::assertTrue($one->isLessThan($two));
     }
@@ -477,11 +477,11 @@ final class VersionTest extends Framework\TestCase
      * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsEqualToSecondValue
      */
     public function testIsSmallerThanReturnsFalseWhenFirstValueIsEqualToSecondValue(
-        string $firstValue,
-        string $secondValue
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Version::fromString($firstValue);
-        $two = Version::fromString($secondValue);
+        $one = Version::fromString($valueOne);
+        $two = Version::fromString($valueTwo);
 
         self::assertFalse($one->isSmallerThan($two));
     }
@@ -490,11 +490,11 @@ final class VersionTest extends Framework\TestCase
      * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsGreaterThanSecondValue
      */
     public function testIsSmallerThanReturnsFalseWhenFirstValueIsGreaterThanSecondValue(
-        string $firstValue,
-        string $secondValue
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Version::fromString($firstValue);
-        $two = Version::fromString($secondValue);
+        $one = Version::fromString($valueOne);
+        $two = Version::fromString($valueTwo);
 
         self::assertFalse($one->isSmallerThan($two));
     }
@@ -503,11 +503,11 @@ final class VersionTest extends Framework\TestCase
      * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsLessThanSecondValue
      */
     public function testIsSmallerThanReturnsTrueWhenFirstValueIsSmallerThanSecondValue(
-        string $firstValue,
-        string $secondValue
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Version::fromString($firstValue);
-        $two = Version::fromString($secondValue);
+        $one = Version::fromString($valueOne);
+        $two = Version::fromString($valueTwo);
 
         self::assertTrue($one->isSmallerThan($two));
     }
@@ -516,11 +516,11 @@ final class VersionTest extends Framework\TestCase
      * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsGreaterThanSecondValue
      */
     public function testEqualsReturnsFalseWhenValuesAreDifferent(
-        string $firstValue,
-        string $secondValue
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Version::fromString($firstValue);
-        $two = Version::fromString($secondValue);
+        $one = Version::fromString($valueOne);
+        $two = Version::fromString($valueTwo);
 
         self::assertFalse($one->equals($two));
     }
@@ -529,11 +529,11 @@ final class VersionTest extends Framework\TestCase
      * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsEqualToSecondValue
      */
     public function testEqualsReturnsTrueWhenValuesAreEqual(
-        string $firstValue,
-        string $secondValue
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Version::fromString($firstValue);
-        $two = Version::fromString($secondValue);
+        $one = Version::fromString($valueOne);
+        $two = Version::fromString($valueTwo);
 
         self::assertTrue($one->equals($two));
     }
@@ -553,11 +553,11 @@ final class VersionTest extends Framework\TestCase
      * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsLessThanSecondValue
      */
     public function testIsGreaterThanReturnsFalseWhenFirstValueIsLessThanSecondValue(
-        string $firstValue,
-        string $secondValue
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Version::fromString($firstValue);
-        $two = Version::fromString($secondValue);
+        $one = Version::fromString($valueOne);
+        $two = Version::fromString($valueTwo);
 
         self::assertFalse($one->isGreaterThan($two));
     }
@@ -577,11 +577,11 @@ final class VersionTest extends Framework\TestCase
      * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsEqualToSecondValue
      */
     public function testIsGreaterThanReturnsFalseWhenFirstValueIsEqualToSecondValue(
-        string $firstValue,
-        string $secondValue
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Version::fromString($firstValue);
-        $two = Version::fromString($secondValue);
+        $one = Version::fromString($valueOne);
+        $two = Version::fromString($valueTwo);
 
         self::assertFalse($one->isGreaterThan($two));
     }
@@ -590,11 +590,11 @@ final class VersionTest extends Framework\TestCase
      * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::valuesWhereFirstValueIsGreaterThanSecondValue
      */
     public function testIsGreaterThanReturnsTrueWhenFirstValueIsGreaterThanSecondValue(
-        string $firstValue,
-        string $secondValue
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Version::fromString($firstValue);
-        $two = Version::fromString($secondValue);
+        $one = Version::fromString($valueOne);
+        $two = Version::fromString($valueTwo);
 
         self::assertTrue($one->isGreaterThan($two));
     }

@@ -88,11 +88,11 @@ final class MinorTest extends Framework\TestCase
      * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsLessThanSecondValue
      */
     public function testCompareReturnsMinusOneWhenFirstValueIsLessThanSecondValue(
-        string $firstValue,
-        string $secondValue
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Minor::fromString($firstValue);
-        $two = Minor::fromString($secondValue);
+        $one = Minor::fromString($valueOne);
+        $two = Minor::fromString($valueTwo);
 
         self::assertSame(-1, $one->compare($two));
     }
@@ -113,11 +113,11 @@ final class MinorTest extends Framework\TestCase
      * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsGreaterThanSecondValue
      */
     public function testCompareReturnsPlusOneWhenFirstValueIsGreaterThanSecondValue(
-        string $firstValue,
-        string $secondValue
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Minor::fromString($firstValue);
-        $two = Minor::fromString($secondValue);
+        $one = Minor::fromString($valueOne);
+        $two = Minor::fromString($valueTwo);
 
         self::assertSame(1, $one->compare($two));
     }
@@ -138,11 +138,11 @@ final class MinorTest extends Framework\TestCase
      * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsGreaterThanSecondValue
      */
     public function testIsLessThanReturnsFalseWhenFirstValueIsGreaterThanSecondValue(
-        string $firstValue,
-        string $secondValue
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Minor::fromString($firstValue);
-        $two = Minor::fromString($secondValue);
+        $one = Minor::fromString($valueOne);
+        $two = Minor::fromString($valueTwo);
 
         self::assertFalse($one->isLessThan($two));
     }
@@ -151,11 +151,11 @@ final class MinorTest extends Framework\TestCase
      * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsLessThanSecondValue
      */
     public function testIsLessThanReturnsTrueWhenFirstValueIsLessThanSecondValue(
-        string $firstValue,
-        string $secondValue
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Minor::fromString($firstValue);
-        $two = Minor::fromString($secondValue);
+        $one = Minor::fromString($valueOne);
+        $two = Minor::fromString($valueTwo);
 
         self::assertTrue($one->isLessThan($two));
     }
@@ -176,11 +176,11 @@ final class MinorTest extends Framework\TestCase
      * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsGreaterThanSecondValue
      */
     public function testIsSmallerThanReturnsFalseWhenFirstValueIsGreaterThanSecondValue(
-        string $firstValue,
-        string $secondValue
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Minor::fromString($firstValue);
-        $two = Minor::fromString($secondValue);
+        $one = Minor::fromString($valueOne);
+        $two = Minor::fromString($valueTwo);
 
         self::assertFalse($one->isSmallerThan($two));
     }
@@ -189,11 +189,11 @@ final class MinorTest extends Framework\TestCase
      * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsLessThanSecondValue
      */
     public function testIsSmallerThanReturnsTrueWhenFirstValueIsSmallerThanSecondValue(
-        string $firstValue,
-        string $secondValue
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Minor::fromString($firstValue);
-        $two = Minor::fromString($secondValue);
+        $one = Minor::fromString($valueOne);
+        $two = Minor::fromString($valueTwo);
 
         self::assertTrue($one->isSmallerThan($two));
     }
@@ -222,11 +222,11 @@ final class MinorTest extends Framework\TestCase
      * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsLessThanSecondValue
      */
     public function testIsGreaterThanReturnsFalseWhenFirstValueIsLessThanSecondValue(
-        string $firstValue,
-        string $secondValue
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Minor::fromString($firstValue);
-        $two = Minor::fromString($secondValue);
+        $one = Minor::fromString($valueOne);
+        $two = Minor::fromString($valueTwo);
 
         self::assertFalse($one->isGreaterThan($two));
     }
@@ -247,11 +247,11 @@ final class MinorTest extends Framework\TestCase
      * @dataProvider \Ergebnis\Version\Test\DataProvider\NumberProvider::valuesWhereFirstValueIsGreaterThanSecondValue
      */
     public function testIsGreaterThanReturnsTrueWhenFirstValueIsGreaterThanSecondValue(
-        string $firstValue,
-        string $secondValue
+        string $valueOne,
+        string $valueTwo
     ): void {
-        $one = Minor::fromString($firstValue);
-        $two = Minor::fromString($secondValue);
+        $one = Minor::fromString($valueOne);
+        $two = Minor::fromString($valueTwo);
 
         self::assertTrue($one->isGreaterThan($two));
     }
