@@ -201,9 +201,12 @@ final class Version
         return -1 === $this->compare($other);
     }
 
+    /**
+     * @deprecated will be removed in 2.0.0, use isLessThan() instead
+     */
     public function isSmallerThan(self $other): bool
     {
-        return -1 === $this->compare($other);
+        return $this->isLessThan($other);
     }
 
     public function equals(self $other): bool

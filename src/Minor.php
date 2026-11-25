@@ -87,9 +87,12 @@ final class Minor
         return $this->value < $other->value;
     }
 
+    /**
+     * @deprecated will be removed in 2.0.0, use isLessThan() instead
+     */
     public function isSmallerThan(self $other): bool
     {
-        return $this->value < $other->value;
+        return $this->isLessThan($other);
     }
 
     public function equals(self $other): bool
