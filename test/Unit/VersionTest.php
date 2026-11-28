@@ -13,14 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Version\Test\Unit;
 
-use Ergebnis\Version\BuildMetaData;
-use Ergebnis\Version\Exception;
-use Ergebnis\Version\Major;
-use Ergebnis\Version\Minor;
-use Ergebnis\Version\Patch;
-use Ergebnis\Version\PreRelease;
-use Ergebnis\Version\Test;
-use Ergebnis\Version\Version;
+use Ergebnis\Version;
 use PHPUnit\Framework;
 
 /**
@@ -35,16 +28,16 @@ use PHPUnit\Framework;
  */
 final class VersionTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Version\Test\Util\Helper;
 
     /**
      * @dataProvider \Ergebnis\Version\Test\DataProvider\VersionProvider::invalid
      */
     public function testFromStringRejectsInvalidValue(string $value): void
     {
-        $this->expectException(Exception\InvalidVersion::class);
+        $this->expectException(Version\Exception\InvalidVersion::class);
 
-        Version::fromString($value);
+        Version\Version::fromString($value);
     }
 
     /**
@@ -52,7 +45,7 @@ final class VersionTest extends Framework\TestCase
      */
     public function testFromStringReturnsVersion(string $value): void
     {
-        $version = Version::fromString($value);
+        $version = Version\Version::fromString($value);
 
         self::assertSame($value, $version->toString());
     }
@@ -62,13 +55,13 @@ final class VersionTest extends Framework\TestCase
      */
     public function testFromStringReturnsVersionWithMajorMinorPatchPreReleaseAndBuildMetaData(
         string $value,
-        Major $major,
-        Minor $minor,
-        Patch $patch,
-        PreRelease $preRelease,
-        BuildMetaData $buildMetaData
+        Version\Major $major,
+        Version\Minor $minor,
+        Version\Patch $patch,
+        Version\PreRelease $preRelease,
+        Version\BuildMetaData $buildMetaData
     ): void {
-        $version = Version::fromString($value);
+        $version = Version\Version::fromString($value);
 
         self::assertEquals($major, $version->major());
         self::assertEquals($minor, $version->minor());
@@ -81,227 +74,227 @@ final class VersionTest extends Framework\TestCase
      * @see https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
      * @see https://regex101.com/r/Ly7O1x/3/
      *
-     * @return \Generator<string, array{0: string, 1: Major, 2: Minor, 3: Patch, 4: PreRelease, 5: BuildMetaData}>
+     * @return \Generator<string, array{0: string, 1: Version\Major, 2: Version\Minor, 3: Version\Patch, 4: Version\PreRelease, 5: Version\BuildMetaData}>
      */
     public static function provideValueMajorMinorPatchPreReleaseAndBuildMetaData(): iterable
     {
         $values = [
             '0.0.4' => [
-                Major::fromString('0'),
-                Minor::fromString('0'),
-                Patch::fromString('4'),
-                PreRelease::empty(),
-                BuildMetaData::empty(),
+                Version\Major::fromString('0'),
+                Version\Minor::fromString('0'),
+                Version\Patch::fromString('4'),
+                Version\PreRelease::empty(),
+                Version\BuildMetaData::empty(),
             ],
             '1.0.0' => [
-                Major::fromString('1'),
-                Minor::fromString('0'),
-                Patch::fromString('0'),
-                PreRelease::empty(),
-                BuildMetaData::empty(),
+                Version\Major::fromString('1'),
+                Version\Minor::fromString('0'),
+                Version\Patch::fromString('0'),
+                Version\PreRelease::empty(),
+                Version\BuildMetaData::empty(),
             ],
             '1.0.0+0.build.1-rc.10000aaa-kk-0.1' => [
-                Major::fromString('1'),
-                Minor::fromString('0'),
-                Patch::fromString('0'),
-                PreRelease::empty(),
-                BuildMetaData::fromString('0.build.1-rc.10000aaa-kk-0.1'),
+                Version\Major::fromString('1'),
+                Version\Minor::fromString('0'),
+                Version\Patch::fromString('0'),
+                Version\PreRelease::empty(),
+                Version\BuildMetaData::fromString('0.build.1-rc.10000aaa-kk-0.1'),
             ],
             '1.0.0-0A.is.legal' => [
-                Major::fromString('1'),
-                Minor::fromString('0'),
-                Patch::fromString('0'),
-                PreRelease::fromString('0A.is.legal'),
-                BuildMetaData::empty(),
+                Version\Major::fromString('1'),
+                Version\Minor::fromString('0'),
+                Version\Patch::fromString('0'),
+                Version\PreRelease::fromString('0A.is.legal'),
+                Version\BuildMetaData::empty(),
             ],
             '1.0.0-alpha' => [
-                Major::fromString('1'),
-                Minor::fromString('0'),
-                Patch::fromString('0'),
-                PreRelease::fromString('alpha'),
-                BuildMetaData::empty(),
+                Version\Major::fromString('1'),
+                Version\Minor::fromString('0'),
+                Version\Patch::fromString('0'),
+                Version\PreRelease::fromString('alpha'),
+                Version\BuildMetaData::empty(),
             ],
             '1.0.0-alpha+beta' => [
-                Major::fromString('1'),
-                Minor::fromString('0'),
-                Patch::fromString('0'),
-                PreRelease::fromString('alpha'),
-                BuildMetaData::fromString('beta'),
+                Version\Major::fromString('1'),
+                Version\Minor::fromString('0'),
+                Version\Patch::fromString('0'),
+                Version\PreRelease::fromString('alpha'),
+                Version\BuildMetaData::fromString('beta'),
             ],
             '1.0.0-alpha-a.b-c-somethinglong+build.1-aef.1-its-okay' => [
-                Major::fromString('1'),
-                Minor::fromString('0'),
-                Patch::fromString('0'),
-                PreRelease::fromString('alpha-a.b-c-somethinglong'),
-                BuildMetaData::fromString('build.1-aef.1-its-okay'),
+                Version\Major::fromString('1'),
+                Version\Minor::fromString('0'),
+                Version\Patch::fromString('0'),
+                Version\PreRelease::fromString('alpha-a.b-c-somethinglong'),
+                Version\BuildMetaData::fromString('build.1-aef.1-its-okay'),
             ],
             '1.0.0-alpha.0valid' => [
-                Major::fromString('1'),
-                Minor::fromString('0'),
-                Patch::fromString('0'),
-                PreRelease::fromString('alpha.0valid'),
-                BuildMetaData::empty(),
+                Version\Major::fromString('1'),
+                Version\Minor::fromString('0'),
+                Version\Patch::fromString('0'),
+                Version\PreRelease::fromString('alpha.0valid'),
+                Version\BuildMetaData::empty(),
             ],
             '1.0.0-alpha.1' => [
-                Major::fromString('1'),
-                Minor::fromString('0'),
-                Patch::fromString('0'),
-                PreRelease::fromString('alpha.1'),
-                BuildMetaData::empty(),
+                Version\Major::fromString('1'),
+                Version\Minor::fromString('0'),
+                Version\Patch::fromString('0'),
+                Version\PreRelease::fromString('alpha.1'),
+                Version\BuildMetaData::empty(),
             ],
             '1.0.0-alpha.beta' => [
-                Major::fromString('1'),
-                Minor::fromString('0'),
-                Patch::fromString('0'),
-                PreRelease::fromString('alpha.beta'),
-                BuildMetaData::empty(),
+                Version\Major::fromString('1'),
+                Version\Minor::fromString('0'),
+                Version\Patch::fromString('0'),
+                Version\PreRelease::fromString('alpha.beta'),
+                Version\BuildMetaData::empty(),
             ],
             '1.0.0-alpha.beta.1' => [
-                Major::fromString('1'),
-                Minor::fromString('0'),
-                Patch::fromString('0'),
-                PreRelease::fromString('alpha.beta.1'),
-                BuildMetaData::empty(),
+                Version\Major::fromString('1'),
+                Version\Minor::fromString('0'),
+                Version\Patch::fromString('0'),
+                Version\PreRelease::fromString('alpha.beta.1'),
+                Version\BuildMetaData::empty(),
             ],
             '1.0.0-alpha0.valid' => [
-                Major::fromString('1'),
-                Minor::fromString('0'),
-                Patch::fromString('0'),
-                PreRelease::fromString('alpha0.valid'),
-                BuildMetaData::empty(),
+                Version\Major::fromString('1'),
+                Version\Minor::fromString('0'),
+                Version\Patch::fromString('0'),
+                Version\PreRelease::fromString('alpha0.valid'),
+                Version\BuildMetaData::empty(),
             ],
             '1.0.0-beta' => [
-                Major::fromString('1'),
-                Minor::fromString('0'),
-                Patch::fromString('0'),
-                PreRelease::fromString('beta'),
-                BuildMetaData::empty(),
+                Version\Major::fromString('1'),
+                Version\Minor::fromString('0'),
+                Version\Patch::fromString('0'),
+                Version\PreRelease::fromString('beta'),
+                Version\BuildMetaData::empty(),
             ],
             '1.0.0-rc.1+build.1' => [
-                Major::fromString('1'),
-                Minor::fromString('0'),
-                Patch::fromString('0'),
-                PreRelease::fromString('rc.1'),
-                BuildMetaData::fromString('build.1'),
+                Version\Major::fromString('1'),
+                Version\Minor::fromString('0'),
+                Version\Patch::fromString('0'),
+                Version\PreRelease::fromString('rc.1'),
+                Version\BuildMetaData::fromString('build.1'),
             ],
             '1.1.2+meta' => [
-                Major::fromString('1'),
-                Minor::fromString('1'),
-                Patch::fromString('2'),
-                PreRelease::empty(),
-                BuildMetaData::fromString('meta'),
+                Version\Major::fromString('1'),
+                Version\Minor::fromString('1'),
+                Version\Patch::fromString('2'),
+                Version\PreRelease::empty(),
+                Version\BuildMetaData::fromString('meta'),
             ],
             '1.1.2+meta-valid' => [
-                Major::fromString('1'),
-                Minor::fromString('1'),
-                Patch::fromString('2'),
-                PreRelease::empty(),
-                BuildMetaData::fromString('meta-valid'),
+                Version\Major::fromString('1'),
+                Version\Minor::fromString('1'),
+                Version\Patch::fromString('2'),
+                Version\PreRelease::empty(),
+                Version\BuildMetaData::fromString('meta-valid'),
             ],
             '1.1.2-prerelease+meta' => [
-                Major::fromString('1'),
-                Minor::fromString('1'),
-                Patch::fromString('2'),
-                PreRelease::fromString('prerelease'),
-                BuildMetaData::fromString('meta'),
+                Version\Major::fromString('1'),
+                Version\Minor::fromString('1'),
+                Version\Patch::fromString('2'),
+                Version\PreRelease::fromString('prerelease'),
+                Version\BuildMetaData::fromString('meta'),
             ],
             '1.1.7' => [
-                Major::fromString('1'),
-                Minor::fromString('1'),
-                Patch::fromString('7'),
-                PreRelease::empty(),
-                BuildMetaData::empty(),
+                Version\Major::fromString('1'),
+                Version\Minor::fromString('1'),
+                Version\Patch::fromString('7'),
+                Version\PreRelease::empty(),
+                Version\BuildMetaData::empty(),
             ],
             '1.2.3' => [
-                Major::fromString('1'),
-                Minor::fromString('2'),
-                Patch::fromString('3'),
-                PreRelease::empty(),
-                BuildMetaData::empty(),
+                Version\Major::fromString('1'),
+                Version\Minor::fromString('2'),
+                Version\Patch::fromString('3'),
+                Version\PreRelease::empty(),
+                Version\BuildMetaData::empty(),
             ],
             '1.2.3----R-S.12.9.1--.12+meta' => [
-                Major::fromString('1'),
-                Minor::fromString('2'),
-                Patch::fromString('3'),
-                PreRelease::fromString('---R-S.12.9.1--.12'),
-                BuildMetaData::fromString('meta'),
+                Version\Major::fromString('1'),
+                Version\Minor::fromString('2'),
+                Version\Patch::fromString('3'),
+                Version\PreRelease::fromString('---R-S.12.9.1--.12'),
+                Version\BuildMetaData::fromString('meta'),
             ],
             '1.2.3----RC-SNAPSHOT.12.9.1--.12' => [
-                Major::fromString('1'),
-                Minor::fromString('2'),
-                Patch::fromString('3'),
-                PreRelease::fromString('---RC-SNAPSHOT.12.9.1--.12'),
-                BuildMetaData::empty(),
+                Version\Major::fromString('1'),
+                Version\Minor::fromString('2'),
+                Version\Patch::fromString('3'),
+                Version\PreRelease::fromString('---RC-SNAPSHOT.12.9.1--.12'),
+                Version\BuildMetaData::empty(),
             ],
             '1.2.3----RC-SNAPSHOT.12.9.1--.12+788' => [
-                Major::fromString('1'),
-                Minor::fromString('2'),
-                Patch::fromString('3'),
-                PreRelease::fromString('---RC-SNAPSHOT.12.9.1--.12'),
-                BuildMetaData::fromString('788'),
+                Version\Major::fromString('1'),
+                Version\Minor::fromString('2'),
+                Version\Patch::fromString('3'),
+                Version\PreRelease::fromString('---RC-SNAPSHOT.12.9.1--.12'),
+                Version\BuildMetaData::fromString('788'),
             ],
             '1.2.3-SNAPSHOT-123' => [
-                Major::fromString('1'),
-                Minor::fromString('2'),
-                Patch::fromString('3'),
-                PreRelease::fromString('SNAPSHOT-123'),
-                BuildMetaData::empty(),
+                Version\Major::fromString('1'),
+                Version\Minor::fromString('2'),
+                Version\Patch::fromString('3'),
+                Version\PreRelease::fromString('SNAPSHOT-123'),
+                Version\BuildMetaData::empty(),
             ],
             '1.2.3-beta' => [
-                Major::fromString('1'),
-                Minor::fromString('2'),
-                Patch::fromString('3'),
-                PreRelease::fromString('beta'),
-                BuildMetaData::empty(),
+                Version\Major::fromString('1'),
+                Version\Minor::fromString('2'),
+                Version\Patch::fromString('3'),
+                Version\PreRelease::fromString('beta'),
+                Version\BuildMetaData::empty(),
             ],
             '10.2.3-DEV-SNAPSHOT' => [
-                Major::fromString('10'),
-                Minor::fromString('2'),
-                Patch::fromString('3'),
-                PreRelease::fromString('DEV-SNAPSHOT'),
-                BuildMetaData::empty(),
+                Version\Major::fromString('10'),
+                Version\Minor::fromString('2'),
+                Version\Patch::fromString('3'),
+                Version\PreRelease::fromString('DEV-SNAPSHOT'),
+                Version\BuildMetaData::empty(),
             ],
             '10.20.30' => [
-                Major::fromString('10'),
-                Minor::fromString('20'),
-                Patch::fromString('30'),
-                PreRelease::empty(),
-                BuildMetaData::empty(),
+                Version\Major::fromString('10'),
+                Version\Minor::fromString('20'),
+                Version\Patch::fromString('30'),
+                Version\PreRelease::empty(),
+                Version\BuildMetaData::empty(),
             ],
             '2.0.0' => [
-                Major::fromString('2'),
-                Minor::fromString('0'),
-                Patch::fromString('0'),
-                PreRelease::empty(),
-                BuildMetaData::empty(),
+                Version\Major::fromString('2'),
+                Version\Minor::fromString('0'),
+                Version\Patch::fromString('0'),
+                Version\PreRelease::empty(),
+                Version\BuildMetaData::empty(),
             ],
             '2.0.0+build.1848' => [
-                Major::fromString('2'),
-                Minor::fromString('0'),
-                Patch::fromString('0'),
-                PreRelease::empty(),
-                BuildMetaData::fromString('build.1848'),
+                Version\Major::fromString('2'),
+                Version\Minor::fromString('0'),
+                Version\Patch::fromString('0'),
+                Version\PreRelease::empty(),
+                Version\BuildMetaData::fromString('build.1848'),
             ],
             '2.0.0-rc.1+build.123' => [
-                Major::fromString('2'),
-                Minor::fromString('0'),
-                Patch::fromString('0'),
-                PreRelease::fromString('rc.1'),
-                BuildMetaData::fromString('build.123'),
+                Version\Major::fromString('2'),
+                Version\Minor::fromString('0'),
+                Version\Patch::fromString('0'),
+                Version\PreRelease::fromString('rc.1'),
+                Version\BuildMetaData::fromString('build.123'),
             ],
             '2.0.1-alpha.1227' => [
-                Major::fromString('2'),
-                Minor::fromString('0'),
-                Patch::fromString('1'),
-                PreRelease::fromString('alpha.1227'),
-                BuildMetaData::empty(),
+                Version\Major::fromString('2'),
+                Version\Minor::fromString('0'),
+                Version\Patch::fromString('1'),
+                Version\PreRelease::fromString('alpha.1227'),
+                Version\BuildMetaData::empty(),
             ],
             '99999999999999999999999.999999999999999999.99999999999999999' => [
-                Major::fromString('99999999999999999999999'),
-                Minor::fromString('999999999999999999'),
-                Patch::fromString('99999999999999999'),
-                PreRelease::empty(),
-                BuildMetaData::empty(),
+                Version\Major::fromString('99999999999999999999999'),
+                Version\Minor::fromString('999999999999999999'),
+                Version\Patch::fromString('99999999999999999'),
+                Version\PreRelease::empty(),
+                Version\BuildMetaData::empty(),
             ],
         ];
 
@@ -324,7 +317,7 @@ final class VersionTest extends Framework\TestCase
         string $value,
         string $valueWithBumpedMajor
     ): void {
-        $one = Version::fromString($value);
+        $one = Version\Version::fromString($value);
 
         $two = $one->bumpMajor();
 
@@ -339,7 +332,7 @@ final class VersionTest extends Framework\TestCase
         string $value,
         string $valueWithBumpedMinor
     ): void {
-        $one = Version::fromString($value);
+        $one = Version\Version::fromString($value);
 
         $two = $one->bumpMinor();
 
@@ -354,7 +347,7 @@ final class VersionTest extends Framework\TestCase
         string $value,
         string $valueWithBumpedPatch
     ): void {
-        $one = Version::fromString($value);
+        $one = Version\Version::fromString($value);
 
         $two = $one->bumpPatch();
 
@@ -369,8 +362,8 @@ final class VersionTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Version::fromString($valueOne);
-        $two = Version::fromString($valueTwo);
+        $one = Version\Version::fromString($valueOne);
+        $two = Version\Version::fromString($valueTwo);
 
         self::assertSame(-1, $one->compare($two));
     }
@@ -380,8 +373,8 @@ final class VersionTest extends Framework\TestCase
      */
     public function testCompareReturnsZeroWhenFirstValueIsIdenticalToSecondValue(string $value): void
     {
-        $one = Version::fromString($value);
-        $two = Version::fromString($value);
+        $one = Version\Version::fromString($value);
+        $two = Version\Version::fromString($value);
 
         self::assertSame(0, $one->compare($two));
     }
@@ -393,8 +386,8 @@ final class VersionTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Version::fromString($valueOne);
-        $two = Version::fromString($valueTwo);
+        $one = Version\Version::fromString($valueOne);
+        $two = Version\Version::fromString($valueTwo);
 
         self::assertSame(0, $one->compare($two));
     }
@@ -406,8 +399,8 @@ final class VersionTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Version::fromString($valueOne);
-        $two = Version::fromString($valueTwo);
+        $one = Version\Version::fromString($valueOne);
+        $two = Version\Version::fromString($valueTwo);
 
         self::assertSame(1, $one->compare($two));
     }
@@ -417,8 +410,8 @@ final class VersionTest extends Framework\TestCase
      */
     public function testIsLessThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(string $value): void
     {
-        $one = Version::fromString($value);
-        $two = Version::fromString($value);
+        $one = Version\Version::fromString($value);
+        $two = Version\Version::fromString($value);
 
         self::assertFalse($one->isLessThan($two));
     }
@@ -430,8 +423,8 @@ final class VersionTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Version::fromString($valueOne);
-        $two = Version::fromString($valueTwo);
+        $one = Version\Version::fromString($valueOne);
+        $two = Version\Version::fromString($valueTwo);
 
         self::assertFalse($one->isLessThan($two));
     }
@@ -443,8 +436,8 @@ final class VersionTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Version::fromString($valueOne);
-        $two = Version::fromString($valueTwo);
+        $one = Version\Version::fromString($valueOne);
+        $two = Version\Version::fromString($valueTwo);
 
         self::assertFalse($one->isLessThan($two));
     }
@@ -456,8 +449,8 @@ final class VersionTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Version::fromString($valueOne);
-        $two = Version::fromString($valueTwo);
+        $one = Version\Version::fromString($valueOne);
+        $two = Version\Version::fromString($valueTwo);
 
         self::assertTrue($one->isLessThan($two));
     }
@@ -467,8 +460,8 @@ final class VersionTest extends Framework\TestCase
      */
     public function testIsSmallerThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(string $value): void
     {
-        $one = Version::fromString($value);
-        $two = Version::fromString($value);
+        $one = Version\Version::fromString($value);
+        $two = Version\Version::fromString($value);
 
         self::assertFalse($one->isSmallerThan($two));
     }
@@ -480,8 +473,8 @@ final class VersionTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Version::fromString($valueOne);
-        $two = Version::fromString($valueTwo);
+        $one = Version\Version::fromString($valueOne);
+        $two = Version\Version::fromString($valueTwo);
 
         self::assertFalse($one->isSmallerThan($two));
     }
@@ -493,8 +486,8 @@ final class VersionTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Version::fromString($valueOne);
-        $two = Version::fromString($valueTwo);
+        $one = Version\Version::fromString($valueOne);
+        $two = Version\Version::fromString($valueTwo);
 
         self::assertFalse($one->isSmallerThan($two));
     }
@@ -506,8 +499,8 @@ final class VersionTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Version::fromString($valueOne);
-        $two = Version::fromString($valueTwo);
+        $one = Version\Version::fromString($valueOne);
+        $two = Version\Version::fromString($valueTwo);
 
         self::assertTrue($one->isSmallerThan($two));
     }
@@ -519,8 +512,8 @@ final class VersionTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Version::fromString($valueOne);
-        $two = Version::fromString($valueTwo);
+        $one = Version\Version::fromString($valueOne);
+        $two = Version\Version::fromString($valueTwo);
 
         self::assertFalse($one->equals($two));
     }
@@ -532,8 +525,8 @@ final class VersionTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Version::fromString($valueOne);
-        $two = Version::fromString($valueTwo);
+        $one = Version\Version::fromString($valueOne);
+        $two = Version\Version::fromString($valueTwo);
 
         self::assertTrue($one->equals($two));
     }
@@ -543,8 +536,8 @@ final class VersionTest extends Framework\TestCase
      */
     public function testEqualsReturnsTrueWhenValuesAreIdentical(string $value): void
     {
-        $one = Version::fromString($value);
-        $two = Version::fromString($value);
+        $one = Version\Version::fromString($value);
+        $two = Version\Version::fromString($value);
 
         self::assertTrue($one->equals($two));
     }
@@ -556,8 +549,8 @@ final class VersionTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Version::fromString($valueOne);
-        $two = Version::fromString($valueTwo);
+        $one = Version\Version::fromString($valueOne);
+        $two = Version\Version::fromString($valueTwo);
 
         self::assertFalse($one->isGreaterThan($two));
     }
@@ -567,8 +560,8 @@ final class VersionTest extends Framework\TestCase
      */
     public function testIsGreaterThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(string $value): void
     {
-        $one = Version::fromString($value);
-        $two = Version::fromString($value);
+        $one = Version\Version::fromString($value);
+        $two = Version\Version::fromString($value);
 
         self::assertFalse($one->isGreaterThan($two));
     }
@@ -580,8 +573,8 @@ final class VersionTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Version::fromString($valueOne);
-        $two = Version::fromString($valueTwo);
+        $one = Version\Version::fromString($valueOne);
+        $two = Version\Version::fromString($valueTwo);
 
         self::assertFalse($one->isGreaterThan($two));
     }
@@ -593,8 +586,8 @@ final class VersionTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Version::fromString($valueOne);
-        $two = Version::fromString($valueTwo);
+        $one = Version\Version::fromString($valueOne);
+        $two = Version\Version::fromString($valueTwo);
 
         self::assertTrue($one->isGreaterThan($two));
     }

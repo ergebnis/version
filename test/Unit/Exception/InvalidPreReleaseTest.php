@@ -13,8 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Version\Test\Unit\Exception;
 
-use Ergebnis\Version\Exception;
-use Ergebnis\Version\Test;
+use Ergebnis\Version;
 use PHPUnit\Framework;
 
 /**
@@ -22,13 +21,13 @@ use PHPUnit\Framework;
  */
 final class InvalidPreReleaseTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Version\Test\Util\Helper;
 
     public function testFromStringReturnsException(): void
     {
         $value = self::faker()->word();
 
-        $exception = Exception\InvalidPreRelease::fromString($value);
+        $exception = Version\Exception\InvalidPreRelease::fromString($value);
 
         $message = \sprintf(
             'Value "%s" does not appear to be valid.',

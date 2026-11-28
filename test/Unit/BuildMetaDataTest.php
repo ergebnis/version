@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Version\Test\Unit;
 
-use Ergebnis\Version\BuildMetaData;
-use Ergebnis\Version\Exception;
-use Ergebnis\Version\Test;
+use Ergebnis\Version;
 use PHPUnit\Framework;
 
 /**
@@ -25,16 +23,16 @@ use PHPUnit\Framework;
  */
 final class BuildMetaDataTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Version\Test\Util\Helper;
 
     /**
      * @dataProvider \Ergebnis\Version\Test\DataProvider\BuildMetaDataProvider::invalid
      */
     public function testFromStringRejectsInvalidValue(string $value): void
     {
-        $this->expectException(Exception\InvalidBuildMetaData::class);
+        $this->expectException(Version\Exception\InvalidBuildMetaData::class);
 
-        BuildMetaData::fromString($value);
+        Version\BuildMetaData::fromString($value);
     }
 
     /**
@@ -42,14 +40,14 @@ final class BuildMetaDataTest extends Framework\TestCase
      */
     public function testFromStringReturnsBuildMetaData(string $value): void
     {
-        $buildMetaData = BuildMetaData::fromString($value);
+        $buildMetaData = Version\BuildMetaData::fromString($value);
 
         self::assertSame($value, $buildMetaData->toString());
     }
 
     public function testEmptyReturnsBuildMetaData(): void
     {
-        $buildMetaData = BuildMetaData::empty();
+        $buildMetaData = Version\BuildMetaData::empty();
 
         self::assertSame('', $buildMetaData->toString());
     }
@@ -58,8 +56,8 @@ final class BuildMetaDataTest extends Framework\TestCase
     {
         $faker = self::faker()->unique();
 
-        $one = BuildMetaData::fromString($faker->word());
-        $two = BuildMetaData::fromString($faker->word());
+        $one = Version\BuildMetaData::fromString($faker->word());
+        $two = Version\BuildMetaData::fromString($faker->word());
 
         self::assertFalse($one->equals($two));
     }
@@ -68,8 +66,8 @@ final class BuildMetaDataTest extends Framework\TestCase
     {
         $value = self::faker()->word();
 
-        $one = BuildMetaData::fromString($value);
-        $two = BuildMetaData::fromString($value);
+        $one = Version\BuildMetaData::fromString($value);
+        $two = Version\BuildMetaData::fromString($value);
 
         self::assertTrue($one->equals($two));
     }
