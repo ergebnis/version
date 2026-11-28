@@ -14,9 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Version\Test\Unit;
 
 use Ergebnis\DataProvider;
-use Ergebnis\Version\Exception;
-use Ergebnis\Version\Minor;
-use Ergebnis\Version\Test;
+use Ergebnis\Version;
 use PHPUnit\Framework;
 
 /**
@@ -26,16 +24,16 @@ use PHPUnit\Framework;
  */
 final class MinorTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Version\Test\Util\Helper;
 
     /**
      * @dataProvider \Ergebnis\DataProvider\IntProvider::lessThanZero
      */
     public function testFromIntRejectsInvalidIntValue(int $value): void
     {
-        $this->expectException(Exception\InvalidMinor::class);
+        $this->expectException(Version\Exception\InvalidMinor::class);
 
-        Minor::fromInt($value);
+        Version\Minor::fromInt($value);
     }
 
     /**
@@ -44,7 +42,7 @@ final class MinorTest extends Framework\TestCase
      */
     public function testFromIntReturnsMinor(int $value): void
     {
-        $minor = Minor::fromInt($value);
+        $minor = Version\Minor::fromInt($value);
 
         self::assertSame((string) $value, $minor->toString());
     }
@@ -54,9 +52,9 @@ final class MinorTest extends Framework\TestCase
      */
     public function testFromStringRejectsInvalidStringValue(string $value): void
     {
-        $this->expectException(Exception\InvalidMinor::class);
+        $this->expectException(Version\Exception\InvalidMinor::class);
 
-        Minor::fromString($value);
+        Version\Minor::fromString($value);
     }
 
     /**
@@ -64,7 +62,7 @@ final class MinorTest extends Framework\TestCase
      */
     public function testFromStringReturnsMinor(string $value): void
     {
-        $minor = Minor::fromString($value);
+        $minor = Version\Minor::fromString($value);
 
         self::assertSame($value, $minor->toString());
     }
@@ -76,7 +74,7 @@ final class MinorTest extends Framework\TestCase
         string $value,
         string $bumpedValue
     ): void {
-        $one = Minor::fromString($value);
+        $one = Version\Minor::fromString($value);
 
         $two = $one->bump();
 
@@ -91,8 +89,8 @@ final class MinorTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Minor::fromString($valueOne);
-        $two = Minor::fromString($valueTwo);
+        $one = Version\Minor::fromString($valueOne);
+        $two = Version\Minor::fromString($valueTwo);
 
         self::assertSame(-1, $one->compare($two));
     }
@@ -103,8 +101,8 @@ final class MinorTest extends Framework\TestCase
      */
     public function testCompareReturnsZeroWhenFirstValueIsIdenticalToSecondValue(int $value): void
     {
-        $one = Minor::fromInt($value);
-        $two = Minor::fromInt($value);
+        $one = Version\Minor::fromInt($value);
+        $two = Version\Minor::fromInt($value);
 
         self::assertSame(0, $one->compare($two));
     }
@@ -116,8 +114,8 @@ final class MinorTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Minor::fromString($valueOne);
-        $two = Minor::fromString($valueTwo);
+        $one = Version\Minor::fromString($valueOne);
+        $two = Version\Minor::fromString($valueTwo);
 
         self::assertSame(1, $one->compare($two));
     }
@@ -128,8 +126,8 @@ final class MinorTest extends Framework\TestCase
      */
     public function testIsLessThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(int $value): void
     {
-        $one = Minor::fromInt($value);
-        $two = Minor::fromInt($value);
+        $one = Version\Minor::fromInt($value);
+        $two = Version\Minor::fromInt($value);
 
         self::assertFalse($one->isLessThan($two));
     }
@@ -141,8 +139,8 @@ final class MinorTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Minor::fromString($valueOne);
-        $two = Minor::fromString($valueTwo);
+        $one = Version\Minor::fromString($valueOne);
+        $two = Version\Minor::fromString($valueTwo);
 
         self::assertFalse($one->isLessThan($two));
     }
@@ -154,8 +152,8 @@ final class MinorTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Minor::fromString($valueOne);
-        $two = Minor::fromString($valueTwo);
+        $one = Version\Minor::fromString($valueOne);
+        $two = Version\Minor::fromString($valueTwo);
 
         self::assertTrue($one->isLessThan($two));
     }
@@ -166,8 +164,8 @@ final class MinorTest extends Framework\TestCase
      */
     public function testIsSmallerThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(int $value): void
     {
-        $one = Minor::fromInt($value);
-        $two = Minor::fromInt($value);
+        $one = Version\Minor::fromInt($value);
+        $two = Version\Minor::fromInt($value);
 
         self::assertFalse($one->isSmallerThan($two));
     }
@@ -179,8 +177,8 @@ final class MinorTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Minor::fromString($valueOne);
-        $two = Minor::fromString($valueTwo);
+        $one = Version\Minor::fromString($valueOne);
+        $two = Version\Minor::fromString($valueTwo);
 
         self::assertFalse($one->isSmallerThan($two));
     }
@@ -192,8 +190,8 @@ final class MinorTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Minor::fromString($valueOne);
-        $two = Minor::fromString($valueTwo);
+        $one = Version\Minor::fromString($valueOne);
+        $two = Version\Minor::fromString($valueTwo);
 
         self::assertTrue($one->isSmallerThan($two));
     }
@@ -202,8 +200,8 @@ final class MinorTest extends Framework\TestCase
     {
         $faker = self::faker()->unique();
 
-        $one = Minor::fromInt($faker->numberBetween(0));
-        $two = Minor::fromInt($faker->numberBetween(0));
+        $one = Version\Minor::fromInt($faker->numberBetween(0));
+        $two = Version\Minor::fromInt($faker->numberBetween(0));
 
         self::assertFalse($one->equals($two));
     }
@@ -212,8 +210,8 @@ final class MinorTest extends Framework\TestCase
     {
         $value = self::faker()->numberBetween(0);
 
-        $one = Minor::fromInt($value);
-        $two = Minor::fromInt($value);
+        $one = Version\Minor::fromInt($value);
+        $two = Version\Minor::fromInt($value);
 
         self::assertTrue($one->equals($two));
     }
@@ -225,8 +223,8 @@ final class MinorTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Minor::fromString($valueOne);
-        $two = Minor::fromString($valueTwo);
+        $one = Version\Minor::fromString($valueOne);
+        $two = Version\Minor::fromString($valueTwo);
 
         self::assertFalse($one->isGreaterThan($two));
     }
@@ -237,8 +235,8 @@ final class MinorTest extends Framework\TestCase
      */
     public function testIsGreaterThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(int $value): void
     {
-        $one = Minor::fromInt($value);
-        $two = Minor::fromInt($value);
+        $one = Version\Minor::fromInt($value);
+        $two = Version\Minor::fromInt($value);
 
         self::assertFalse($one->isGreaterThan($two));
     }
@@ -250,8 +248,8 @@ final class MinorTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Minor::fromString($valueOne);
-        $two = Minor::fromString($valueTwo);
+        $one = Version\Minor::fromString($valueOne);
+        $two = Version\Minor::fromString($valueTwo);
 
         self::assertTrue($one->isGreaterThan($two));
     }

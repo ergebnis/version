@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Version\Test\Unit\Exception;
 
-use Ergebnis\Version\Exception;
+use Ergebnis\Version;
 use PHPUnit\Framework;
 
 /**
@@ -23,7 +23,7 @@ final class ExtensionMissingTest extends Framework\TestCase
 {
     public function testBcmathReturnsException(): void
     {
-        $exception = Exception\ExtensionMissing::bcmath();
+        $exception = Version\Exception\ExtensionMissing::bcmath();
 
         $message = \sprintf(
             'The bcmath extension is required to perform calculations for integers that are greater than "%d".',

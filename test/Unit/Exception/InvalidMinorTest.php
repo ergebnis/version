@@ -13,8 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Version\Test\Unit\Exception;
 
-use Ergebnis\Version\Exception;
-use Ergebnis\Version\Test;
+use Ergebnis\Version;
 use PHPUnit\Framework;
 
 /**
@@ -22,13 +21,13 @@ use PHPUnit\Framework;
  */
 final class InvalidMinorTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Version\Test\Util\Helper;
 
     public function testFromIntReturnsException(): void
     {
         $value = self::faker()->numberBetween(0);
 
-        $exception = Exception\InvalidMinor::fromInt($value);
+        $exception = Version\Exception\InvalidMinor::fromInt($value);
 
         $message = \sprintf(
             'Value "%d" does not appear to be valid.',
@@ -42,7 +41,7 @@ final class InvalidMinorTest extends Framework\TestCase
     {
         $value = self::faker()->word();
 
-        $exception = Exception\InvalidMinor::fromString($value);
+        $exception = Version\Exception\InvalidMinor::fromString($value);
 
         $message = \sprintf(
             'Value "%s" does not appear to be valid.',

@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Version\Test\Unit;
 
-use Ergebnis\Version\Exception;
-use Ergebnis\Version\PreRelease;
-use Ergebnis\Version\Test;
+use Ergebnis\Version;
 use PHPUnit\Framework;
 
 /**
@@ -25,16 +23,16 @@ use PHPUnit\Framework;
  */
 final class PreReleaseTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Version\Test\Util\Helper;
 
     /**
      * @dataProvider \Ergebnis\Version\Test\DataProvider\PreReleaseProvider::invalid
      */
     public function testFromStringRejectsInvalidValue(string $value): void
     {
-        $this->expectException(Exception\InvalidPreRelease::class);
+        $this->expectException(Version\Exception\InvalidPreRelease::class);
 
-        PreRelease::fromString($value);
+        Version\PreRelease::fromString($value);
     }
 
     /**
@@ -42,14 +40,14 @@ final class PreReleaseTest extends Framework\TestCase
      */
     public function testFromStringReturnsPreRelease(string $value): void
     {
-        $preRelease = PreRelease::fromString($value);
+        $preRelease = Version\PreRelease::fromString($value);
 
         self::assertSame($value, $preRelease->toString());
     }
 
     public function testEmptyReturnsPreRelease(): void
     {
-        $preRelease = PreRelease::empty();
+        $preRelease = Version\PreRelease::empty();
 
         self::assertSame('', $preRelease->toString());
     }
@@ -61,8 +59,8 @@ final class PreReleaseTest extends Framework\TestCase
         string $value,
         string $otherValue
     ): void {
-        $one = PreRelease::fromString($value);
-        $two = PreRelease::fromString($otherValue);
+        $one = Version\PreRelease::fromString($value);
+        $two = Version\PreRelease::fromString($otherValue);
 
         self::assertSame(-1, $one->compare($two));
     }
@@ -72,8 +70,8 @@ final class PreReleaseTest extends Framework\TestCase
      */
     public function testCompareReturnsZeroWhenFirstValueIsIdenticalToSecondValue(string $value): void
     {
-        $one = PreRelease::fromString($value);
-        $two = PreRelease::fromString($value);
+        $one = Version\PreRelease::fromString($value);
+        $two = Version\PreRelease::fromString($value);
 
         self::assertSame(0, $one->compare($two));
     }
@@ -85,8 +83,8 @@ final class PreReleaseTest extends Framework\TestCase
         string $value,
         string $otherValue
     ): void {
-        $one = PreRelease::fromString($value);
-        $two = PreRelease::fromString($otherValue);
+        $one = Version\PreRelease::fromString($value);
+        $two = Version\PreRelease::fromString($otherValue);
 
         self::assertSame(1, $one->compare($two));
     }
@@ -96,8 +94,8 @@ final class PreReleaseTest extends Framework\TestCase
      */
     public function testIsLessThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(string $value): void
     {
-        $one = PreRelease::fromString($value);
-        $two = PreRelease::fromString($value);
+        $one = Version\PreRelease::fromString($value);
+        $two = Version\PreRelease::fromString($value);
 
         self::assertFalse($one->isLessThan($two));
     }
@@ -109,8 +107,8 @@ final class PreReleaseTest extends Framework\TestCase
         string $value,
         string $otherValue
     ): void {
-        $one = PreRelease::fromString($value);
-        $two = PreRelease::fromString($otherValue);
+        $one = Version\PreRelease::fromString($value);
+        $two = Version\PreRelease::fromString($otherValue);
 
         self::assertFalse($one->isLessThan($two));
     }
@@ -122,8 +120,8 @@ final class PreReleaseTest extends Framework\TestCase
         string $value,
         string $otherValue
     ): void {
-        $one = PreRelease::fromString($value);
-        $two = PreRelease::fromString($otherValue);
+        $one = Version\PreRelease::fromString($value);
+        $two = Version\PreRelease::fromString($otherValue);
 
         self::assertTrue($one->isLessThan($two));
     }
@@ -133,8 +131,8 @@ final class PreReleaseTest extends Framework\TestCase
      */
     public function testIsSmallerThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(string $value): void
     {
-        $one = PreRelease::fromString($value);
-        $two = PreRelease::fromString($value);
+        $one = Version\PreRelease::fromString($value);
+        $two = Version\PreRelease::fromString($value);
 
         self::assertFalse($one->isSmallerThan($two));
     }
@@ -146,8 +144,8 @@ final class PreReleaseTest extends Framework\TestCase
         string $value,
         string $otherValue
     ): void {
-        $one = PreRelease::fromString($value);
-        $two = PreRelease::fromString($otherValue);
+        $one = Version\PreRelease::fromString($value);
+        $two = Version\PreRelease::fromString($otherValue);
 
         self::assertFalse($one->isSmallerThan($two));
     }
@@ -159,8 +157,8 @@ final class PreReleaseTest extends Framework\TestCase
         string $value,
         string $otherValue
     ): void {
-        $one = PreRelease::fromString($value);
-        $two = PreRelease::fromString($otherValue);
+        $one = Version\PreRelease::fromString($value);
+        $two = Version\PreRelease::fromString($otherValue);
 
         self::assertTrue($one->isSmallerThan($two));
     }
@@ -169,8 +167,8 @@ final class PreReleaseTest extends Framework\TestCase
     {
         $faker = self::faker()->unique();
 
-        $one = PreRelease::fromString($faker->word());
-        $two = PreRelease::fromString($faker->word());
+        $one = Version\PreRelease::fromString($faker->word());
+        $two = Version\PreRelease::fromString($faker->word());
 
         self::assertFalse($one->equals($two));
     }
@@ -179,8 +177,8 @@ final class PreReleaseTest extends Framework\TestCase
     {
         $value = self::faker()->word();
 
-        $one = PreRelease::fromString($value);
-        $two = PreRelease::fromString($value);
+        $one = Version\PreRelease::fromString($value);
+        $two = Version\PreRelease::fromString($value);
 
         self::assertTrue($one->equals($two));
     }
@@ -192,8 +190,8 @@ final class PreReleaseTest extends Framework\TestCase
         string $value,
         string $otherValue
     ): void {
-        $one = PreRelease::fromString($value);
-        $two = PreRelease::fromString($otherValue);
+        $one = Version\PreRelease::fromString($value);
+        $two = Version\PreRelease::fromString($otherValue);
 
         self::assertFalse($one->isGreaterThan($two));
     }
@@ -203,8 +201,8 @@ final class PreReleaseTest extends Framework\TestCase
      */
     public function testIsGreaterThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(string $value): void
     {
-        $one = PreRelease::fromString($value);
-        $two = PreRelease::fromString($value);
+        $one = Version\PreRelease::fromString($value);
+        $two = Version\PreRelease::fromString($value);
 
         self::assertFalse($one->isGreaterThan($two));
     }
@@ -216,8 +214,8 @@ final class PreReleaseTest extends Framework\TestCase
         string $value,
         string $otherValue
     ): void {
-        $one = PreRelease::fromString($value);
-        $two = PreRelease::fromString($otherValue);
+        $one = Version\PreRelease::fromString($value);
+        $two = Version\PreRelease::fromString($otherValue);
 
         self::assertTrue($one->isGreaterThan($two));
     }

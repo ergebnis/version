@@ -14,9 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Version\Test\Unit;
 
 use Ergebnis\DataProvider;
-use Ergebnis\Version\Exception;
-use Ergebnis\Version\Patch;
-use Ergebnis\Version\Test;
+use Ergebnis\Version;
 use PHPUnit\Framework;
 
 /**
@@ -26,16 +24,16 @@ use PHPUnit\Framework;
  */
 final class PatchTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Version\Test\Util\Helper;
 
     /**
      * @dataProvider \Ergebnis\DataProvider\IntProvider::lessThanZero
      */
     public function testFromIntRejectsInvalidIntValue(int $value): void
     {
-        $this->expectException(Exception\InvalidPatch::class);
+        $this->expectException(Version\Exception\InvalidPatch::class);
 
-        Patch::fromInt($value);
+        Version\Patch::fromInt($value);
     }
 
     /**
@@ -44,7 +42,7 @@ final class PatchTest extends Framework\TestCase
      */
     public function testFromIntReturnsPatch(int $value): void
     {
-        $patch = Patch::fromInt($value);
+        $patch = Version\Patch::fromInt($value);
 
         self::assertSame((string) $value, $patch->toString());
     }
@@ -54,9 +52,9 @@ final class PatchTest extends Framework\TestCase
      */
     public function testFromStringRejectsInvalidStringValue(string $value): void
     {
-        $this->expectException(Exception\InvalidPatch::class);
+        $this->expectException(Version\Exception\InvalidPatch::class);
 
-        Patch::fromString($value);
+        Version\Patch::fromString($value);
     }
 
     /**
@@ -64,7 +62,7 @@ final class PatchTest extends Framework\TestCase
      */
     public function testFromStringReturnsPatch(string $value): void
     {
-        $patch = Patch::fromString($value);
+        $patch = Version\Patch::fromString($value);
 
         self::assertSame($value, $patch->toString());
     }
@@ -76,7 +74,7 @@ final class PatchTest extends Framework\TestCase
         string $value,
         string $bumpedValue
     ): void {
-        $one = Patch::fromString($value);
+        $one = Version\Patch::fromString($value);
 
         $two = $one->bump();
 
@@ -91,8 +89,8 @@ final class PatchTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Patch::fromString($valueOne);
-        $two = Patch::fromString($valueTwo);
+        $one = Version\Patch::fromString($valueOne);
+        $two = Version\Patch::fromString($valueTwo);
 
         self::assertSame(-1, $one->compare($two));
     }
@@ -103,8 +101,8 @@ final class PatchTest extends Framework\TestCase
      */
     public function testCompareReturnsZeroWhenFirstValueIsIdenticalToSecondValue(int $value): void
     {
-        $one = Patch::fromInt($value);
-        $two = Patch::fromInt($value);
+        $one = Version\Patch::fromInt($value);
+        $two = Version\Patch::fromInt($value);
 
         self::assertSame(0, $one->compare($two));
     }
@@ -116,8 +114,8 @@ final class PatchTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Patch::fromString($valueOne);
-        $two = Patch::fromString($valueTwo);
+        $one = Version\Patch::fromString($valueOne);
+        $two = Version\Patch::fromString($valueTwo);
 
         self::assertSame(1, $one->compare($two));
     }
@@ -128,8 +126,8 @@ final class PatchTest extends Framework\TestCase
      */
     public function testIsLessThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(int $value): void
     {
-        $one = Patch::fromInt($value);
-        $two = Patch::fromInt($value);
+        $one = Version\Patch::fromInt($value);
+        $two = Version\Patch::fromInt($value);
 
         self::assertFalse($one->isLessThan($two));
     }
@@ -141,8 +139,8 @@ final class PatchTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Patch::fromString($valueOne);
-        $two = Patch::fromString($valueTwo);
+        $one = Version\Patch::fromString($valueOne);
+        $two = Version\Patch::fromString($valueTwo);
 
         self::assertFalse($one->isLessThan($two));
     }
@@ -154,8 +152,8 @@ final class PatchTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Patch::fromString($valueOne);
-        $two = Patch::fromString($valueTwo);
+        $one = Version\Patch::fromString($valueOne);
+        $two = Version\Patch::fromString($valueTwo);
 
         self::assertTrue($one->isLessThan($two));
     }
@@ -166,8 +164,8 @@ final class PatchTest extends Framework\TestCase
      */
     public function testIsSmallerThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(int $value): void
     {
-        $one = Patch::fromInt($value);
-        $two = Patch::fromInt($value);
+        $one = Version\Patch::fromInt($value);
+        $two = Version\Patch::fromInt($value);
 
         self::assertFalse($one->isSmallerThan($two));
     }
@@ -179,8 +177,8 @@ final class PatchTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Patch::fromString($valueOne);
-        $two = Patch::fromString($valueTwo);
+        $one = Version\Patch::fromString($valueOne);
+        $two = Version\Patch::fromString($valueTwo);
 
         self::assertFalse($one->isSmallerThan($two));
     }
@@ -192,8 +190,8 @@ final class PatchTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Patch::fromString($valueOne);
-        $two = Patch::fromString($valueTwo);
+        $one = Version\Patch::fromString($valueOne);
+        $two = Version\Patch::fromString($valueTwo);
 
         self::assertTrue($one->isSmallerThan($two));
     }
@@ -202,8 +200,8 @@ final class PatchTest extends Framework\TestCase
     {
         $faker = self::faker()->unique();
 
-        $one = Patch::fromInt($faker->numberBetween(0));
-        $two = Patch::fromInt($faker->numberBetween(0));
+        $one = Version\Patch::fromInt($faker->numberBetween(0));
+        $two = Version\Patch::fromInt($faker->numberBetween(0));
 
         self::assertFalse($one->equals($two));
     }
@@ -212,8 +210,8 @@ final class PatchTest extends Framework\TestCase
     {
         $value = self::faker()->numberBetween(0);
 
-        $one = Patch::fromInt($value);
-        $two = Patch::fromInt($value);
+        $one = Version\Patch::fromInt($value);
+        $two = Version\Patch::fromInt($value);
 
         self::assertTrue($one->equals($two));
     }
@@ -225,8 +223,8 @@ final class PatchTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Patch::fromString($valueOne);
-        $two = Patch::fromString($valueTwo);
+        $one = Version\Patch::fromString($valueOne);
+        $two = Version\Patch::fromString($valueTwo);
 
         self::assertFalse($one->isGreaterThan($two));
     }
@@ -237,8 +235,8 @@ final class PatchTest extends Framework\TestCase
      */
     public function testIsGreaterThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(int $value): void
     {
-        $one = Patch::fromInt($value);
-        $two = Patch::fromInt($value);
+        $one = Version\Patch::fromInt($value);
+        $two = Version\Patch::fromInt($value);
 
         self::assertFalse($one->isGreaterThan($two));
     }
@@ -250,8 +248,8 @@ final class PatchTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Patch::fromString($valueOne);
-        $two = Patch::fromString($valueTwo);
+        $one = Version\Patch::fromString($valueOne);
+        $two = Version\Patch::fromString($valueTwo);
 
         self::assertTrue($one->isGreaterThan($two));
     }

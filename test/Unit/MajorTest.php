@@ -14,9 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Version\Test\Unit;
 
 use Ergebnis\DataProvider;
-use Ergebnis\Version\Exception;
-use Ergebnis\Version\Major;
-use Ergebnis\Version\Test;
+use Ergebnis\Version;
 use PHPUnit\Framework;
 
 /**
@@ -26,16 +24,16 @@ use PHPUnit\Framework;
  */
 final class MajorTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Version\Test\Util\Helper;
 
     /**
      * @dataProvider \Ergebnis\DataProvider\IntProvider::lessThanZero
      */
     public function testFromIntRejectsInvalidIntValue(int $value): void
     {
-        $this->expectException(Exception\InvalidMajor::class);
+        $this->expectException(Version\Exception\InvalidMajor::class);
 
-        Major::fromInt($value);
+        Version\Major::fromInt($value);
     }
 
     /**
@@ -44,7 +42,7 @@ final class MajorTest extends Framework\TestCase
      */
     public function testFromIntReturnsMajor(int $value): void
     {
-        $major = Major::fromInt($value);
+        $major = Version\Major::fromInt($value);
 
         self::assertSame((string) $value, $major->toString());
     }
@@ -54,9 +52,9 @@ final class MajorTest extends Framework\TestCase
      */
     public function testFromStringRejectsInvalidStringValue(string $value): void
     {
-        $this->expectException(Exception\InvalidMajor::class);
+        $this->expectException(Version\Exception\InvalidMajor::class);
 
-        Major::fromString($value);
+        Version\Major::fromString($value);
     }
 
     /**
@@ -64,7 +62,7 @@ final class MajorTest extends Framework\TestCase
      */
     public function testFromStringReturnsMajor(string $value): void
     {
-        $major = Major::fromString($value);
+        $major = Version\Major::fromString($value);
 
         self::assertSame($value, $major->toString());
     }
@@ -76,7 +74,7 @@ final class MajorTest extends Framework\TestCase
         string $value,
         string $bumpedValue
     ): void {
-        $one = Major::fromString($value);
+        $one = Version\Major::fromString($value);
 
         $two = $one->bump();
 
@@ -91,8 +89,8 @@ final class MajorTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Major::fromString($valueOne);
-        $two = Major::fromString($valueTwo);
+        $one = Version\Major::fromString($valueOne);
+        $two = Version\Major::fromString($valueTwo);
 
         self::assertSame(-1, $one->compare($two));
     }
@@ -103,8 +101,8 @@ final class MajorTest extends Framework\TestCase
      */
     public function testCompareReturnsZeroWhenFirstValueIsIdenticalToSecondValue(int $value): void
     {
-        $one = Major::fromInt($value);
-        $two = Major::fromInt($value);
+        $one = Version\Major::fromInt($value);
+        $two = Version\Major::fromInt($value);
 
         self::assertSame(0, $one->compare($two));
     }
@@ -116,8 +114,8 @@ final class MajorTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Major::fromString($valueOne);
-        $two = Major::fromString($valueTwo);
+        $one = Version\Major::fromString($valueOne);
+        $two = Version\Major::fromString($valueTwo);
 
         self::assertSame(1, $one->compare($two));
     }
@@ -128,8 +126,8 @@ final class MajorTest extends Framework\TestCase
      */
     public function testIsLessThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(int $value): void
     {
-        $one = Major::fromInt($value);
-        $two = Major::fromInt($value);
+        $one = Version\Major::fromInt($value);
+        $two = Version\Major::fromInt($value);
 
         self::assertFalse($one->isLessThan($two));
     }
@@ -141,8 +139,8 @@ final class MajorTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Major::fromString($valueOne);
-        $two = Major::fromString($valueTwo);
+        $one = Version\Major::fromString($valueOne);
+        $two = Version\Major::fromString($valueTwo);
 
         self::assertFalse($one->isLessThan($two));
     }
@@ -154,8 +152,8 @@ final class MajorTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Major::fromString($valueOne);
-        $two = Major::fromString($valueTwo);
+        $one = Version\Major::fromString($valueOne);
+        $two = Version\Major::fromString($valueTwo);
 
         self::assertTrue($one->isLessThan($two));
     }
@@ -166,8 +164,8 @@ final class MajorTest extends Framework\TestCase
      */
     public function testIsSmallerThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(int $value): void
     {
-        $one = Major::fromInt($value);
-        $two = Major::fromInt($value);
+        $one = Version\Major::fromInt($value);
+        $two = Version\Major::fromInt($value);
 
         self::assertFalse($one->isSmallerThan($two));
     }
@@ -179,8 +177,8 @@ final class MajorTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Major::fromString($valueOne);
-        $two = Major::fromString($valueTwo);
+        $one = Version\Major::fromString($valueOne);
+        $two = Version\Major::fromString($valueTwo);
 
         self::assertFalse($one->isSmallerThan($two));
     }
@@ -192,8 +190,8 @@ final class MajorTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Major::fromString($valueOne);
-        $two = Major::fromString($valueTwo);
+        $one = Version\Major::fromString($valueOne);
+        $two = Version\Major::fromString($valueTwo);
 
         self::assertTrue($one->isSmallerThan($two));
     }
@@ -202,8 +200,8 @@ final class MajorTest extends Framework\TestCase
     {
         $faker = self::faker()->unique();
 
-        $one = Major::fromInt($faker->numberBetween(0));
-        $two = Major::fromInt($faker->numberBetween(0));
+        $one = Version\Major::fromInt($faker->numberBetween(0));
+        $two = Version\Major::fromInt($faker->numberBetween(0));
 
         self::assertFalse($one->equals($two));
     }
@@ -212,8 +210,8 @@ final class MajorTest extends Framework\TestCase
     {
         $value = self::faker()->numberBetween(0);
 
-        $one = Major::fromInt($value);
-        $two = Major::fromInt($value);
+        $one = Version\Major::fromInt($value);
+        $two = Version\Major::fromInt($value);
 
         self::assertTrue($one->equals($two));
     }
@@ -225,8 +223,8 @@ final class MajorTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Major::fromString($valueOne);
-        $two = Major::fromString($valueTwo);
+        $one = Version\Major::fromString($valueOne);
+        $two = Version\Major::fromString($valueTwo);
 
         self::assertFalse($one->isGreaterThan($two));
     }
@@ -237,8 +235,8 @@ final class MajorTest extends Framework\TestCase
      */
     public function testIsGreaterThanReturnsFalseWhenFirstValueIsIdenticalToSecondValue(int $value): void
     {
-        $one = Major::fromInt($value);
-        $two = Major::fromInt($value);
+        $one = Version\Major::fromInt($value);
+        $two = Version\Major::fromInt($value);
 
         self::assertFalse($one->isGreaterThan($two));
     }
@@ -250,8 +248,8 @@ final class MajorTest extends Framework\TestCase
         string $valueOne,
         string $valueTwo
     ): void {
-        $one = Major::fromString($valueOne);
-        $two = Major::fromString($valueTwo);
+        $one = Version\Major::fromString($valueOne);
+        $two = Version\Major::fromString($valueTwo);
 
         self::assertTrue($one->isGreaterThan($two));
     }
